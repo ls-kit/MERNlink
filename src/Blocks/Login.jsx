@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  //see or hide pass
+  const [showPass, setShowPass] = useState(false);
+
+  const toggler = (e) => {
+    e.preventDefault();
+    setShowPass(!showPass);
+  };
+
   // form data and hanlde submit
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
-    <div className="h-screen bg-[#fffafa]">
+    <div className="lg:h-screen md:h-screen bg-[#fffafa]">
       {/* hero section and user authentication */}
-      <div className="grid lg:grid-cols-2 grid-cols-1 items-start">
+      <div className="grid lg:grid-cols-2 grid-cols-1 items-center">
         {/* left portion: graphics */}
-        <div className=" py-20 px-10">
+        <div className="py-20 px-10">
           <div className="flex justify-center">
             <img className="h-72" src="/Tech Life -tiny.png" alt="Tech life" />
           </div>
@@ -26,7 +34,7 @@ const Login = () => {
         </div>
 
         {/* right portion: login form and others */}
-        <div className="bg-[#f0fff0] px-10 pt-24 h-screen">
+        <div className="bg-[#f0fff0] px-10 pt-24 lg:h-screen">
           <div className="flex gap-x-2 items-end justify-center">
             <img
               className="h-10 mb-3 order-2"
@@ -46,16 +54,25 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-3 px-10">
                 <input
+                  type="email"
                   placeholder="Email"
-                  className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2"
-                  {...register("email")}
+                  className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white"
+                  {...register("email", { required: true })}
                 />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2"
-                  {...register("pass")}
-                />
+                <div className="relative">
+                  <input
+                    type={showPass ? "password" : "text"}
+                    placeholder="Password"
+                    className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 w-full bg-white"
+                    {...register("pass", { required: true })}
+                  />
+                  <button
+                    onClick={toggler}
+                    className="absolute right-0 top-0 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
+                  >
+                    {showPass ? "👀" : "🕶️"}
+                  </button>
+                </div>
               </div>
               <div className="px-10 mt-5 flex justify-between">
                 <p className="text-xs font-semibold">
