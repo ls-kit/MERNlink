@@ -1,6 +1,7 @@
 # MERN ANALYTICS
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
 Live Link: [visit.website](https://lskit-mern-analytics.netlify.app/)
 Currently, two official plugins are available:
 
