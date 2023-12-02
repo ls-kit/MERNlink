@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Poveiders/AuthProvider";
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
+  // authcontext and create user
+  const { signIn } = useContext(AuthContext);
+
   //see or hide pass
   const [showPass, setShowPass] = useState(false);
 
@@ -12,11 +17,25 @@ const Login = () => {
   };
 
   // form data and hanlde submit
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => {
+    // console.log(data);
+    signIn(data.email, data.pass)
+      .then((res) => {
+        const loggedUser = res.user;
+        toast.success("Successfully Logged in");
+        // console.log(loggedUser);
+        reset();
+      })
+      .catch((error) => {
+        toast.error("Wrong Credentials");
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="lg:h-screen md:h-screen bg-[#fffafa]">
+      <Toaster position="top-center" richColors />
       {/* hero section and user authentication */}
       <div className="grid lg:grid-cols-2 grid-cols-1 items-center">
         {/* left portion: graphics */}
@@ -61,7 +80,7 @@ const Login = () => {
                 />
                 <div className="relative">
                   <input
-                    type={showPass ? "password" : "text"}
+                    type={showPass ? "text" : "password"}
                     placeholder="Password"
                     className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 w-full bg-white"
                     {...register("pass", { required: true })}
@@ -70,7 +89,7 @@ const Login = () => {
                     onClick={toggler}
                     className="absolute right-0 top-0 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
                   >
-                    {showPass ? "👀" : "🕶️"}
+                    {showPass ? "🕶️" : "👀"}
                   </button>
                 </div>
               </div>
@@ -79,7 +98,7 @@ const Login = () => {
                   Don't have an account?{" "}
                   <Link
                     className="text-indigo-500 hover:font-bold hover:underline"
-                    to={""}
+                    to={"/signup"}
                   >
                     Sign Up
                   </Link>{" "}
