@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
+import { Outlet } from "react-router-dom";
+import PageBanner from "../Componetns/PageBanner";
 
 const DashBoard = () => {
   const { logOut } = useContext(AuthContext);
@@ -14,12 +16,48 @@ const DashBoard = () => {
       });
   };
   return (
-    <div className="px-20 py-20 text-center">
+    <div>
       <Toaster position="top-center" richColors />
-      <p>You have been redirected to dashboard after login</p>
-      <button onClick={handleLogout} className="btn btn-active btn-neutral">
-        Logout
-      </button>
+      <PageBanner
+        pagetitle={"Manage Your Actions"}
+        pageDesc={"Browse all the category"}
+      />
+
+      <div className="drawer lg:drawer-open">
+        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
+          {/* Page content here */}
+          <Outlet />
+          <label
+            htmlFor="my-drawer"
+            className="btn btn-primary drawer-button lg:hidden block"
+          >
+            Open drawer
+          </label>
+        </div>
+        <div className="drawer-side">
+          <label
+            htmlFor="my-drawer"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          <ul className="menu p-4 w-fit min-h-full bg-base-200 text-base-content">
+            {/* Sidebar content here */}
+            <li>
+              <a>Sidebar Item 1</a>
+            </li>
+            <li>
+              <a>Sidebar Item 2</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="px-20 py-20 text-center">
+        <p>You have been redirected to dashboard after login</p>
+        <button onClick={handleLogout} className="btn btn-active btn-neutral">
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

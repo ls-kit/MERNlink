@@ -4,6 +4,7 @@ import Login from "../Blocks/Login";
 import SignUp from "../Blocks/SignUp";
 import DashBoard from "../Layouts/DashBoard";
 import PrivateRoute from "./PrivateRoute";
+import ReqBackLink from "../Blocks/ReqBackLink";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
             <DashBoard />
           </PrivateRoute>
         ),
+        children: [
+          {
+            path: "/request_backlink",
+            element: <ReqBackLink />,
+          },
+        ],
       },
     ],
   },
