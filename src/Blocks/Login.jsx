@@ -6,7 +6,7 @@ import { Toaster, toast } from "sonner";
 
 const Login = () => {
   // authcontext and create user
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
 
   //see or hide pass
   const [showPass, setShowPass] = useState(false);
@@ -28,8 +28,21 @@ const Login = () => {
         reset();
       })
       .catch((error) => {
-        toast.error("Wrong Credentials");
+        toast.error(`${error.message}`);
         console.log(error.message);
+      });
+  };
+
+  // signin with google
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((res) => {
+        if (res.status) {
+          toast.success("Successfully Logged in");
+        }
+      })
+      .catch((error) => {
+        toast.error(`${error.message}`);
       });
   };
 
@@ -75,7 +88,7 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="Email"
-                  className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white"
+                  className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white w-full"
                   {...register("email", { required: true })}
                 />
                 <div className="relative">
@@ -121,7 +134,10 @@ const Login = () => {
 
           <div className="divider text-sm font-bold text-slate-300">or</div>
           {/* sign in with goole */}
-          <button className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500">
+          <button
+            onClick={handleGoogleSignIn}
+            className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500"
+          >
             Sign in with Google
             <img
               className="h-4 inline-block"
