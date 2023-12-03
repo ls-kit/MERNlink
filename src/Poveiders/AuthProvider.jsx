@@ -21,14 +21,14 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  //   creates user for signup/ registration
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-
   // sign in with google / sign in with popup
   const googleSignIn = () => {
     return signInWithPopup(auth, provider);
+  };
+
+  //   creates user for signup/ registration
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const authInfo = {

@@ -22,7 +22,6 @@ const Login = () => {
     // console.log(data);
     signIn(data.email, data.pass)
       .then((res) => {
-        const loggedUser = res.user;
         toast.success("Successfully Logged in");
         // console.log(loggedUser);
         reset();
@@ -37,9 +36,7 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
-        if (res.status) {
-          toast.success("Successfully Logged in");
-        }
+        toast.success("Successfully Logged in");
       })
       .catch((error) => {
         toast.error(`${error.message}`);
@@ -136,7 +133,7 @@ const Login = () => {
           {/* sign in with goole */}
           <button
             onClick={handleGoogleSignIn}
-            className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500"
+            className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
           >
             Sign in with Google
             <img
