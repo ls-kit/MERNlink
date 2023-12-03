@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
 
@@ -8,6 +8,9 @@ const Login = () => {
   // authcontext and create user
   const { signIn, googleSignIn, user } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
   //see or hide pass
   const [showPass, setShowPass] = useState(false);
 
@@ -22,9 +25,12 @@ const Login = () => {
     // console.log(data);
     signIn(data.email, data.pass)
       .then((res) => {
-        toast.success("Successfully Logged in");
-        // console.log(loggedUser);
-        reset();
+        const user = res.user;
+        if (user) {
+          toast.success(`Logged in successfully`);
+          navigate(from, { replace: true });
+        }
+        // reset();
       })
       .catch((error) => {
         toast.error(`${error.message}`);
@@ -36,11 +42,12 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
-        toast.success("Successfully Logged in");
-        // if (user) {
-        //   console.log(user);
-        //   return <Navigate to={"/dashboard"} replace={true}></Navigate>;
-        // }
+        const user = res.user;
+        if (user) {
+          toast.success("Successfully Logged in");
+          navigate(from, { replace: true });
+        }
+        // return <Navigate to={"/dashboard"} replace={true} />;
       })
       .catch((error) => {
         toast.error(`${error.message}`);
