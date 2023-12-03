@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import PageBanner from "../Componetns/PageBanner";
 
 const DashBoard = () => {
@@ -44,10 +44,13 @@ const DashBoard = () => {
           <ul className="menu p-4 w-fit min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <li>
-              <a>Sidebar Item 1</a>
+              <Link to={"/req-link"}>Request Backlink</Link>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <Link to={"/offer-link"}>Offer Backlink</Link>
+            </li>
+            <li>
+              <Link to={"/marketplace"}>Market Place</Link>
             </li>
           </ul>
         </div>
