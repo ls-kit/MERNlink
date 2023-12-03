@@ -28,6 +28,9 @@ const DashBoard = () => {
         <div className="drawer-content">
           {/* Page content here */}
           <Outlet />
+          <div className="px-20 py-20 text-center">
+            <p>You have been redirected to dashboard after login</p>
+          </div>
           <label
             htmlFor="my-drawer"
             className="btn btn-primary drawer-button lg:hidden block"
@@ -41,7 +44,7 @@ const DashBoard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-fit min-h-full bg-base-200 text-base-content">
+          <ul className="menu px-4 pt-10 w-fit h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <li>
               <Link to={"/req-link"}>Request Backlink</Link>
@@ -52,14 +55,12 @@ const DashBoard = () => {
             <li>
               <Link to={"/marketplace"}>Market Place</Link>
             </li>
+            <div className="divider"></div>
+            <li onClick={handleLogout} className="btn btn-active btn-neutral">
+              Logout
+            </li>
           </ul>
         </div>
-      </div>
-      <div className="px-20 py-20 text-center">
-        <p>You have been redirected to dashboard after login</p>
-        <button onClick={handleLogout} className="btn btn-active btn-neutral">
-          Logout
-        </button>
       </div>
     </div>
   );
