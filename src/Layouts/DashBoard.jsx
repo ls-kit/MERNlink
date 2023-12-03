@@ -16,8 +16,8 @@ const DashBoard = () => {
   return (
     <div className="px-20 py-20 text-center">
       <Toaster position="top-center" richColors />
-      You have been redirected to dashboard after login
-      <button onClick={handleLogout} className="btn">
+      <p>You have been redirected to dashboard after login</p>
+      <button onClick={handleLogout} className="btn btn-active btn-neutral">
         Logout
       </button>
     </div>
