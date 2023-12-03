@@ -52,7 +52,7 @@ const Login = () => {
       {/* hero section and user authentication */}
       <div className="grid lg:grid-cols-2 grid-cols-1 items-center">
         {/* left portion: graphics */}
-        <div className="py-20 px-10">
+        <div className="py-20 px-10 lg:order-first order-last">
           <div className="flex justify-center">
             <img className="h-72" src="/Tech Life -tiny.png" alt="Tech life" />
           </div>
@@ -66,7 +66,7 @@ const Login = () => {
         </div>
 
         {/* right portion: login form and others */}
-        <div className="bg-[#f0fff0] px-10 pt-24 lg:h-screen">
+        <div className="bg-[#f0fff0] px-10 pt-24 lg:order-last order-first lg:h-screen">
           <div className="flex gap-x-2 items-end justify-center">
             <img
               className="h-10 mb-3 order-2"
