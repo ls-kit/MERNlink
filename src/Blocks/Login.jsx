@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
 
 const Login = () => {
   // authcontext and create user
-  const { signIn, googleSignIn } = useContext(AuthContext);
+  const { signIn, googleSignIn, user } = useContext(AuthContext);
 
   //see or hide pass
   const [showPass, setShowPass] = useState(false);
@@ -37,6 +37,10 @@ const Login = () => {
     googleSignIn()
       .then((res) => {
         toast.success("Successfully Logged in");
+        // if (user) {
+        //   console.log(user);
+        //   return <Navigate to={"/dashboard"} replace={true}></Navigate>;
+        // }
       })
       .catch((error) => {
         toast.error(`${error.message}`);
