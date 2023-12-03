@@ -55,28 +55,28 @@ const SignUp = () => {
       <Toaster position="top-center" richColors />
 
       {/* first grid column */}
-      <div className="bg-[#F8F8FF] py-20 h-screen">
-        <h1 className="text-2xl font-bold text-slate-700 px-20">
+      <div className="bg-[#F8F8FF] py-10 px-20 lg:min-h-screen">
+        <h1 className="text-2xl font-bold text-slate-700">
           Register / Sign Up
         </h1>
-        <p className="text-xs px-20 pb-4 pt-1">
+        <p className="text-xs pb-4 pt-1">
           Create your account first, provide all the valid info. <br />
           All the fields are required
         </p>
 
         {/* form */}
-        <form className="px-20" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex gap-3">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col gap-y-3">
             <input
               type="text"
               placeholder="Full Name"
-              className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white w-full"
+              className="input input-bordered w-full max-w-xs"
               {...register("fullName", { required: true })}
             />
             <input
               type="text"
               placeholder="Username"
-              className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white w-full"
+              className="input input-bordered w-full max-w-xs"
               {...register("userName", { required: true })}
             />
           </div>
@@ -84,29 +84,29 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="Country"
-              className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white w-full"
+              className="input input-bordered w-full max-w-xs"
               {...register("country", { required: true })}
             />
             <input
               type="text"
               placeholder="Phone Number"
-              className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white w-full"
+              className="input input-bordered w-full max-w-xs"
               {...register("phone", { required: true })}
             />
             <input
               type="email"
               placeholder="Email"
-              className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white w-full"
+              className="input input-bordered w-full max-w-xs"
               {...register("email", { required: true })}
             />
           </div>
           {/* password */}
-          <div className="mt-2 flex flex-col gap-2">
+          <div className="mt-2 flex flex-col gap-y-2">
             <div className="relative">
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="Password"
-                className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 w-full bg-white"
+                className="input input-bordered w-full max-w-xs"
                 {...register("password", {
                   required: true,
                   minLength: 6,
@@ -115,7 +115,7 @@ const SignUp = () => {
               />
               <button
                 onClick={toggler}
-                className="absolute right-0 top-0 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
+                className="absolute left-72 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
               >
                 {showPass ? "🕶️" : "👀"}
               </button>
@@ -141,14 +141,14 @@ const SignUp = () => {
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="Confirm Password"
-                className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 w-full bg-white"
+                className="input input-bordered w-full max-w-xs"
                 {...register("confirmPassword", {
                   required: true,
                 })}
               />
               <button
                 onClick={toggler}
-                className="absolute right-0 top-0 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
+                className="absolute left-72 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
               >
                 {showPass ? "🕶️" : "👀"}
               </button>
@@ -165,15 +165,13 @@ const SignUp = () => {
           </div>
           <button
             type="submit"
-            className="border border-slate-600 rounded-md px-4 pt-2 pb-1 mt-2 w-full bg-indigo-200 hover:bg-indigo-300 text-slate-700 font-bold text-sm"
+            className="rounded-md px-4 pt-2 pb-1 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full max-w-xs btn text-white"
           >
             Sign Up
           </button>
         </form>
-        <div className="divider text-sm font-bold text-slate-500 px-20 mt-5">
-          or
-        </div>
-        <div className="px-20 my-1">
+        <div className="divider text-sm font-bold text-slate-500 mt-5">or</div>
+        <div className="my-1">
           <h1 className="text-xs text-center">
             Already have an account?{" "}
             <Link className="text-indigo-500 hover:font-bold" to={"/"}>
@@ -185,7 +183,7 @@ const SignUp = () => {
         {/* sign in with google */}
         <button
           onClick={handleGoogleSignUp}
-          className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+          className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 btn"
         >
           Sign Up with Google
           <img
