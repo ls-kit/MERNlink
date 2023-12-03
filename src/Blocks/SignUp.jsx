@@ -70,13 +70,13 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="Full Name"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full"
               {...register("fullName", { required: true })}
             />
             <input
               type="text"
               placeholder="Username"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full"
               {...register("userName", { required: true })}
             />
           </div>
@@ -84,19 +84,19 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="Country"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full"
               {...register("country", { required: true })}
             />
             <input
               type="text"
               placeholder="Phone Number"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full"
               {...register("phone", { required: true })}
             />
             <input
               type="email"
               placeholder="Email"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full"
               {...register("email", { required: true })}
             />
           </div>
@@ -106,7 +106,7 @@ const SignUp = () => {
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="Password"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 {...register("password", {
                   required: true,
                   minLength: 6,
@@ -115,7 +115,7 @@ const SignUp = () => {
               />
               <button
                 onClick={toggler}
-                className="absolute left-72 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
+                className="absolute right-0 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
               >
                 {showPass ? "🕶️" : "👀"}
               </button>
@@ -141,14 +141,14 @@ const SignUp = () => {
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="Confirm Password"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full "
                 {...register("confirmPassword", {
                   required: true,
                 })}
               />
               <button
                 onClick={toggler}
-                className="absolute left-72 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
+                className="absolute right-0 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
               >
                 {showPass ? "🕶️" : "👀"}
               </button>
@@ -165,7 +165,7 @@ const SignUp = () => {
           </div>
           <button
             type="submit"
-            className="rounded-md px-4 pt-2 pb-1 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full max-w-xs btn text-white"
+            className="border-2 border-slate-500 rounded-md px-4 pt-2 pb-1 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full  btn text-[#111110]"
           >
             Sign Up
           </button>

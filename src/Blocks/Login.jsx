@@ -85,19 +85,19 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="Email"
-                  className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 bg-white w-full"
+                  className="input input-bordered w-full"
                   {...register("email", { required: true })}
                 />
                 <div className="relative">
                   <input
                     type={showPass ? "text" : "password"}
                     placeholder="Password"
-                    className="border border-[#e2e2e2] rounded-md pt-2 pb-1 px-2 w-full bg-white"
+                    className="input input-bordered w-full"
                     {...register("pass", { required: true })}
                   />
                   <button
                     onClick={toggler}
-                    className="absolute right-0 top-0 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
+                    className="absolute right-0 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
                   >
                     {showPass ? "🕶️" : "👀"}
                   </button>
@@ -120,7 +120,7 @@ const Login = () => {
 
               <div className="px-10">
                 <button
-                  className="w-full pt-2 pb-1 px-7 mt-5 border border-slate-500 bg-[#f6ee86] hover:bg-yellow-300 rounded-md text-sm font-bold text-slate-600"
+                  className="w-full pt-2 pb-1 px-7 mt-5 border border-slate-500 bg-[#f6ee86] hover:bg-yellow-300 rounded-md text-sm font-bold text-[#111110] btn"
                   type="submit"
                 >
                   Sign In
@@ -133,7 +133,7 @@ const Login = () => {
           {/* sign in with goole */}
           <button
             onClick={handleGoogleSignIn}
-            className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+            className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 btn"
           >
             Sign in with Google
             <img
