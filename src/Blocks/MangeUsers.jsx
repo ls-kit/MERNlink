@@ -1,11 +1,12 @@
+import axios from "axios";
 import { parentUrl } from "../Api/baseUrl";
 import TableRow from "../Componetns/TableRow";
 import { useQuery } from "react-query";
 
 const MangeUsers = () => {
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch(`${parentUrl}/users`);
-    return res.json();
+    const res = await axios.get(`${parentUrl}/users`);
+    return res.data;
   });
 
   return (

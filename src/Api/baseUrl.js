@@ -1,1 +1,1 @@
-export const parentUrl = `http://localhost:3000`;
+export const parentUrl = `https://lskit-mern-backend.vercel.app`;

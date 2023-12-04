@@ -12,7 +12,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state?.from?.pathname || "/";
+  const from = "/";
   //see or hide pass
   const [showPass, setShowPass] = useState(false);
 

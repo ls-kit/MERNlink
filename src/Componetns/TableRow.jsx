@@ -59,7 +59,7 @@ const TableRow = ({
         <th className="flex flex-col items-center">
           <button onClick={() => toggleAdmin()} className="btn">
             {" "}
-            {role ? "Remove Admin" : "Make Admin"}
+            {role === "admin" ? "Remove Admin" : "Make Admin"}
           </button>
         </th>
       </tr>
