@@ -5,7 +5,7 @@ import { Toaster, toast } from "sonner";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import countriesWithFlag from "../Api/country";
 import axios from "axios";
-import parentUrl from "../Api/baseUrl";
+import { parentUrl } from "../Api/baseUrl";
 
 const SignUp = () => {
   const { createUser, googleSignIn, user } = useContext(AuthContext);
@@ -46,7 +46,7 @@ const SignUp = () => {
           .post(`${parentUrl}/users`, userData)
           .then((res) => {
             console.log(res);
-            toast.success("Account created successfully");
+            toast.success("Account created, redirecting to login");
           })
           .catch((error) => {
             console.log(error.message);
@@ -69,7 +69,23 @@ const SignUp = () => {
     googleSignIn()
       .then((res) => {
         console.log(res.user);
-        toast.success("Account created successfully");
+        const data = res.user;
+        const userData = {
+          fullName: data.displayName,
+          email: data.email,
+          userName: data.username ? data.username : data.email,
+          country: data.country ? data.country : "Not Provided",
+          phone: data.phoneNumber ? data.phoneNumber : "Not Provided",
+        };
+
+        console.log(userData);
+        // post to users route in backend
+        axios
+          .post(`${parentUrl}/users`, userData)
+          .then((res) => console.log(res.status))
+          .catch((error) => console.log(error.message));
+
+        toast.success("Account created, redirecting to dashboard");
       })
       .catch((error) => {
         toast.error(`${error.message}`);

@@ -9,6 +9,7 @@ import OfferLink from "../Blocks/OfferLink";
 import MarketPlace from "../Blocks/MarketPlace";
 import NewsLetter from "../Blocks/NewsLetter";
 import Notifications from "../Blocks/Notifications";
+import MangeUsers from "../Blocks/MangeUsers";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
           {
             path: "/notifications",
             element: <Notifications />,
+          },
+          {
+            path: "/manageusers",
+            element: <MangeUsers />,
           },
         ],
       },

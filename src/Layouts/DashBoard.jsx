@@ -8,8 +8,9 @@ import {
   FaHive,
   FaWandMagicSparkles,
 } from "react-icons/fa6";
+import { FaUsersCog } from "react-icons/fa";
 import { RiNotification4Fill } from "react-icons/ri";
-import { MdAttachEmail, MdAdminPanelSettings } from "react-icons/md";
+import { MdAttachEmail } from "react-icons/md";
 
 const DashBoard = () => {
   const { logOut, user } = useContext(AuthContext);
@@ -87,16 +88,27 @@ const DashBoard = () => {
               </li>
             )}
             <div className="divider"></div>
-            <li className="mt-1">
-              <Link to={"/notifications"} className="flex items-start">
-                <RiNotification4Fill /> Notifiactions
-              </Link>
-            </li>
-            <li className="mt-1">
-              <Link to={"/newsletter"} className="flex items-start">
-                <MdAttachEmail /> Newsletter
-              </Link>
-            </li>
+            {isAdmin ? (
+              <>
+                <li className="mt-1">
+                  <Link to={"/notifications"} className="flex items-start">
+                    <RiNotification4Fill /> Notifiactions
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link to={"/newsletter"} className="flex items-start">
+                    <MdAttachEmail /> Newsletter
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link to={"/manageusers"} className="flex items-start">
+                    <FaUsersCog /> Manage Users
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <></>
+            )}
             <div className="form-control">
               <label className="label cursor-pointer flex flex-col">
                 <p className="label-text">
