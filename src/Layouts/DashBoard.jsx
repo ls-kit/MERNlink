@@ -11,16 +11,17 @@ import {
 import { FaUsersCog } from "react-icons/fa";
 import { RiNotification4Fill } from "react-icons/ri";
 import { MdAttachEmail } from "react-icons/md";
+import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
   const { logOut, user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
 
   // toggle role-demo
-  const [isAdmin, setIsAdmin] = useState(false);
+  /*  const [isAdmin, setIsAdmin] = useState(false);
   const toggleRole = () => {
     setIsAdmin((prevStat) => !prevStat);
-    // console.log(isAdmin);
-  };
+  }; */
   // logout
   const handleLogout = () => {
     logOut()
@@ -109,7 +110,7 @@ const DashBoard = () => {
             ) : (
               <></>
             )}
-            <div className="form-control">
+            {/* <div className="form-control">
               <label className="label cursor-pointer flex flex-col">
                 <p className="label-text">
                   {isAdmin ? "Switch to User" : "Switch to Admin"}
@@ -120,7 +121,7 @@ const DashBoard = () => {
                   className="toggle toggle-sm"
                 />
               </label>
-            </div>
+            </div> */}
             <li
               onClick={handleLogout}
               className="btn btn-active btn-neutral mt-2"
