@@ -2,11 +2,16 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import countriesWithFlag from "../Api/country";
+import axios from "axios";
+import parentUrl from "../Api/baseUrl";
 
 const SignUp = () => {
-  const { createUser, googleSignIn } = useContext(AuthContext);
+  const { createUser, googleSignIn, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/login";
   const [showPass, setShowPass] = useState(false);
 
   const toggler = (e) => {
@@ -23,11 +28,30 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+    // google create user with email and pass
     createUser(data.email, data.password)
       .then((res) => {
-        toast.success("Account created successfully");
+        // send user data to backend
+        const userData = {
+          fullName: data.fullName,
+          email: data.email,
+          userName: data.userName,
+          country: data.country.split(" ")[0],
+          phone: data.phone,
+        };
+
         reset();
+        axios
+          .post(`${parentUrl}/users`, userData)
+          .then((res) => {
+            console.log(res);
+            toast.success("Account created successfully");
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         if (error) {
@@ -44,6 +68,7 @@ const SignUp = () => {
   const handleGoogleSignUp = () => {
     googleSignIn()
       .then((res) => {
+        console.log(res.user);
         toast.success("Account created successfully");
       })
       .catch((error) => {
@@ -88,6 +113,7 @@ const SignUp = () => {
                 className="input input-bordered w-full"
                 {...register("country", { required: true })}
               /> */}
+
               <select
                 className="select select-bordered w-full"
                 {...register("country", { required: true })}
@@ -99,6 +125,7 @@ const SignUp = () => {
                   <option key={i}>{country}</option>
                 ))}
               </select>
+
               <input
                 type="text"
                 placeholder="Phone Number"
@@ -134,17 +161,17 @@ const SignUp = () => {
               </div>
 
               {/* validations for ui */}
-              {errors.password?.type == "minLength" && (
+              {errors.password && errors.password?.type === "minLength" && (
                 <p className="text-xs font-bold pt-1 text-red-400 mt-1">
                   Password must be atleast 6 characters
                 </p>
               )}
-              {errors.password?.type === "required" && (
+              {errors.password && errors.password?.type === "required" && (
                 <p className="text-xs font-bold pt-1 text-red-400 mt-1">
                   Password is required
                 </p>
               )}
-              {errors.password?.type === "pattern" && (
+              {errors.password && errors.password?.type === "pattern" && (
                 <p className="text-xs font-bold pt-1 text-red-400 mt-1">
                   uppercase, number and special character required
                 </p>

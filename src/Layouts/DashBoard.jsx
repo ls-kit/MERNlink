@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
 import { Link, Outlet } from "react-router-dom";
@@ -9,10 +9,18 @@ import {
   FaWandMagicSparkles,
 } from "react-icons/fa6";
 import { RiNotification4Fill } from "react-icons/ri";
-import { MdAttachEmail } from "react-icons/md";
+import { MdAttachEmail, MdAdminPanelSettings } from "react-icons/md";
 
 const DashBoard = () => {
-  const { logOut } = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
+
+  // toggle role-demo
+  const [isAdmin, setIsAdmin] = useState(false);
+  const toggleRole = () => {
+    setIsAdmin((prevStat) => !prevStat);
+    // console.log(isAdmin);
+  };
+  // logout
   const handleLogout = () => {
     logOut()
       .then((res) => {
@@ -53,21 +61,31 @@ const DashBoard = () => {
           ></label>
           <ul className="menu px-4 pt-10 w-fit h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
-            <li className="mt-1">
-              <Link className="flex items-start" to={"/req-link"}>
-                <FaCodePullRequest /> Request Backlink
-              </Link>
-            </li>
-            <li className="mt-1">
-              <Link className="flex items-start" to={"/offer-link"}>
-                <FaWandMagicSparkles /> Offer Backlink
-              </Link>
-            </li>
-            <li className="mt-1">
-              <Link className="flex items-start" to={"/marketplace"}>
-                <FaHive /> Market Place
-              </Link>
-            </li>
+            {isAdmin ? (
+              <>
+                <li className="mt-1">
+                  <Link className="flex items-start" to={"/req-link"}>
+                    <FaCodePullRequest /> Request Backlink
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link className="flex items-start" to={"/offer-link"}>
+                    <FaWandMagicSparkles /> Offer Backlink
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link className="flex items-start" to={"/marketplace"}>
+                    <FaHive /> Market Place
+                  </Link>
+                </li>{" "}
+              </>
+            ) : (
+              <li className="mt-1">
+                <Link className="flex items-start" to={"/marketplace"}>
+                  <FaHive /> Market Place
+                </Link>
+              </li>
+            )}
             <div className="divider"></div>
             <li className="mt-1">
               <Link to={"/notifications"} className="flex items-start">
@@ -79,6 +97,18 @@ const DashBoard = () => {
                 <MdAttachEmail /> Newsletter
               </Link>
             </li>
+            <div className="form-control">
+              <label className="label cursor-pointer flex flex-col">
+                <p className="label-text">
+                  {isAdmin ? "Switch to User" : "Switch to Admin"}
+                </p>
+                <input
+                  onClick={() => toggleRole()}
+                  type="checkbox"
+                  className="toggle toggle-sm"
+                />
+              </label>
+            </div>
             <li
               onClick={handleLogout}
               className="btn btn-active btn-neutral mt-2"
