@@ -7,6 +7,8 @@ import PrivateRoute from "./PrivateRoute";
 import ReqBackLink from "../Blocks/ReqBackLink";
 import OfferLink from "../Blocks/OfferLink";
 import MarketPlace from "../Blocks/MarketPlace";
+import NewsLetter from "../Blocks/NewsLetter";
+import Notifications from "../Blocks/Notifications";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
           {
             path: "/marketplace",
             element: <MarketPlace />,
+          },
+          {
+            path: "/newsletter",
+            element: <NewsLetter />,
+          },
+          {
+            path: "/notifications",
+            element: <Notifications />,
           },
         ],
       },

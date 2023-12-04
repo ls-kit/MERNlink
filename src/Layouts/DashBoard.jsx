@@ -3,6 +3,13 @@ import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
 import { Link, Outlet } from "react-router-dom";
 import PageBanner from "../Componetns/PageBanner";
+import {
+  FaCodePullRequest,
+  FaHive,
+  FaWandMagicSparkles,
+} from "react-icons/fa6";
+import { RiNotification4Fill } from "react-icons/ri";
+import { MdAttachEmail } from "react-icons/md";
 
 const DashBoard = () => {
   const { logOut } = useContext(AuthContext);
@@ -46,17 +53,36 @@ const DashBoard = () => {
           ></label>
           <ul className="menu px-4 pt-10 w-fit h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
-            <li>
-              <Link to={"/req-link"}>Request Backlink</Link>
+            <li className="mt-1">
+              <Link className="flex items-start" to={"/req-link"}>
+                <FaCodePullRequest /> Request Backlink
+              </Link>
             </li>
-            <li>
-              <Link to={"/offer-link"}>Offer Backlink</Link>
+            <li className="mt-1">
+              <Link className="flex items-start" to={"/offer-link"}>
+                <FaWandMagicSparkles /> Offer Backlink
+              </Link>
             </li>
-            <li>
-              <Link to={"/marketplace"}>Market Place</Link>
+            <li className="mt-1">
+              <Link className="flex items-start" to={"/marketplace"}>
+                <FaHive /> Market Place
+              </Link>
             </li>
             <div className="divider"></div>
-            <li onClick={handleLogout} className="btn btn-active btn-neutral">
+            <li className="mt-1">
+              <Link to={"/notifications"} className="flex items-start">
+                <RiNotification4Fill /> Notifiactions
+              </Link>
+            </li>
+            <li className="mt-1">
+              <Link to={"/newsletter"} className="flex items-start">
+                <MdAttachEmail /> Newsletter
+              </Link>
+            </li>
+            <li
+              onClick={handleLogout}
+              className="btn btn-active btn-neutral mt-2"
+            >
               Logout
             </li>
           </ul>
