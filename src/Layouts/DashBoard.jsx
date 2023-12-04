@@ -122,6 +122,12 @@ const DashBoard = () => {
                 />
               </label>
             </div> */}
+            <li>
+              <span className="text-xs mt-1">
+                Interaction as {isAdmin ? "Admin" : "User"} <br />{" "}
+                {user.displayName}
+              </span>
+            </li>
             <li
               onClick={handleLogout}
               className="btn btn-active btn-neutral mt-2"

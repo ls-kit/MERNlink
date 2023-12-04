@@ -10,6 +10,7 @@ import MarketPlace from "../Blocks/MarketPlace";
 import NewsLetter from "../Blocks/NewsLetter";
 import Notifications from "../Blocks/Notifications";
 import MangeUsers from "../Blocks/MangeUsers";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/manageusers",
-            element: <MangeUsers />,
+            element: (
+              <AdminRoute>
+                <MangeUsers />
+              </AdminRoute>
+            ),
           },
         ],
       },

@@ -37,12 +37,11 @@ const TableRow = ({
         </th>
         <td>
           <div className="flex items-end gap-3">
-            <div className="avatar">
-              <div className="w-12 rounded-full">
-                <img
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  alt="Tailwind-CSS-Avatar-component"
-                />
+            <div className="avatar placeholder">
+              <div className="bg-neutral text-neutral-content rounded-full w-12">
+                <span className="text-sm">
+                  {fullName[0] + fullName[1].toUpperCase()}
+                </span>
               </div>
             </div>
             <div>
