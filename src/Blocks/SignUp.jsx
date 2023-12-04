@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
 import { Link } from "react-router-dom";
+import countriesWithFlag from "../Api/country";
 
 const SignUp = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
@@ -81,12 +82,23 @@ const SignUp = () => {
               />
             </div>
             <div className="flex flex-col gap-3 mt-2">
-              <input
+              {/* <input
                 type="text"
                 placeholder="Country"
                 className="input input-bordered w-full"
                 {...register("country", { required: true })}
-              />
+              /> */}
+              <select
+                className="select select-bordered w-full"
+                {...register("country", { required: true })}
+              >
+                <option className="text-lg text-slate-500" disabled selected>
+                  Select your country
+                </option>
+                {countriesWithFlag.map((country, i) => (
+                  <option key={i}>{country}</option>
+                ))}
+              </select>
               <input
                 type="text"
                 placeholder="Phone Number"
