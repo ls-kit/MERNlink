@@ -12,6 +12,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/login";
+  const dash = location?.state?.from?.pathname || "/";
   const [showPass, setShowPass] = useState(false);
 
   const toggler = (e) => {
@@ -78,7 +79,7 @@ const SignUp = () => {
           phone: data.phoneNumber ? data.phoneNumber : "Not Provided",
         };
 
-        console.log(userData);
+        // console.log(userData);
         // post to users route in backend
         axios
           .post(`${parentUrl}/users`, userData)
@@ -86,6 +87,7 @@ const SignUp = () => {
           .catch((error) => console.log(error.message));
 
         toast.success("Account created, redirecting to dashboard");
+        navigate(dash, { replace: true });
       })
       .catch((error) => {
         toast.error(`${error.message}`);

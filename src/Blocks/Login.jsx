@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
+import axios from "axios";
+import { parentUrl } from "../Api/baseUrl";
 
 const Login = () => {
   // authcontext and create user
@@ -40,10 +42,29 @@ const Login = () => {
 
   // signin with google
   const handleGoogleSignIn = () => {
+    // check if user exists
+
     googleSignIn()
       .then((res) => {
         const user = res.user;
         if (user) {
+          const data = res.user;
+          const userData = {
+            fullName: data.displayName,
+            email: data.email,
+            userName: data.username ? data.username : data.email,
+            country: data.country ? data.country : "Not Provided",
+            phone: data.phoneNumber ? data.phoneNumber : "Not Provided",
+          };
+
+          // check if user exists
+
+          // post to users route in backend
+          axios
+            .post(`${parentUrl}/users`, userData)
+            .then((res) => console.log(res.data.message))
+            .catch((error) => console.log(error.message));
+
           toast.success("Successfully Logged in");
           navigate(from, { replace: true });
         }

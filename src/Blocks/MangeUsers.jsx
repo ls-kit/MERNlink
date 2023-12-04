@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { parentUrl } from "../Api/baseUrl";
 import TableRow from "../Componetns/TableRow";
+import { useQuery } from "react-query";
 
 const MangeUsers = () => {
   const [users, setUsers] = useState([]);
@@ -15,6 +16,11 @@ const MangeUsers = () => {
       })
       .catch((error) => console.log(error.message));
   }, [parentUrl]);
+
+  /* const { data: users = [], refetch } = useQuery(["users"], async () => {
+    const res = await fetch(`${parentUrl}/users`);
+    return res.json;
+  }); */
 
   return (
     <div className="overflow-x-auto">

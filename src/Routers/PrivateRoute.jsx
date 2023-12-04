@@ -12,9 +12,6 @@ const PrivateRoute = ({ children }) => {
     return (
       <div className="px-10 py-10 flex flex-col justify-center items-center gap-4 lg:h-screen">
         <span className="loading loading-bars loading-md"></span>
-        <p className="text-sm text-slate-600 text-center">
-          Login successfull, redirecting to dashboard
-        </p>
       </div>
     );
   }
