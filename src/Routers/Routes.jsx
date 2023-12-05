@@ -11,6 +11,7 @@ import NewsLetter from "../Blocks/NewsLetter";
 import Notifications from "../Blocks/Notifications";
 import MangeUsers from "../Blocks/MangeUsers";
 import AdminRoute from "./AdminRoute";
+import ResetPass from "../Blocks/ResetPass";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/resetpass",
+        element: <ResetPass />,
       },
       {
         path: "/",

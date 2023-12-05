@@ -147,7 +147,12 @@ const Login = () => {
                   now!
                 </p>
 
-                <p className="text-xs text-purple-600">Forgot Password</p>
+                <Link
+                  to={"/resetpass"}
+                  className="text-xs text-purple-600 hover:font-bold"
+                >
+                  Forgot Password
+                </Link>
               </div>
 
               <div className="px-10">
