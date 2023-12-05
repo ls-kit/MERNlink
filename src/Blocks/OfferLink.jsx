@@ -29,7 +29,7 @@ const OfferLink = () => {
                 <span className="label-text">Add Your Website</span>
               </div>
               <input
-                type="url"
+                type="text"
                 placeholder="Type here"
                 className="input input-bordered w-full max-w-xs"
                 {...register("addedSite", {
@@ -66,18 +66,56 @@ const OfferLink = () => {
                 <span className="label-text">Monthly Organic Visits</span>
               </div>
               <input
-                type="url"
+                type="number"
                 placeholder="Type here"
                 className="input input-bordered w-full max-w-xs"
-                {...register("organicVisitMonthly", {
+                {...register("monthlyOrgVisit", {
                   required: true,
                 })}
               />
-              {errors.addedSite && errors.addedSite?.type === "pattern" && (
-                <span className="text-xs py-2 font-semibold text-red-400">
-                  Start with www. and end with .com or TLDs
-                </span>
-              )}
+              {errors.monthlyOrgVisit &&
+                errors.monthlyOrgVisist?.type === "valueAsNumber" && (
+                  <span className="text-xs py-2 font-semibold text-red-400">
+                    Numbers Only
+                  </span>
+                )}
+            </label>
+          </div>
+          {/* second row */}
+          <div className="mt-3 flex lg:flex-row flex-col gap-3">
+            {/* launch date */}
+            <label className="form-control w-fit max-w-xs">
+              <div className="label">
+                <span className="label-text">Launch Date</span>
+              </div>
+              <input
+                type="date"
+                placeholder="Type here"
+                className="input input-bordered w-full max-w-xs"
+                {...register("launchDate", {
+                  required: true,
+                })}
+              />
+            </label>
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Ranking Keywords</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered w-full max-w-xs"
+                {...register("rankingKeyWords", {
+                  required: true,
+                  pattern: /^\w+(,\w+)*$/,
+                })}
+              />
+              {errors.rankingKeyWords &&
+                errors.rankingKeyWords?.type === "pattern" && (
+                  <span className="text-xs py-2 font-semibold text-red-400">
+                    Seperate words with commas (,)
+                  </span>
+                )}
             </label>
           </div>
           <input className="btn btn-md btn-outline mt-3" type="submit" />
