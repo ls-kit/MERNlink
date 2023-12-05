@@ -28,11 +28,51 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  /* const onSubmit = (data) => {
     // console.log(data);
     // google create user with email and pass
     createUser(data.email, data.password)
       .then((res) => {
+        toast.success(res.message + `redirecting to Login`);
+      })
+      .then((error) => {
+        // if (error && error.message) {
+        toast.error(`${error.message}`);
+        reset();
+        return;
+        // }
+      });
+    // send user data to backend
+    const userData = {
+      fullName: data.fullName,
+      email: data.email,
+      userName: data.userName,
+      country: data.country.split(" ")[0],
+      phone: data.phone,
+    };
+
+    reset();
+    axios
+      .post(`${parentUrl}/users`, userData)
+      .then((res) => {
+        console.log(res);
+        toast.success("Account created, redirecting to login");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    // navigate(from, { replace: true });
+  }; */
+
+  const onSubmit = (data) => {
+    // console.log(data);
+
+    // google create user with email and pass
+    createUser(data.email, data.password)
+      .then((res) => {
+        toast.success(res.message);
+
         // send user data to backend
         const userData = {
           fullName: data.fullName,
@@ -43,20 +83,18 @@ const SignUp = () => {
         };
 
         reset();
-        axios
-          .post(`${parentUrl}/users`, userData)
-          .then((res) => {
-            console.log(res);
-            toast.success("Account created, redirecting to login");
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+
+        return axios.post(`${parentUrl}/users`, userData);
+      })
+      .then((res) => {
+        // console.log(res);
+        toast.success("Account created, redirecting to login");
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        if (error) {
+        if (error && error.message) {
           toast.error(`${error.message}`);
+          reset();
         }
       });
   };
@@ -95,11 +133,11 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <Toaster position="top-center" richColors />;
-      <div className="grid lg:grid-cols-2 grid-cols-1 items-center lg:h-screen">
+    <div className="h-screen pb-4">
+      <Toaster position="top-center" richColors />
+      <div className="grid lg:grid-cols-2 grid-cols-1 items-center lg:h-screen md:h-screen">
         {/* first grid column */}
-        <div className="bg-[#F8F8FF] py-10 px-20 lg:min-h-screen">
+        <div className="bg-[#F8F8FF] py-10 px-20 lg:h-screen">
           <h1 className="text-2xl font-bold text-slate-700">
             Register / Sign Up
           </h1>
@@ -228,7 +266,7 @@ const SignUp = () => {
                 Sign Up
               </button>
             ) : (
-              <button className="btn-disabled border-2 border-slate-500 rounded-md px-4 pt-2 pb-1 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full  btn text-[#111110]">
+              <button className="btn-disabled border-2 border-slate-500 rounded-md px-4 py-2 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full  btn text-[#111110]">
                 Sign Up
               </button>
             )}
@@ -248,7 +286,7 @@ const SignUp = () => {
           {/* sign in with google */}
           <button
             onClick={handleGoogleSignUp}
-            className="px-4 pt-2 pb-1 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 btn"
+            className="px-4 py-2 rounded-3xl bg-white text-sm font-semibold mx-auto flex justify-center gap-2 my-4 border border-slate-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 btn"
           >
             Sign Up with Google
             <img
