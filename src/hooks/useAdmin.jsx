@@ -15,7 +15,7 @@ const useAdmin = () => {
       // .catch((error) => {
       //   toast.error(`${error.message}`);
       // });
-      console.log(`is admin`, res);
+      // console.log(`is admin`, res);
 
       return res.data.admin;
     },
