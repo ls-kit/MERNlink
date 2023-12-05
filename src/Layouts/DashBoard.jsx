@@ -6,11 +6,12 @@ import PageBanner from "../Componetns/PageBanner";
 import {
   FaCodePullRequest,
   FaHive,
+  FaUsers,
   FaWandMagicSparkles,
 } from "react-icons/fa6";
 import { FaUsersCog } from "react-icons/fa";
 import { RiNotification4Fill } from "react-icons/ri";
-import { MdAttachEmail } from "react-icons/md";
+import { MdAttachEmail, MdOutlineWebStories } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
@@ -82,11 +83,23 @@ const DashBoard = () => {
                 </li>{" "}
               </>
             ) : (
-              <li className="mt-1">
-                <Link className="flex items-start" to={"/marketplace"}>
-                  <FaHive /> Market Place
-                </Link>
-              </li>
+              <>
+                <li className="mt-1">
+                  <Link className="flex items-start" to={"/req-link"}>
+                    <FaCodePullRequest /> Request Backlink
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link className="flex items-start" to={"/offer-link"}>
+                    <FaWandMagicSparkles /> Offer Backlink
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link className="flex items-start" to={"/marketplace"}>
+                    <FaHive /> Market Place
+                  </Link>
+                </li>
+              </>
             )}
             <div className="divider"></div>
             {isAdmin ? (
@@ -103,7 +116,17 @@ const DashBoard = () => {
                 </li>
                 <li className="mt-1">
                   <Link to={"/manageusers"} className="flex items-start">
-                    <FaUsersCog /> Manage Users
+                    <FaUsersCog /> Administration
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link to={"/allusers"} className="flex items-start">
+                    <FaUsers /> All Users
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link to={"/allsites"} className="flex items-start">
+                    <MdOutlineWebStories /> All Websites
                   </Link>
                 </li>
               </>

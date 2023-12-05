@@ -10,6 +10,9 @@ const ResetPass = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data.email);
+
+    // todo: check if the email includes in data base, if includes then move to the next procedure or else give an warning toast
+
     resetPass(data.email)
       .then((res) => {
         toast.success(`A reset link has been sent to your email`);

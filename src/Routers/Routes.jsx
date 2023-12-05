@@ -12,6 +12,8 @@ import Notifications from "../Blocks/Notifications";
 import MangeUsers from "../Blocks/MangeUsers";
 import AdminRoute from "./AdminRoute";
 import ResetPass from "../Blocks/ResetPass";
+import AllUsers from "../Blocks/AllUsers";
+import AllWebsites from "../Blocks/AllWebsites";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,22 @@ const router = createBrowserRouter([
             element: (
               <AdminRoute>
                 <MangeUsers />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "/allusers",
+            element: (
+              <AdminRoute>
+                <AllUsers></AllUsers>
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "/allsites",
+            element: (
+              <AdminRoute>
+                <AllWebsites />
               </AdminRoute>
             ),
           },
