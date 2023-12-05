@@ -3,6 +3,8 @@ import { AuthContext } from "../Poveiders/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { parentUrl } from "../Api/baseUrl";
 
 const ResetPass = () => {
   const { resetPass } = useContext(AuthContext);
@@ -12,13 +14,26 @@ const ResetPass = () => {
     console.log(data.email);
 
     // todo: check if the email includes in data base, if includes then move to the next procedure or else give an warning toast
-
-    resetPass(data.email)
+    axios
+      .get(`${parentUrl}/users`)
       .then((res) => {
-        toast.success(`A reset link has been sent to your email`);
-        reset();
+        const allUsers = res.data;
+        allUsers.map((item) => {
+          if (item.email !== data.email) {
+            toast.error(`Account not found, register first!`);
+          } else {
+            resetPass(data.email)
+              .then((res) => {
+                toast.success(`A reset link has been sent to your email`);
+                reset();
+              })
+              .catch((error) => toast.error(error.message));
+          }
+        });
       })
-      .catch((error) => toast.error(error.message));
+      .catch((error) => {
+        toast.error(`${error.message}`);
+      });
   };
 
   return (

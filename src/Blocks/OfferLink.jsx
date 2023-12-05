@@ -12,6 +12,7 @@ const OfferLink = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    reset();
   };
 
   return (
@@ -97,6 +98,7 @@ const OfferLink = () => {
                 })}
               />
             </label>
+            {/* key words */}
             <label className="form-control w-full max-w-xs">
               <div className="label">
                 <span className="label-text">Ranking Keywords</span>
@@ -117,7 +119,33 @@ const OfferLink = () => {
                   </span>
                 )}
             </label>
+            {/* type do follow / not follow */}
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Category</span>
+              </div>
+              <select
+                className="select select-bordered"
+                {...register("type", { required: true })}
+              >
+                <option disabled selected>
+                  Pick one
+                </option>
+                <option>Follow</option>
+                <option>Not follow</option>
+              </select>
+            </label>
           </div>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Pick your html file</span>
+            </div>
+            <input
+              type="file"
+              className="file-input file-input-bordered w-full max-w-xs"
+              {...register("htmlFile", { required: true })}
+            />
+          </label>
           <input className="btn btn-md btn-outline mt-3" type="submit" />
         </form>
       </div>
