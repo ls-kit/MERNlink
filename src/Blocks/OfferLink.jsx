@@ -1,6 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { webCategory } from "../Api/siteCategory";
+import DownLoadBtn from "../Componetns/DownLoadBtn";
+import axios from "axios";
+import { parentUrl } from "../Api/baseUrl";
+import { toast } from "sonner";
 
 const OfferLink = () => {
   const {
@@ -12,6 +16,13 @@ const OfferLink = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    axios
+      .post(`${parentUrl}/offer-backlink`)
+      .then((res) => {
+        console.log(res);
+        toast.info(`Data submitted, Download to html file to verify`);
+      })
+      .then((error) => console.log(error));
     reset();
   };
 
@@ -137,14 +148,12 @@ const OfferLink = () => {
             </label>
           </div>
           <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Pick your html file</span>
+            <div className="label flex flex-col items-start mt-4">
+              <span className="label-text pb-1">
+                Download the file to verify your site
+              </span>
+              <DownLoadBtn />
             </div>
-            <input
-              type="file"
-              className="file-input file-input-bordered w-full max-w-xs"
-              {...register("htmlFile", { required: true })}
-            />
           </label>
           <input className="btn btn-md btn-outline mt-3" type="submit" />
         </form>
