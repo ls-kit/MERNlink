@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { parentUrl } from "../Api/baseUrl";
 import { Toaster, toast } from "sonner";
+import { AuthContext } from "../Poveiders/AuthProvider";
 
 const TableRow = ({
   index,
@@ -13,6 +14,8 @@ const TableRow = ({
   refetch,
   role,
 }) => {
+  const { user } = useContext(AuthContext);
+
   const makeAdmin = () => {
     fetch(`${parentUrl}/users/make-admin/${id}`, {
       method: "PATCH",
@@ -73,7 +76,7 @@ const TableRow = ({
           {role === "admin" ? (
             <button
               className={`btn btn-outline ${
-                role === "admin" ? "btn-disabled" : ""
+                user.email === email ? "btn-disabled" : ""
               }`}
               onClick={() => removeAdmin()}
             >

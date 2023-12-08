@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="px-20 py-20">
+      <h1 class="text-center">Run this file in your website url</h1>
+      <p>Example: www.mysite.com/verify.html</p>
+    </div>
+
+    <script>
+      const url = location.href;
+      fetch(
+        `https://lskit-mern-backend.vercel.app/offer-backlink/isValid/${url}`,
+        {
+          method: "PATCH",
+        }
+      )
+        .then((res) => res.json())
+        .then((error) => alert(error.mesage));
+    </script>
+  </body>
+</html>
