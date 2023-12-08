@@ -15,12 +15,12 @@ const OfferLink = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     axios
-      .post(`${parentUrl}/offer-backlink`)
+      .post(`${parentUrl}/offer-backlink`, data)
       .then((res) => {
-        console.log(res);
-        toast.info(`Data submitted, Download to html file to verify`);
+        // console.log(res);
+        toast.info(`Data submitted, Download the html file to verify`);
       })
       .then((error) => console.log(error));
     reset();
