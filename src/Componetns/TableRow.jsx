@@ -13,14 +13,27 @@ const TableRow = ({
   refetch,
   role,
 }) => {
-  const toggleAdmin = () => {
-    fetch(`${parentUrl}/users/admin/${id}`, {
+  const makeAdmin = () => {
+    fetch(`${parentUrl}/users/make-admin/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
           toast.success(`${fullName} is an admin now!`);
+        }
+        refetch();
+      });
+  };
+
+  const removeAdmin = () => {
+    fetch(`${parentUrl}/users/remove-admin/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          toast.warning(`Admin removed!`);
         }
         refetch();
       });
@@ -57,10 +70,20 @@ const TableRow = ({
         </td>
         <td>{phone}</td>
         <th className="flex flex-col items-center">
-          <button onClick={() => toggleAdmin()} className="btn">
-            {" "}
-            {role === "admin" ? "Remove Admin" : "Make Admin"}
-          </button>
+          {role === "admin" ? (
+            <button
+              className={`btn btn-outline ${
+                role === "admin" ? "btn-disabled" : ""
+              }`}
+              onClick={() => removeAdmin()}
+            >
+              Remove Admin
+            </button>
+          ) : (
+            <button className="btn btn-outline" onClick={() => makeAdmin()}>
+              Make Admin
+            </button>
+          )}
         </th>
       </tr>
     </>

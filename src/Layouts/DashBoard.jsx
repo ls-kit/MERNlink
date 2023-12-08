@@ -16,7 +16,7 @@ import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
   const { logOut, user } = useContext(AuthContext);
-  const [isAdmin] = useAdmin();
+  const [isAdmin, isAdminLoading] = useAdmin();
 
   // toggle role-demo
   /*  const [isAdmin, setIsAdmin] = useState(false);
@@ -102,7 +102,13 @@ const DashBoard = () => {
               </>
             )}
             <div className="divider"></div>
-            {isAdmin ? (
+            {isAdminLoading ? (
+              <>
+                <div className="text-center py-3 px-5">
+                  <h1 className="font-bold">Loading...</h1>
+                </div>
+              </>
+            ) : (
               <>
                 <li className="mt-1">
                   <Link to={"/notifications"} className="flex items-start">
@@ -130,8 +136,6 @@ const DashBoard = () => {
                   </Link>
                 </li>
               </>
-            ) : (
-              <></>
             )}
             {/* <div className="form-control">
               <label className="label cursor-pointer flex flex-col">
@@ -147,7 +151,7 @@ const DashBoard = () => {
             </div> */}
             <li>
               <span className="text-xs mt-1">
-                Interaction as {isAdmin ? "Admin" : "User"} <br />{" "}
+                Interacting as {isAdmin ? "Admin" : "User"} <br />{" "}
                 {user.displayName}
               </span>
             </li>
