@@ -37,6 +37,7 @@ const ReqLinkTbRow = ({ index, url, lanchDate }) => {
       reqUserEmail: user.email,
       reqUserPhone: user?.phone,
       data: formattedDate,
+      selectedUrl4Request: url,
     };
     axios
       .post(`${parentUrl}/requested-backlink`, payLoad)
