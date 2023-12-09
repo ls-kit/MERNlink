@@ -18,6 +18,17 @@ const ReqLinkTbRow = ({ index, url, lanchDate }) => {
   //   submitted data from modal
   const onSubmit = (data) => {
     console.log(data);
+
+    // date
+    const currentDate = new Date();
+    const options = {
+      month: "2-digit",
+      day: "2-digit",
+      year: "2-digit",
+    };
+    const formattedDate = currentDate.toLocaleDateString("en-US", options);
+
+    // payload to send data in backend
     const payLoad = {
       reqBackLink: data.requestedBackLink,
       msg: data.message,
@@ -25,6 +36,7 @@ const ReqLinkTbRow = ({ index, url, lanchDate }) => {
       reqUser: user.displayName,
       reqUserEmail: user.email,
       reqUserPhone: user?.phone,
+      data: formattedDate,
     };
     axios
       .post(`${parentUrl}/requested-backlink`, payLoad)
@@ -38,6 +50,14 @@ const ReqLinkTbRow = ({ index, url, lanchDate }) => {
       });
     reset();
   };
+
+  const currentDate = new Date();
+  const options = {
+    month: "2-digit",
+    day: "2-digit",
+    year: "2-digit",
+  };
+  const formattedDate = currentDate.toLocaleDateString("en-US", options);
 
   return (
     <>
@@ -59,7 +79,9 @@ const ReqLinkTbRow = ({ index, url, lanchDate }) => {
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <label className="form-control w-full">
                       <div className="label">
-                        <span className="label-text">Given Back-Link URL</span>
+                        <span className="label-text">
+                          Given Back-Link URL , Date:{formattedDate}
+                        </span>
                       </div>
                       <input
                         type="text"
