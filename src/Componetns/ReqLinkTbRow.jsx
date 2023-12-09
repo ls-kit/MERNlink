@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../Poveiders/AuthProvider";
 
 const ReqLinkTbRow = ({ index, url, lanchDate }) => {
+  // logged in user data
+  const { user } = useContext(AuthContext);
+
   return (
     <tbody>
       {/* row 1 */}
