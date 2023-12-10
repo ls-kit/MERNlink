@@ -10,10 +10,14 @@ const ReqBackLink = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [linksPerPage, setlinksPerPage] = useState(1);
 
+  // filter
+  const [type, setType] = useState("");
+
   useEffect(() => {
     const fetchLinks = async () => {
       setLoading(true);
-      const res = await axios.get(`${parentUrl}/offer-backlink`);
+      console.log(type);
+      const res = await axios.get(`${parentUrl}/offer-backlink/${type}`);
       /* .then((res) => console.log(res.status))
         .then((error) => console.log(error)); */
       setLinks(res.data);
@@ -21,7 +25,7 @@ const ReqBackLink = () => {
     };
 
     fetchLinks();
-  }, []);
+  }, [type]);
 
   // get current posts
   const indexOfLastPost = currentPage * linksPerPage;
@@ -50,6 +54,21 @@ const ReqBackLink = () => {
           totalLinks={links.length}
           paginate={paginate}
         />
+        {/* filter */}
+        <details className="dropdown">
+          <summary className="m-1 btn">Filter By</summary>
+          <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <li>
+              <button onClick={() => setType("Follow")}>Follow</button>
+            </li>
+            <li>
+              <button onClick={() => setType("Not follow")}>Not Follow</button>
+            </li>
+            <li>
+              <button onClick={() => setType("")}>Show All</button>
+            </li>
+          </ul>
+        </details>
       </div>
       {/* table data */}
       <div className="overflow-x-auto overflow-y-auto lg:px-5">
