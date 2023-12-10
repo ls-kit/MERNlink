@@ -146,7 +146,10 @@ const DashBoard = () => {
             ) : (
               <>
                 <li className="mt-1">
-                  <Link className="flex items-start text-sm animate-pulse">
+                  <Link
+                    to={"/pending"}
+                    className="flex items-start text-sm animate-pulse"
+                  >
                     <MdOutlinePending /> Pending Requests
                   </Link>
                 </li>

@@ -71,7 +71,7 @@ const ReqBackLink = () => {
         </details>
       </div>
       {/* table data */}
-      <div className="overflow-x-auto overflow-y-auto lg:px-5">
+      <div className="overflow-x-auto overflow-y-auto">
         <table className="table">
           {/* head */}
           <thead>

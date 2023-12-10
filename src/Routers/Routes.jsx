@@ -14,6 +14,7 @@ import AdminRoute from "./AdminRoute";
 import ResetPass from "../Blocks/ResetPass";
 import AllUsers from "../Blocks/AllUsers";
 import AllWebsites from "../Blocks/AllWebsites";
+import PendingRequests from "../Blocks/PendingRequests";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
           {
             path: "/notifications",
             element: <Notifications />,
+          },
+          {
+            path: "/pending",
+            element: <PendingRequests />,
           },
           {
             path: "/manageusers",
