@@ -42,14 +42,15 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
     axios
       .post(`${parentUrl}/requested-backlink`, payLoad)
       .then((res) => {
-        // console.log(res);
         // send request number to offer-backlink collection
         axios
           .post(`${parentUrl}/offer-backlink/count/${id}`)
           .then((res) => {
             console.log(res);
           })
-          .then((error) => console.log(error));
+          .then((error) => {
+            console.log(error);
+          });
         toast.success("Request Sent");
       })
       .catch((error) => {

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { webCategory } from "../Api/siteCategory";
 import DownLoadBtn from "../Componetns/DownLoadBtn";
 import axios from "axios";
 import { parentUrl } from "../Api/baseUrl";
 import { toast } from "sonner";
+import { AuthContext } from "../Poveiders/AuthProvider";
 
 const OfferLink = () => {
+  // get user
+  const { user } = useContext(AuthContext);
+
   const {
     register,
     reset,
@@ -15,9 +19,18 @@ const OfferLink = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
+    const payLoad = {
+      addedSite: data.addedSite,
+      category: data.category,
+      launchDate: data.launchDate,
+      monthlyOrgVisit: data.monthlyOrgVisit,
+      rankingKeyWords: data.rankingKeyWords,
+      type: data.type,
+      user: user.email,
+    };
     axios
-      .post(`${parentUrl}/offer-backlink`, data)
+      .post(`${parentUrl}/offer-backlink`, payLoad)
       .then((res) => {
         // console.log(res);
         toast.info(`Data submitted, Download the html file to verify`);
