@@ -36,7 +36,7 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
       reqUser: user.displayName,
       reqUserEmail: user.email,
       reqUserPhone: user?.phone,
-      data: formattedDate,
+      date: formattedDate,
       selectedUrl4Request: url,
     };
     axios

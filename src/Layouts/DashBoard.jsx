@@ -8,10 +8,16 @@ import {
   FaHive,
   FaUsers,
   FaWandMagicSparkles,
+  FaCircleCheck,
 } from "react-icons/fa6";
 import { FaUsersCog } from "react-icons/fa";
 import { RiNotification4Fill } from "react-icons/ri";
-import { MdAttachEmail, MdOutlineWebStories } from "react-icons/md";
+import {
+  MdAttachEmail,
+  MdOutlineWebStories,
+  MdOutlinePending,
+  MdCancel,
+} from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
@@ -102,13 +108,14 @@ const DashBoard = () => {
               </>
             )}
             <div className="divider"></div>
-            {isAdminLoading ? (
+            {isAdminLoading && (
               <>
                 <div className="text-center py-3 px-5">
                   <h1 className="font-bold">Loading...</h1>
                 </div>
               </>
-            ) : (
+            )}
+            {isAdmin ? (
               <>
                 <li className="mt-1">
                   <Link to={"/notifications"} className="flex items-start">
@@ -133,6 +140,24 @@ const DashBoard = () => {
                 <li className="mt-1">
                   <Link to={"/allsites"} className="flex items-start">
                     <MdOutlineWebStories /> All Websites
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="mt-1">
+                  <Link className="flex items-start text-sm animate-pulse">
+                    <MdOutlinePending /> Pending Requests
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link className="flex items-start text-sm">
+                    <FaCircleCheck className="text-sm" /> Accepted Request
+                  </Link>
+                </li>
+                <li className="mt-1">
+                  <Link className="flex items-start text-sm">
+                    <MdCancel /> Rejected Request
                   </Link>
                 </li>
               </>

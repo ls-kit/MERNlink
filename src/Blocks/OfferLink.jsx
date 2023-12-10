@@ -19,7 +19,7 @@ const OfferLink = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const payLoad = {
       addedSite: data.addedSite,
       category: data.category,
