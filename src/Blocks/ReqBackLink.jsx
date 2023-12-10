@@ -88,6 +88,7 @@ const ReqBackLink = () => {
               url={item.addedSite}
               index={i + 1}
               lanchDate={item.launchDate}
+              id={item._id}
             />
           ))}
         </table>

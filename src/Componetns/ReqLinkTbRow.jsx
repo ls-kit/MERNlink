@@ -5,7 +5,7 @@ import { parentUrl } from "../Api/baseUrl";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
 
-const ReqLinkTbRow = ({ index, url, lanchDate }) => {
+const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
   // logged in user data
   const { user } = useContext(AuthContext);
   const {
@@ -43,6 +43,13 @@ const ReqLinkTbRow = ({ index, url, lanchDate }) => {
       .post(`${parentUrl}/requested-backlink`, payLoad)
       .then((res) => {
         // console.log(res);
+        // send request number to offer-backlink collection
+        axios
+          .post(`${parentUrl}/offer-backlink/count/${id}`)
+          .then((res) => {
+            console.log(res);
+          })
+          .then((error) => console.log(error));
         toast.success("Request Sent");
       })
       .catch((error) => {
