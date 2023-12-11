@@ -48,6 +48,7 @@ const AllUsers = () => {
                 index={i + 1}
                 Name={item.fullName}
                 email={item.email}
+                id={item._id}
               />
             ))}
           </tbody>

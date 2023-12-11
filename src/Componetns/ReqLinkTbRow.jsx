@@ -84,7 +84,7 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
             </button>
             <dialog id="my_modal_1" className="modal">
               <div className="modal-box">
-                <div className="">
+                <div>
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <label className="form-control w-full">
                       <div className="label">
