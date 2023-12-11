@@ -4,10 +4,23 @@ import TableRow from "../Componetns/TableRow";
 import { useQuery } from "react-query";
 
 const MangeUsers = () => {
-  const { data: users = [], refetch } = useQuery(["users"], async () => {
+  const {
+    data: users = [],
+    refetch,
+    error,
+    isLoading,
+  } = useQuery(["users"], async () => {
     const res = await axios.get(`${parentUrl}/users`);
     return res.data;
   });
+
+  if (isLoading) {
+    return <p className="text-center px-20 py-20">Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="text-center px-20 py-20">{error.message}</p>;
+  }
 
   return (
     <div className="overflow-x-auto">
