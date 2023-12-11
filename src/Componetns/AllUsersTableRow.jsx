@@ -4,7 +4,16 @@ import { PiRadioactiveFill } from "react-icons/pi";
 import { toast } from "sonner";
 import { parentUrl } from "../Api/baseUrl";
 
-const AllUsersTableRow = ({ index, Name, email, id, userStatus, refetch }) => {
+const AllUsersTableRow = ({
+  index,
+  Name,
+  email,
+  country,
+  phone,
+  id,
+  userStatus,
+  refetch,
+}) => {
   //   const [btnDisable, setBtnDisable] = useState(false);
 
   // handle delete operation
@@ -50,15 +59,36 @@ const AllUsersTableRow = ({ index, Name, email, id, userStatus, refetch }) => {
         <th>{index}</th>
         <td>{Name}</td>
         <td>{email}</td>
+        <td>{country}</td>
+        <td>{phone}</td>
         <td className="flex gap-3">
           {/* edit */}
-          <button className="btn btn-outline bg-emerald-300">
-            <FaUserEdit /> <p>Edit</p>
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <button
+            className="btn btn-outline btn-sm bg-emerald-300"
+            onClick={() => document.getElementById("my_modal_1").showModal()}
+          >
+            <FaUserEdit />
+            Edit
           </button>
+          <dialog id="my_modal_1" className="modal">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">Hello!</h3>
+              <p className="py-4">
+                Press ESC key or click the button below to close
+              </p>
+              <div className="modal-action">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
           {/* delete */}
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <button
-            className="btn btn-outline bg-red-300"
+            className="btn btn-outline btn-sm bg-red-300"
             onClick={() => document.getElementById("my_modal_1").showModal()}
           >
             <FaTrash /> Delete
@@ -72,13 +102,13 @@ const AllUsersTableRow = ({ index, Name, email, id, userStatus, refetch }) => {
                 <button
                   onClick={() => handleDelete(id)}
                   //   disabled={btnDisable}
-                  className={"btn btn-outline bg-red-300"}
+                  className={"btn btn-outline btn-sm bg-red-300"}
                 >
                   Yes, Delete
                 </button>
                 <form method="dialog">
                   {/* if there is a button in form, it will close the modal */}
-                  <button className="btn btn-outline">Close</button>
+                  <button className="btn btn-outline btn-sm">Close</button>
                 </form>
               </div>
             </div>
@@ -87,7 +117,7 @@ const AllUsersTableRow = ({ index, Name, email, id, userStatus, refetch }) => {
           <button
             onClick={() => handleDeactivate(id)}
             disabled={userStatus === "deactivated" ? true : false}
-            className={"btn btn-outline bg-yellow-300"}
+            className={"btn btn-outline btn-sm bg-yellow-300"}
           >
             <PiRadioactiveFill />{" "}
             <p>{userStatus === "deactivated" ? "Deactivated" : "Deactivate"}</p>
