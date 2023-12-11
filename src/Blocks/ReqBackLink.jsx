@@ -1,32 +1,51 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { parentUrl } from "../Api/baseUrl";
 import ReqLinkTbRow from "../Componetns/ReqLinkTbRow";
 import Pagination from "../Componetns/Pagination";
+import { useQuery } from "react-query";
 
 const ReqBackLink = () => {
-  const [links, setLinks] = useState([]);
-  const [loading, setLoading] = useState([]);
+  // const [links, setLinks] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [linksPerPage, setlinksPerPage] = useState(1);
+  const [linksPerPage, setlinksPerPage] = useState(3);
 
   // filter
-  const [type, setType] = useState("");
+  const [type, setType] = useState();
 
-  useEffect(() => {
-    const fetchLinks = async () => {
-      setLoading(true);
-      console.log(type);
-      const res = await axios.get(`${parentUrl}/offer-backlink/${type}`);
-      /* .then((res) => console.log(res.status))
-        .then((error) => console.log(error)); */
-      setLinks(res.data);
-      setLoading(false);
-    };
+  const loadDataByFilter = (filter) => {
+    console.log(filter);
+    if (filter === "") {
+      setType(null);
+      refetch();
+    }
+    setType(filter);
+    refetch();
+  };
 
-    fetchLinks();
-  }, [type]);
+  const fetchLinks = async () => {
+    const res = await axios.get(`${parentUrl}/offer-backlink/${type}`);
+    return res.data;
+  };
 
+  const {
+    data: links,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["links"],
+    queryFn: fetchLinks,
+  });
+
+  if (isLoading) {
+    return <p className="px-10 py-10 text-center">Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="px-10 py-10 text-center">{error.message}</p>;
+  }
   // get current posts
   const indexOfLastPost = currentPage * linksPerPage;
   const indexOfFirstPost = indexOfLastPost - linksPerPage;
@@ -59,13 +78,22 @@ const ReqBackLink = () => {
           <summary className="m-1 btn">Filter By</summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
             <li>
-              <button onClick={() => setType("Follow")}>Follow</button>
+              <button type="button" onClick={() => loadDataByFilter("Follow")}>
+                Follow
+              </button>
             </li>
             <li>
-              <button onClick={() => setType("Not follow")}>Not Follow</button>
+              <button
+                type="button"
+                onClick={() => loadDataByFilter("Not follow")}
+              >
+                Not Follow
+              </button>
             </li>
             <li>
-              <button onClick={() => setType("")}>Show All</button>
+              <button type="button" onClick={() => loadDataByFilter("")}>
+                Show All
+              </button>
             </li>
           </ul>
         </details>

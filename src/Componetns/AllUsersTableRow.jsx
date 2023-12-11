@@ -1,13 +1,47 @@
 import React, { useState } from "react";
 import { FaTrash, FaUserEdit } from "react-icons/fa";
 import { PiRadioactiveFill } from "react-icons/pi";
+import { toast } from "sonner";
+import { parentUrl } from "../Api/baseUrl";
 
-const AllUsersTableRow = ({ index, Name, email, id }) => {
-  const [btnDisable, setBtnDisable] = useState(false);
+const AllUsersTableRow = ({ index, Name, email, id, userStatus, refetch }) => {
+  //   const [btnDisable, setBtnDisable] = useState(false);
+
   // handle delete operation
   const handleDelete = (userID) => {
+    // todo: delete from backend
+    fetch(`${parentUrl}/users/delete/${userID}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        console.log(res.status);
+        toast.warning(`Deleted ${Name}`);
+        // setBtnDisable(true);
+        refetch();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log(`Deleted ${Name}, userID: ${userID}`);
-    setBtnDisable(true);
+
+    // setBtnDisable(true);
+  };
+
+  //   handle deactivate
+  const handleDeactivate = (userId) => {
+    // todo: add a deactivate account status in backend
+    fetch(`${parentUrl}/users/deactivate/${userId}`, {
+      method: "PATCH",
+    })
+      .then((res) => {
+        console.log(res.status);
+        toast.warning(`Deactivated ${Name}`);
+        // refetch();
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(`Error: ${err.message}`);
+      });
   };
 
   return (
@@ -37,7 +71,7 @@ const AllUsersTableRow = ({ index, Name, email, id }) => {
               <div className="modal-action flex justify-start">
                 <button
                   onClick={() => handleDelete(id)}
-                  disabled={btnDisable}
+                  //   disabled={btnDisable}
                   className={"btn btn-outline bg-red-300"}
                 >
                   Yes, Delete
@@ -50,8 +84,13 @@ const AllUsersTableRow = ({ index, Name, email, id }) => {
             </div>
           </dialog>
           {/* deactivate */}
-          <button className="btn btn-outline bg-yellow-300">
-            <PiRadioactiveFill /> <p>Deactivate</p>
+          <button
+            onClick={() => handleDeactivate(id)}
+            disabled={userStatus === "deactivated" ? true : false}
+            className={"btn btn-outline bg-yellow-300"}
+          >
+            <PiRadioactiveFill />{" "}
+            <p>{userStatus === "deactivated" ? "Deactivated" : "Deactivate"}</p>
           </button>
         </td>
       </tr>

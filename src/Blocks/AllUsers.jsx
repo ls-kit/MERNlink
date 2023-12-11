@@ -3,6 +3,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { parentUrl } from "../Api/baseUrl";
 import AllUsersTableRow from "../Componetns/AllUsersTableRow";
+import { Toaster } from "sonner";
 
 const AllUsers = () => {
   // fetch fn
@@ -16,6 +17,7 @@ const AllUsers = () => {
     data: allusers,
     isLoading,
     error,
+    refetch,
   } = useQuery({ queryKey: ["allusers"], queryFn: getUsers });
 
   // console.log(allusers);
@@ -29,6 +31,7 @@ const AllUsers = () => {
 
   return (
     <>
+      <Toaster position="top-center" richColors />
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -49,6 +52,8 @@ const AllUsers = () => {
                 Name={item.fullName}
                 email={item.email}
                 id={item._id}
+                userStatus={item.activeStatus}
+                refetch={refetch}
               />
             ))}
           </tbody>
