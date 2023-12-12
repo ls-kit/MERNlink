@@ -29,11 +29,11 @@ const AllSiteTableRow = ({
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <button
             className="btn btn-outline btn-sm bg-red-300"
-            onClick={() => document.getElementById("my_modal_1").showModal()}
+            onClick={() => document.getElementById("my_modal_2").showModal()}
           >
             <FaTrash /> Delete
           </button>
-          <dialog id="my_modal_1" className="modal">
+          <dialog id="my_modal_2" className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">Delete permanently🗑️</h3>
               <p className="pt-4">Account holder: Name</p>
