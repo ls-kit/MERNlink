@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { parentUrl } from "../Api/baseUrl";
 import { useForm } from "react-hook-form";
 import countriesWithFlag from "../Api/country";
+import axios from "axios";
 
 const AllUsersTableRow = ({
   index,
@@ -27,6 +28,19 @@ const AllUsersTableRow = ({
   const onSubmit = (data) => {
     console.log(data);
     reset();
+  };
+
+  // activate user
+  const activateUser = (userID) => {
+    axios
+      .patch(`${parentUrl}/users/activate/${userID}`)
+      .then((res) => {
+        toast.success(res.status);
+        refetch();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   // handle delete operation
@@ -80,11 +94,13 @@ const AllUsersTableRow = ({
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             <button
               className="btn btn-outline btn-sm bg-emerald-300"
-              onClick={() => document.getElementById("my_modal_1").showModal()}
+              onClick={() =>
+                document.getElementById(`my_modal_${index}`).showModal()
+              }
             >
               <FaUserEdit /> Edit
             </button>
-            <dialog id="my_modal_1" className="modal">
+            <dialog id={`my_modal_${index}`} className="modal">
               <div className="modal-box">
                 <form method="dialog">
                   {/* if there is a button in form, it will close the modal */}
@@ -92,7 +108,7 @@ const AllUsersTableRow = ({
                     <img src="/cross.svg" alt="cross" />
                   </button>
                 </form>
-                <h3 className="font-bold text-lg">Edit User Info ⌨</h3>
+                <h3 className="font-bold text-lg">Edit {Name}'s Info ⌨</h3>
                 <form className="py-4" onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col gap-3">
                     <select
@@ -124,19 +140,22 @@ const AllUsersTableRow = ({
                       {...register("email", { required: true })}
                     />
                   </div>
+                  <div className="flex gap-x-3 pt-5">
+                    <button
+                      type="submit"
+                      className="btn btn-sm btn-outline bg-green-300"
+                    >
+                      Upadate User
+                    </button>
+                    <button
+                      onClick={() => activateUser(id)}
+                      className="btn btn-sm btn-outline bg-cyan-300"
+                    >
+                      Activate User
+                    </button>
+                  </div>
                 </form>
                 {/* action buttons */}
-                <div className="flex gap-x-3">
-                  <button
-                    type="submit"
-                    className="btn btn-sm btn-outline bg-green-300"
-                  >
-                    Upadate User
-                  </button>
-                  <button className="btn btn-sm btn-outline bg-cyan-300">
-                    Activate User
-                  </button>
-                </div>
               </div>
             </dialog>
           </div>
@@ -145,11 +164,13 @@ const AllUsersTableRow = ({
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <button
               className="btn btn-outline btn-sm bg-red-300"
-              onClick={() => document.getElementById("my_modal_2").showModal()}
+              onClick={() =>
+                document.getElementById(`my_modal_${Name}`).showModal()
+              }
             >
               <FaTrash /> Delete
             </button>
-            <dialog id="my_modal_2" className="modal">
+            <dialog id={`my_modal_${Name}`} className="modal">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">Delete permanently🗑️</h3>
                 <p className="pt-4">Account holder: {Name}</p>
