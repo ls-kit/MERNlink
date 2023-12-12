@@ -59,7 +59,7 @@ const AllUsers = () => {
   const onSubmit = (data) => {
     console.log(data);
     // google create user with email and pass
-    createUser(data.email, data.password)
+    /*  createUser(data.email, data.password)
       .then((res) => {
         // toast.success(res.message);
 
@@ -85,7 +85,7 @@ const AllUsers = () => {
           toast.error(`${error.message}`);
           reset();
         }
-      });
+      }); */
   };
 
   const password = watch("password");
@@ -130,7 +130,9 @@ const AllUsers = () => {
           {/* You can open the modal using document.getElementById('ID').showModal() method */}
           <button
             className="btn btn-circle bg-emerald-200"
-            onClick={() => document.getElementById("my_modal_3").showModal()}
+            onClick={() =>
+              document.getElementById("my_modal_createUser").showModal()
+            }
           >
             <img src="/add.svg" alt="add user" />
           </button>
@@ -139,7 +141,7 @@ const AllUsers = () => {
               Add New User
             </h1>
           </div>
-          <dialog id="my_modal_3" className="modal">
+          <dialog id="my_modal_createUser" className="modal">
             <div className="modal-box">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
@@ -149,6 +151,9 @@ const AllUsers = () => {
                 <h1 className="font-bold text-lg text-slate-700">
                   Create New User
                 </h1>
+                <small className="py-2 animate-pulse">
+                  This section is under maintainance ⚠️
+                </small>
               </form>
               {/* form here goes your form */}
               <form className="pt-2" onSubmit={handleSubmit(onSubmit)}>

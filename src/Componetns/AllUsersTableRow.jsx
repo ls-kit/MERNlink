@@ -5,6 +5,7 @@ import { parentUrl } from "../Api/baseUrl";
 import { useForm } from "react-hook-form";
 import countriesWithFlag from "../Api/country";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const AllUsersTableRow = ({
   index,
@@ -17,17 +18,29 @@ const AllUsersTableRow = ({
   refetch,
 }) => {
   // hookform
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-  // onSubmit Edit data
+  //* onSubmit update data to backend
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    // console.log(data);
+    const payLoad = {
+      country: data.country.split(" ")[0],
+      phone: data.phone,
+      fullName: data.fullName,
+    };
+
+    const userID = data.userID;
+
+    axios
+      .patch(`${parentUrl}/users/update/${userID}`, payLoad)
+      .then((res) => {
+        toast.info(res.status);
+        reset();
+        refetch();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   // activate user
@@ -46,19 +59,17 @@ const AllUsersTableRow = ({
   // handle delete operation
   const handleDelete = (userID) => {
     // todo: delete from backend
-    fetch(`${parentUrl}/users/delete/${userID}`, {
-      method: "DELETE",
-    })
+    axios
+      .delete(`${parentUrl}/users/delete/${userID}`)
       .then((res) => {
         console.log(res.status);
         toast.warning(`Deleted ${Name}`);
-        // setBtnDisable(true);
         refetch();
       })
       .catch((error) => {
         console.log(error);
+        toast.error(`${error.message}`);
       });
-    console.log(`Deleted ${Name}, userID: ${userID}`);
 
     // setBtnDisable(true);
   };
@@ -66,9 +77,8 @@ const AllUsersTableRow = ({
   //   handle deactivate
   const handleDeactivate = (userId) => {
     // todo: add a deactivate account status in backend
-    fetch(`${parentUrl}/users/deactivate/${userId}`, {
-      method: "PATCH",
-    })
+    axios
+      .patch(`${parentUrl}/users/deactivate/${userId}`)
       .then((res) => {
         console.log(res.status);
         toast.warning(`Deactivated ${Name}`);
@@ -111,6 +121,12 @@ const AllUsersTableRow = ({
                 <h3 className="font-bold text-lg">Edit {Name}'s Info ⌨</h3>
                 <form className="py-4" onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col gap-3">
+                    <input
+                      value={id}
+                      type="text"
+                      className="input input-bordered w-full input-xs hidden"
+                      {...register("userID")}
+                    />
                     <select
                       className="select select-bordered w-full"
                       {...register("country", { required: true })}
@@ -134,14 +150,15 @@ const AllUsersTableRow = ({
                       {...register("phone", { required: true })}
                     />
                     <input
-                      type="email"
-                      placeholder="Update Email Address"
+                      type="text"
+                      placeholder="Update Display Name"
                       className="input input-bordered w-full"
-                      {...register("email", { required: true })}
+                      {...register("fullName", { required: true })}
                     />
                   </div>
                   <div className="flex gap-x-3 pt-5">
                     <button
+                      // onClick={() => updateUserInfo(id)}
                       type="submit"
                       className="btn btn-sm btn-outline bg-green-300"
                     >
