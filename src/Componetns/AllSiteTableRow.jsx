@@ -40,7 +40,7 @@ const AllSiteTableRow = ({
     axios
       .patch(`${parentUrl}/offer-backlink/update/${siteID}`, payLoad)
       .then((res) => {
-        toast.info(res.status);
+        toast.success(`${siteName} Updated`);
         reset();
         refetch();
       })
