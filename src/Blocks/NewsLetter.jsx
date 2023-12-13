@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { parentUrl } from "../Api/baseUrl";
+import { toast } from "sonner";
 
 const NewsLetter = () => {
   // fetch data
@@ -41,8 +42,19 @@ const NewsLetter = () => {
       subject: data.subject,
       text: data.message,
     };
-    console.log(payLoad);
+    // send to nodemail in the backend
+    axios
+      .post(`${parentUrl}/newsletter`, payLoad)
+      .then((res) => {
+        toast.success(`Newsletter sent to all users`);
+        reset();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
+
+  // loading and error handling
 
   if (isLoading) {
     return (
@@ -52,12 +64,22 @@ const NewsLetter = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="px-20 py-10">
+        <h1 className="text-center">{error.message}</h1>
+      </div>
+    );
+  }
+
   return (
     <div className="py-10">
-      <h1 className="text-center text-2xl font-bold">
-        👋🏻Send Newsletter to <br />
-        all users
+      <h1 className="text-xl font-bold text-center">
+        👋🏻Send Newsletter in a Second
       </h1>
+      <p className="text-xs font-semibold text-center">
+        Send Newsletter to {users.length} users <br /> email address
+      </p>
       <div className="flex justify-center items-center w-full">
         <form className="w-[60%]" onSubmit={handleSubmit(onSubmit)}>
           <label className="form-control w-full">
