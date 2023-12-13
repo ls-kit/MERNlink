@@ -82,11 +82,14 @@ const AllWebsites = () => {
               <AllSiteTableRow
                 key={i}
                 index={i + 1}
-                addedSite={item.addedSite}
+                siteName={item.addedSite}
                 category={item.category}
                 monthlyVisit={item.monthlyOrgVisit}
                 launchDate={item.launchDate}
                 requestedCount={item.count}
+                siteID={item._id}
+                refetch={refetch}
+                siteStatus={item.status}
               />
             ))}
           </tbody>
