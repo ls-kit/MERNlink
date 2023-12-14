@@ -25,6 +25,27 @@ const ResetPass = () => {
             resetPass(data.email)
               .then((res) => {
                 toast.success(`A reset link has been sent to your email`);
+
+                // notification payload
+                const notificationPayload = {
+                  text: `You have reseted you password! 🖇️`,
+                  dateNotified: new Date(),
+                };
+
+                // todo: send notification
+                axios
+                  .post(
+                    `${parentUrl}/users/notifications/${item._id}`,
+                    notificationPayload
+                  )
+                  .then((res) => {
+                    console.log(res);
+                  })
+                  .catch((error) => {
+                    console.log(error.message);
+                  });
+
+                // end of noitification api
                 reset();
               })
               .catch((error) => toast.error(error.message));

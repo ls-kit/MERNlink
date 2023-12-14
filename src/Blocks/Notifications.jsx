@@ -38,7 +38,7 @@ const Notifications = () => {
 
   return (
     <div className="px-5 py-5">
-      <div className="grid grid-cols-1 overflow-y-auto gap-2">
+      <div className="grid grid-cols-1 overflow-y-auto gap-4">
         {notifications.map((item, i) => (
           <ViewNotification key={i} message={item.text} date={item.date} />
         ))}

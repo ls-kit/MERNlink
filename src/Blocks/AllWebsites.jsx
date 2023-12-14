@@ -90,6 +90,7 @@ const AllWebsites = () => {
                 siteID={item._id}
                 refetch={refetch}
                 siteStatus={item.status}
+                verified={item.isValid}
               />
             ))}
           </tbody>

@@ -27,7 +27,7 @@ const OfferLink = () => {
       monthlyOrgVisit: data.monthlyOrgVisit,
       rankingKeyWords: data.rankingKeyWords,
       type: data.type,
-      user: user.email,
+      email: user.email,
     };
     axios
       .post(`${parentUrl}/offer-backlink`, payLoad)

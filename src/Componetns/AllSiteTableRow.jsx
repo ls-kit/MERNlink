@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { FaTrash, FaUserEdit } from "react-icons/fa";
+import { MdCancel, MdCheckCircle } from "react-icons/md";
 import { PiRadioactiveFill } from "react-icons/pi";
 import { parentUrl } from "../Api/baseUrl";
 import { toast } from "sonner";
@@ -17,6 +18,7 @@ const AllSiteTableRow = ({
   refetch,
   requestedCount,
   siteID,
+  verified,
 }) => {
   // hookform
   const {
@@ -91,7 +93,22 @@ const AllSiteTableRow = ({
     <>
       <tr>
         <th className="text-slate-400 font-sembold">{index}</th>
-        <td>{siteName}</td>
+        <td>
+          {siteName}
+          <p className="text-[10px] border rounded-full p-[2px] font-bold text-slate-400">
+            {verified ? (
+              <>
+                <MdCheckCircle className="text-lg inline-block text-emerald-300" />
+                Verified
+              </>
+            ) : (
+              <>
+                <MdCancel className="inline-block text-lg text-red-300" /> Not
+                Verified
+              </>
+            )}
+          </p>
+        </td>
         <td>{category}</td>
         <td>{monthlyVisit}</td>
         <td>{launchDate}</td>

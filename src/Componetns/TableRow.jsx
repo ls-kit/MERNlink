@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { parentUrl } from "../Api/baseUrl";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../Poveiders/AuthProvider";
+import axios from "axios";
 
 const TableRow = ({
   index,
@@ -24,6 +25,22 @@ const TableRow = ({
       .then((data) => {
         if (data.modifiedCount) {
           toast.success(`${fullName} is an admin now!`);
+          // notification payload
+          const notificationPayload = {
+            text: `${fullName} your are promoted to admin ⚔️`,
+            dateNotified: new Date(),
+          };
+          // todo: send notification
+          axios
+            .post(`${parentUrl}/users/notifications/${id}`, notificationPayload)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+
+          // end of noitification api
         }
         refetch();
       });
@@ -37,6 +54,22 @@ const TableRow = ({
       .then((data) => {
         if (data.modifiedCount) {
           toast.warning(`Admin removed!`);
+          // notification payload
+          const notificationPayload = {
+            text: `${fullName} your were removed from admin role 🏳️`,
+            dateNotified: new Date(),
+          };
+          // todo: send notification
+          axios
+            .post(`${parentUrl}/users/notifications/${id}`, notificationPayload)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+
+          // end of noitification api
         }
         refetch();
       });
