@@ -26,23 +26,20 @@ const Login = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     // console.log(data);
+    // // todo: check if the user has pass and mail in the backend user db , if has then initial login with those credentials and setUser to that user. else move to signIn google method to to do login
+    // // react query
+    // const fetchUser = async () => {
+    //   const response = await axios
+    //     .get(`${parentUrl}/users/login/${data.email}`, data.pass)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       toast.success(res.status);
+    //     })
+    //     .catch((error) => toast.error(error.message));
+    // };
+    // fetchUser();
 
-    // todo: check if the user has pass and mail in the backend user db , if has then initial login with those credentials and setUser to that user. else move to signIn google method to to do login
-
-    // react query
-    const fetchUser = async () => {
-      const response = await axios
-        .get(`${parentUrl}/users/login/${data.email}`, data.pass)
-        .then((res) => {
-          console.log(res.data);
-          toast.success(res.status);
-        })
-        .catch((error) => toast.error(error.message));
-    };
-
-    fetchUser();
-
-    // const {
+    //const {
     //   data: singleUser,
     //   isLoading,
     //   error,
@@ -50,10 +47,10 @@ const Login = () => {
     //   queryKey: ["singleUser"],
     //   queryFn: fetchUser,
     // });
-
     // console.log(singleUser);
 
-    /*  signIn(data.email, data.pass)
+    // sign in with google
+    signIn(data.email, data.pass)
       .then((res) => {
         const user = res.user;
         if (user) {
@@ -65,7 +62,7 @@ const Login = () => {
       .catch((error) => {
         toast.error(`${error.message}`);
         console.log(error.message);
-      }); */
+      });
   };
 
   // signin with google
