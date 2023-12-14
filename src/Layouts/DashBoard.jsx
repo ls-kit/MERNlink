@@ -68,7 +68,7 @@ const DashBoard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu px-4 pt-10 w-fit h-full bg-base-200 text-base-content">
+          <ul className="menu px-4 pt-5 w-fit h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             {isAdmin ? (
               <>

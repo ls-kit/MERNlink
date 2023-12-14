@@ -58,34 +58,30 @@ const AllUsers = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // google create user with email and pass
-    /*  createUser(data.email, data.password)
+
+    // send user data to backend -/users route
+    const userData = {
+      fullName: data.fullName,
+      email: data.email,
+      userName: data.userName,
+      password: data.password,
+      country: data.country.split(" ")[0],
+      phone: data.phone,
+    };
+
+    reset();
+
+    axios
+      .post(`${parentUrl}/users`, userData)
       .then((res) => {
-        // toast.success(res.message);
-
-        // send user data to backend
-        const userData = {
-          fullName: data.fullName,
-          email: data.email,
-          userName: data.userName,
-          country: data.country.split(" ")[0],
-          phone: data.phone,
-        };
-
+        toast.success(`Added New User`);
+        refetch();
         reset();
-
-        return axios.post(`${parentUrl}/users`, userData);
-      })
-      .then((res) => {
-        console.log(res);
-        toast.success("New User Created");
       })
       .catch((error) => {
-        if (error && error.message) {
-          toast.error(`${error.message}`);
-          reset();
-        }
-      }); */
+        toast.error(error.message);
+        reset();
+      });
   };
 
   const password = watch("password");
@@ -125,7 +121,7 @@ const AllUsers = () => {
             ))}
           </tbody>
         </table>
-        {/* ass new user */}
+        {/* add new user */}
         <div className="flex flex-col justify-center items-center py-10">
           {/* You can open the modal using document.getElementById('ID').showModal() method */}
           <button
@@ -151,9 +147,9 @@ const AllUsers = () => {
                 <h1 className="font-bold text-lg text-slate-700">
                   Create New User
                 </h1>
-                <small className="py-2 animate-pulse">
+                {/* <small className="py-2 animate-pulse">
                   This section is under maintainance ⚠️
-                </small>
+                </small> */}
               </form>
               {/* form here goes your form */}
               <form className="pt-2" onSubmit={handleSubmit(onSubmit)}>

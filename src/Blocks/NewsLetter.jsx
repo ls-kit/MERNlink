@@ -30,7 +30,7 @@ const NewsLetter = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
 
     // user /newsletter endpont to send news letter
 
@@ -75,10 +75,10 @@ const NewsLetter = () => {
   return (
     <div className="py-10">
       <h1 className="text-xl font-bold text-center">
-        👋🏻Send Newsletter in a Second
+        Send Newsletter in Seconds 🚀
       </h1>
       <p className="text-xs font-semibold text-center">
-        Send Newsletter to {users.length} users <br /> email address
+        Send Newsletter to {users.length} users
       </p>
       <div className="flex justify-center items-center w-full">
         <form className="w-[60%]" onSubmit={handleSubmit(onSubmit)}>
