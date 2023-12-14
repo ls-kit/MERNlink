@@ -57,7 +57,7 @@ const AllUsers = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
 
     // send user data to backend -/users route
     const userData = {
