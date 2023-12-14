@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import countriesWithFlag from "../Api/country";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllUsersTableRow = ({
   index,
@@ -199,16 +200,22 @@ const AllUsersTableRow = ({
                     <button
                       // onClick={() => updateUserInfo(id)}
                       type="submit"
-                      className="btn btn-sm btn-outline bg-green-300"
+                      className="btn btn-md btn-outline bg-green-300 font-bold"
                     >
                       Upadate User
                     </button>
                     <button
                       onClick={() => activateUser(id)}
-                      className="btn btn-sm btn-outline bg-cyan-300"
+                      className="btn btn-md btn-outline bg-cyan-300 font-bold"
                     >
                       Activate User
                     </button>
+                    <Link
+                      to={`/user-details/${id}`}
+                      className="btn btn-md btn-outline bg-indigo-300 font-bold"
+                    >
+                      User Details
+                    </Link>
                   </div>
                 </form>
                 {/* action buttons */}

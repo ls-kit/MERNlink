@@ -15,6 +15,7 @@ import ResetPass from "../Blocks/ResetPass";
 import AllUsers from "../Blocks/AllUsers";
 import AllWebsites from "../Blocks/AllWebsites";
 import PendingRequests from "../Blocks/PendingRequests";
+import UserDetails from "../Blocks/UserDetails";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,14 @@ const router = createBrowserRouter([
             element: (
               <AdminRoute>
                 <AllWebsites />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "/user-details/:id",
+            element: (
+              <AdminRoute>
+                <UserDetails />
               </AdminRoute>
             ),
           },
