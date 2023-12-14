@@ -50,6 +50,25 @@ const AllUsersTableRow = ({
       .then((res) => {
         toast.success(res.status);
         refetch();
+        // notification payload
+        const notificationPayload = {
+          text: `${Name} your id have been Activated`,
+          dateNotified: new Date(),
+        };
+        // todo: send notification
+        axios
+          .post(
+            `${parentUrl}/users/notifications/${userID}`,
+            notificationPayload
+          )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+
+        // end of noitification api
       })
       .catch((error) => {
         toast.error(error.message);
@@ -83,6 +102,26 @@ const AllUsersTableRow = ({
         console.log(res.status);
         toast.warning(`Deactivated ${Name}`);
         refetch();
+
+        // notification payload
+        const notificationPayload = {
+          text: `${Name} your id have been deactivated`,
+          dateNotified: new Date(),
+        };
+        // todo: send notification
+        axios
+          .post(
+            `${parentUrl}/users/notifications/${userId}`,
+            notificationPayload
+          )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+
+        // end of noitification api
       })
       .catch((err) => {
         console.log(err.message);
@@ -93,7 +132,7 @@ const AllUsersTableRow = ({
   return (
     <>
       <tr>
-        <th>{index}</th>
+        <th className="text-slate-400 font-semibold">{index}</th>
         <td>{Name}</td>
         <td>{email}</td>
         <td>{country}</td>

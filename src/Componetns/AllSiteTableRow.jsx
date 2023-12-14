@@ -90,7 +90,7 @@ const AllSiteTableRow = ({
   return (
     <>
       <tr>
-        <th>{index}</th>
+        <th className="text-slate-400 font-sembold">{index}</th>
         <td>{siteName}</td>
         <td>{category}</td>
         <td>{monthlyVisit}</td>
@@ -172,13 +172,13 @@ const AllSiteTableRow = ({
                     <button
                       // onClick={() => updateUserInfo(id)}
                       type="submit"
-                      className="btn btn-sm btn-outline bg-green-300"
+                      className="btn btn-md btn-outline bg-green-300"
                     >
                       Upadate Site
                     </button>
                     <button
                       onClick={() => handleActivate(siteID)}
-                      className="btn btn-sm btn-outline bg-cyan-300"
+                      className="btn btn-md btn-outline bg-cyan-300"
                     >
                       Activate Site
                     </button>

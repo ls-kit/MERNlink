@@ -67,6 +67,7 @@ const AllUsers = () => {
       password: data.password,
       country: data.country.split(" ")[0],
       phone: data.phone,
+      createdBy: "addedByAdmin",
     };
 
     reset();
@@ -91,12 +92,12 @@ const AllUsers = () => {
   return (
     <>
       <Toaster position="top-center" richColors />
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto py-3">
         <table className="table table-xs">
           {/* head */}
           <thead>
             <tr>
-              <th></th>
+              <th>No.</th>
               <th>Name</th>
               <th>Email</th>
               <th>Country</th>

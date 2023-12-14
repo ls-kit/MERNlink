@@ -63,12 +63,12 @@ const AllWebsites = () => {
 
   return (
     <>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto py-3">
         <table className="table table-xs">
           {/* head */}
           <thead>
             <tr>
-              <th></th>
+              <th>No.</th>
               <th>Added Site</th>
               <th>Category</th>
               <th>Monthly Visit</th>
