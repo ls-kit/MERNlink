@@ -34,7 +34,7 @@ const DashBoard = () => {
     logOut()
       .then((res) => {
         toast.success(`Signed out successfully`);
-        setUser(null);
+        setUser(null); //setUser setted to null beacuse users who's acc was created by admin needs to be initially logged out when clicks
       })
       .catch((error) => {
         toast.error(`${error.message}`);

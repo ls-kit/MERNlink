@@ -16,6 +16,7 @@ import AllUsers from "../Blocks/AllUsers";
 import AllWebsites from "../Blocks/AllWebsites";
 import PendingRequests from "../Blocks/PendingRequests";
 import UserDetails from "../Blocks/UserDetails";
+import { parentUrl } from "../Api/baseUrl";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +98,8 @@ const router = createBrowserRouter([
                 <UserDetails />
               </AdminRoute>
             ),
+            loader: ({ params }) =>
+              fetch(`${parentUrl}/users/details/${params.id}`),
           },
         ],
       },

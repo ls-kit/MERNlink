@@ -163,6 +163,12 @@ const AllUsersTableRow = ({
                   </button>
                 </form>
                 <h3 className="font-bold text-lg">Edit {Name}'s Info ⌨</h3>
+                <Link
+                  to={`/user-details/${id}`}
+                  className="text-slate-400 hover:text-indigo-400 text-xs font-bold"
+                >
+                  View user details <span className="text-lg">🥽</span>
+                </Link>
                 <form className="py-4" onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col gap-3">
                     <input
@@ -214,12 +220,6 @@ const AllUsersTableRow = ({
                     >
                       Activate User
                     </button>
-                    <Link
-                      to={`/user-details/${id}`}
-                      className="btn btn-md btn-outline bg-indigo-300 font-bold"
-                    >
-                      User Details
-                    </Link>
                   </div>
                 </form>
                 {/* action buttons */}
