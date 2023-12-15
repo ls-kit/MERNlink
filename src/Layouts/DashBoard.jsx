@@ -21,7 +21,7 @@ import {
 import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
-  const { logOut, user } = useContext(AuthContext);
+  const { logOut, user, setUser } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin();
 
   // toggle role-demo
@@ -34,6 +34,7 @@ const DashBoard = () => {
     logOut()
       .then((res) => {
         toast.success(`Signed out successfully`);
+        setUser(null);
       })
       .catch((error) => {
         toast.error(`${error.message}`);
