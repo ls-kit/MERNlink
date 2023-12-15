@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import countriesWithFlag from "../Api/country";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllUsersTableRow = ({
   index,
@@ -48,7 +49,7 @@ const AllUsersTableRow = ({
     axios
       .patch(`${parentUrl}/users/activate/${userID}`)
       .then((res) => {
-        toast.success(res.status);
+        toast.success(`${Name} Activated`);
         refetch();
         // notification payload
         const notificationPayload = {
@@ -134,21 +135,25 @@ const AllUsersTableRow = ({
       <tr>
         <th className="text-slate-400 font-semibold">{index}</th>
         <td>{Name}</td>
-        <td>{email}</td>
+        <td>
+          {email} <br /> <small>Phone: {phone}</small>
+        </td>
         <td>{country}</td>
-        <td>{phone}</td>
+        <td>{userStatus === "activated" ? "Active" : "Not Active"}</td>
         <td className="flex gap-3">
           {/* edit */}
           <div>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            <button
-              className="btn btn-outline btn-sm bg-emerald-300"
-              onClick={() =>
-                document.getElementById(`my_modal_${index}`).showModal()
-              }
-            >
-              <FaUserEdit /> Edit
-            </button>
+            <div className="lg:tooltip" data-tip="Edit">
+              <button
+                className="btn btn-outline btn-sm btn-circle bg-emerald-300"
+                onClick={() =>
+                  document.getElementById(`my_modal_${index}`).showModal()
+                }
+              >
+                <FaUserEdit />
+              </button>
+            </div>
             <dialog id={`my_modal_${index}`} className="modal">
               <div className="modal-box">
                 <form method="dialog">
@@ -158,6 +163,12 @@ const AllUsersTableRow = ({
                   </button>
                 </form>
                 <h3 className="font-bold text-lg">Edit {Name}'s Info ⌨</h3>
+                <Link
+                  to={`/user-details/${id}`}
+                  className="text-slate-400 hover:text-indigo-400 text-xs font-bold"
+                >
+                  View user details <span className="text-lg">🥽</span>
+                </Link>
                 <form className="py-4" onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col gap-3">
                     <input
@@ -199,13 +210,13 @@ const AllUsersTableRow = ({
                     <button
                       // onClick={() => updateUserInfo(id)}
                       type="submit"
-                      className="btn btn-sm btn-outline bg-green-300"
+                      className="btn btn-md btn-outline bg-green-300 font-bold"
                     >
                       Upadate User
                     </button>
                     <button
                       onClick={() => activateUser(id)}
-                      className="btn btn-sm btn-outline bg-cyan-300"
+                      className="btn btn-md btn-outline bg-cyan-300 font-bold"
                     >
                       Activate User
                     </button>
@@ -218,14 +229,16 @@ const AllUsersTableRow = ({
           {/* delete */}
           <div>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <button
-              className="btn btn-outline btn-sm bg-red-300"
-              onClick={() =>
-                document.getElementById(`my_modal_${Name}`).showModal()
-              }
-            >
-              <FaTrash /> Delete
-            </button>
+            <div className="lg:tooltip" data-tip="Delete">
+              <button
+                className="btn btn-outline btn-sm btn-circle bg-red-300"
+                onClick={() =>
+                  document.getElementById(`my_modal_${Name}`).showModal()
+                }
+              >
+                <FaTrash />
+              </button>
+            </div>
             <dialog id={`my_modal_${Name}`} className="modal">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">Delete permanently🗑️</h3>
@@ -248,14 +261,15 @@ const AllUsersTableRow = ({
             </dialog>
           </div>
           {/* deactivate */}
-          <button
-            onClick={() => handleDeactivate(id)}
-            disabled={userStatus === "deactivated" ? true : false}
-            className={"btn btn-outline btn-sm bg-yellow-300"}
-          >
-            <PiRadioactiveFill />{" "}
-            <p>{userStatus === "deactivated" ? "Deactivated" : "Deactivate"}</p>
-          </button>
+          <div className="lg:tooltip" data-tip="Deactivate">
+            <button
+              onClick={() => handleDeactivate(id)}
+              disabled={userStatus === "deactivated" ? true : false}
+              className={"btn btn-outline btn-sm btn-circle bg-yellow-300"}
+            >
+              <PiRadioactiveFill />
+            </button>
+          </div>
         </td>
       </tr>
     </>

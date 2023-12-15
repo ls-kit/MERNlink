@@ -21,7 +21,7 @@ import {
 import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
-  const { logOut, user } = useContext(AuthContext);
+  const { logOut, user, setUser } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin();
 
   // toggle role-demo
@@ -34,6 +34,7 @@ const DashBoard = () => {
     logOut()
       .then((res) => {
         toast.success(`Signed out successfully`);
+        setUser(null); //setUser setted to null beacuse users who's acc was created by admin needs to be initially logged out when clicks
       })
       .catch((error) => {
         toast.error(`${error.message}`);
@@ -53,14 +54,18 @@ const DashBoard = () => {
           {/* Page content here */}
           <Outlet />
           <div className="px-20 py-20 text-center">
-            <p>You have been redirected to dashboard after login</p>
+            <p className="text-sm font-bold text-slate-400">
+              You have been redirected to dashboard after login
+            </p>
           </div>
-          <label
-            htmlFor="my-drawer"
-            className="btn btn-primary drawer-button lg:hidden block"
-          >
-            Open drawer
-          </label>
+          <div className="flex justify-center items-center my-3">
+            <label
+              htmlFor="my-drawer"
+              className="btn btn-outline w-fit pt-4 drawer-button lg:hidden block"
+            >
+              Open Side Menu
+            </label>
+          </div>
         </div>
         <div className="drawer-side">
           <label
@@ -180,7 +185,7 @@ const DashBoard = () => {
             <li>
               <span className="text-xs mt-1">
                 Interacting as {isAdmin ? "Admin" : "User"} <br />{" "}
-                {user.displayName}
+                {user.displayName || user.fullName}
               </span>
             </li>
             <li

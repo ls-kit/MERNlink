@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { FaTrash, FaUserEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+import { TbEditCircle } from "react-icons/tb";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import { PiRadioactiveFill } from "react-icons/pi";
 import { parentUrl } from "../Api/baseUrl";
@@ -117,14 +118,16 @@ const AllSiteTableRow = ({
           {/* edit */}
           <div>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            <button
-              className="btn btn-outline btn-sm bg-emerald-300"
-              onClick={() =>
-                document.getElementById(`my_modal_${index}`).showModal()
-              }
-            >
-              <FaUserEdit /> Edit
-            </button>
+            <div className="lg:tooltip" data-tip="Edit">
+              <button
+                className="btn btn-outline btn-circle btn-sm bg-emerald-300"
+                onClick={() =>
+                  document.getElementById(`my_modal_${index}`).showModal()
+                }
+              >
+                <TbEditCircle />
+              </button>
+            </div>
             <dialog id={`my_modal_${index}`} className="modal">
               <div className="modal-box">
                 <form method="dialog">
@@ -207,12 +210,14 @@ const AllSiteTableRow = ({
           </div>
           {/* delete */}
           {/* Open the modal using document.getElementById('ID').showModal() method */}
-          <button
-            className="btn btn-outline btn-sm bg-red-300"
-            onClick={() => document.getElementById(`${siteID}`).showModal()}
-          >
-            <FaTrash /> Delete
-          </button>
+          <div className="lg:tooltip" data-tip="Delete">
+            <button
+              className="btn btn-outline btn-sm btn-circle bg-red-300"
+              onClick={() => document.getElementById(`${siteID}`).showModal()}
+            >
+              <FaTrash />
+            </button>
+          </div>
           <dialog id={`${siteID}`} className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">Delete permanently🗑️</h3>
@@ -234,14 +239,15 @@ const AllSiteTableRow = ({
             </div>
           </dialog>
           {/* deactivate */}
-          <button
-            onClick={() => handleDeactivate(siteID)}
-            disabled={siteStatus === "deactivated" ? true : false}
-            className={"btn btn-outline btn-sm bg-yellow-300"}
-          >
-            <PiRadioactiveFill />{" "}
-            <p>{siteStatus === "deactivated" ? "Deactivated" : "Deactivate"}</p>
-          </button>
+          <div className="lg:tooltip" data-tip="Deactivate">
+            <button
+              onClick={() => handleDeactivate(siteID)}
+              disabled={siteStatus === "deactivated" ? true : false}
+              className={"btn btn-outline btn-sm btn-circle bg-yellow-300"}
+            >
+              <PiRadioactiveFill />
+            </button>
+          </div>
         </td>
       </tr>
     </>

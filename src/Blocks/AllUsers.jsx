@@ -93,7 +93,7 @@ const AllUsers = () => {
     <>
       <Toaster position="top-center" richColors />
       <div className="overflow-x-auto py-3">
-        <table className="table table-xs">
+        <table className="table lg:table-md md:table-sm table-xs">
           {/* head */}
           <thead>
             <tr>
@@ -101,7 +101,7 @@ const AllUsers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Country</th>
-              <th>Phone</th>
+              <th>User Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -122,169 +122,165 @@ const AllUsers = () => {
             ))}
           </tbody>
         </table>
-        {/* add new user */}
-        <div className="flex flex-col justify-center items-center py-10">
-          {/* You can open the modal using document.getElementById('ID').showModal() method */}
-          <button
-            className="btn btn-circle bg-emerald-200"
-            onClick={() =>
-              document.getElementById("my_modal_createUser").showModal()
-            }
-          >
-            <img src="/add.svg" alt="add user" />
-          </button>
-          <div className="text-center">
-            <h1 className="text-slate-400 font-bold text-md py-3">
-              Add New User
-            </h1>
-          </div>
-          <dialog id="my_modal_createUser" className="modal">
-            <div className="modal-box">
-              <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <button className="btn btn-sm hover:bg-red-400 btn-circle btn-ghost absolute right-2 top-2">
-                  <img src="/cross.svg" alt="cross" />
-                </button>
-                <h1 className="font-bold text-lg text-slate-700">
-                  Create New User
-                </h1>
-                {/* <small className="py-2 animate-pulse">
+      </div>
+      {/* add new user */}
+      <div className="flex flex-col justify-center items-center py-10">
+        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+        <button
+          className="btn btn-circle bg-emerald-200"
+          onClick={() =>
+            document.getElementById("my_modal_createUser").showModal()
+          }
+        >
+          <img src="/add.svg" alt="add user" />
+        </button>
+        <div className="text-center">
+          <h1 className="text-slate-400 font-bold text-md py-3">
+            Add New User
+          </h1>
+        </div>
+        <dialog id="my_modal_createUser" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm hover:bg-red-400 btn-circle btn-ghost absolute right-2 top-2">
+                <img src="/cross.svg" alt="cross" />
+              </button>
+              <h1 className="font-bold text-lg text-slate-700">
+                Create New User
+              </h1>
+              {/* <small className="py-2 animate-pulse">
                   This section is under maintainance ⚠️
                 </small> */}
-              </form>
-              {/* form here goes your form */}
-              <form className="pt-2" onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex flex-col gap-y-3">
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    className="input input-bordered w-full"
-                    {...register("fullName", { required: true })}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Username"
-                    className="input input-bordered w-full"
-                    {...register("userName", { required: true })}
-                  />
-                </div>
-                <div className="flex flex-col gap-3 mt-2">
-                  {/* <input
+            </form>
+            {/* form here goes your form */}
+            <form className="pt-2" onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex flex-col gap-y-3">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="input input-bordered w-full"
+                  {...register("fullName", { required: true })}
+                />
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className="input input-bordered w-full"
+                  {...register("userName", { required: true })}
+                />
+              </div>
+              <div className="flex flex-col gap-3 mt-2">
+                {/* <input
                 type="text"
                 placeholder="Country"
                 className="input input-bordered w-full"
                 {...register("country", { required: true })}
               /> */}
 
-                  <select
-                    className="select select-bordered w-full"
-                    {...register("country", { required: true })}
+                <select
+                  className="select select-bordered w-full"
+                  {...register("country", { required: true })}
+                >
+                  <option className="text-lg text-slate-500" disabled selected>
+                    Select your country
+                  </option>
+                  {countriesWithFlag.map((country, i) => (
+                    <option key={i}>{country}</option>
+                  ))}
+                </select>
+
+                <input
+                  type="text"
+                  placeholder="Phone Number"
+                  className="input input-bordered w-full"
+                  {...register("phone", { required: true })}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="input input-bordered w-full"
+                  {...register("email", { required: true })}
+                />
+              </div>
+              {/* password */}
+              <div className="mt-2 flex flex-col gap-y-2">
+                <div className="relative">
+                  <input
+                    type={showPass ? "text" : "password"}
+                    placeholder="Password"
+                    className="input input-bordered w-full"
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      pattern:
+                        /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                    })}
+                  />
+                  <button
+                    onClick={toggler}
+                    className="absolute right-0 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
                   >
-                    <option
-                      className="text-lg text-slate-500"
-                      disabled
-                      selected
-                    >
-                      Select your country
-                    </option>
-                    {countriesWithFlag.map((country, i) => (
-                      <option key={i}>{country}</option>
-                    ))}
-                  </select>
-
-                  <input
-                    type="text"
-                    placeholder="Phone Number"
-                    className="input input-bordered w-full"
-                    {...register("phone", { required: true })}
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="input input-bordered w-full"
-                    {...register("email", { required: true })}
-                  />
+                    {showPass ? "🕶️" : "👀"}
+                  </button>
                 </div>
-                {/* password */}
-                <div className="mt-2 flex flex-col gap-y-2">
-                  <div className="relative">
-                    <input
-                      type={showPass ? "text" : "password"}
-                      placeholder="Password"
-                      className="input input-bordered w-full"
-                      {...register("password", {
-                        required: true,
-                        minLength: 6,
-                        pattern:
-                          /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                      })}
-                    />
-                    <button
-                      onClick={toggler}
-                      className="absolute right-0 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
-                    >
-                      {showPass ? "🕶️" : "👀"}
-                    </button>
-                  </div>
 
-                  {/* validations for ui */}
-                  {errors.password && errors.password?.type === "minLength" && (
-                    <p className="text-xs font-bold pt-1 text-red-400 mt-1">
-                      Password must be atleast 6 characters
-                    </p>
-                  )}
-                  {errors.password && errors.password?.type === "required" && (
-                    <p className="text-xs font-bold pt-1 text-red-400 mt-1">
-                      Password is required
-                    </p>
-                  )}
-                  {errors.password && errors.password?.type === "pattern" && (
-                    <p className="text-xs font-bold pt-1 text-red-400 mt-1">
-                      uppercase, number and special character required
-                    </p>
-                  )}
-                  <div className="relative">
-                    <input
-                      type={showPass ? "text" : "password"}
-                      placeholder="Confirm Password"
-                      className="input input-bordered w-full "
-                      {...register("confirmPassword", {
-                        required: true,
-                      })}
-                    />
-                    <button
-                      onClick={toggler}
-                      className="absolute right-0 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
-                    >
-                      {showPass ? "🕶️" : "👀"}
-                    </button>
-                  </div>
-                  {matchPassword ? (
-                    <p className="text-xs font-bold text-emerald-300 pt-1">
-                      Password match
-                    </p>
-                  ) : (
-                    <p className="text-xs font-bold text-red-400 pt-1">
-                      Password don't match
-                    </p>
-                  )}
+                {/* validations for ui */}
+                {errors.password && errors.password?.type === "minLength" && (
+                  <p className="text-xs font-bold pt-1 text-red-400 mt-1">
+                    Password must be atleast 6 characters
+                  </p>
+                )}
+                {errors.password && errors.password?.type === "required" && (
+                  <p className="text-xs font-bold pt-1 text-red-400 mt-1">
+                    Password is required
+                  </p>
+                )}
+                {errors.password && errors.password?.type === "pattern" && (
+                  <p className="text-xs font-bold pt-1 text-red-400 mt-1">
+                    uppercase, number and special character required
+                  </p>
+                )}
+                <div className="relative">
+                  <input
+                    type={showPass ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    className="input input-bordered w-full "
+                    {...register("confirmPassword", {
+                      required: true,
+                    })}
+                  />
+                  <button
+                    onClick={toggler}
+                    className="absolute right-0 top-2 text-md px-2 pt-2 pb-1 rounded-tr-md rounded-br-md"
+                  >
+                    {showPass ? "🕶️" : "👀"}
+                  </button>
                 </div>
                 {matchPassword ? (
-                  <button
-                    type="submit"
-                    className="border-2 border-slate-500 rounded-md px-4 pt-2 pb-1 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full  btn text-[#111110]"
-                  >
-                    Add User
-                  </button>
+                  <p className="text-xs font-bold text-emerald-300 pt-1">
+                    Password match
+                  </p>
                 ) : (
-                  <button className="btn-disabled border-2 border-slate-500 rounded-md px-4 py-2 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full  btn text-[#111110]">
-                    Add User
-                  </button>
+                  <p className="text-xs font-bold text-red-400 pt-1">
+                    Password don't match
+                  </p>
                 )}
-              </form>
-            </div>
-          </dialog>
-        </div>
+              </div>
+              {matchPassword ? (
+                <button
+                  type="submit"
+                  className="border-2 border-slate-500 rounded-md px-4 pt-2 pb-1 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full  btn text-[#111110]"
+                >
+                  Add User
+                </button>
+              ) : (
+                <button className="btn-disabled border-2 border-slate-500 rounded-md px-4 py-2 mt-2 bg-indigo-200 hover:bg-indigo-300 font-bold text-sm w-full  btn text-[#111110]">
+                  Add User
+                </button>
+              )}
+            </form>
+          </div>
+        </dialog>
       </div>
     </>
   );
