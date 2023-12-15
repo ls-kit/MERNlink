@@ -73,7 +73,7 @@ const NewsLetter = () => {
   }
 
   return (
-    <div className="py-10">
+    <div className="py-10 font-roboto">
       <h1 className="text-xl font-bold text-center">
         Send Newsletter in Seconds 🚀
       </h1>

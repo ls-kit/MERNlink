@@ -23,7 +23,7 @@ const MangeUsers = () => {
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto font-roboto">
       <table className="table">
         <thead>
           <tr>

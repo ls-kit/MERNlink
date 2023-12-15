@@ -58,7 +58,7 @@ const ResetPass = () => {
   };
 
   return (
-    <div className="px-20 py-20">
+    <div className="px-20 py-20 font-roboto">
       <Toaster position="top-center" richColors />
       <h1 className="text-2xl font-bold text-slate-700 text-center">
         Give your email address

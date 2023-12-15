@@ -41,7 +41,7 @@ const DashBoard = () => {
       });
   };
   return (
-    <div>
+    <div className="font-roboto">
       <Toaster position="top-center" richColors />
       <PageBanner
         pagetitle={"Manage Your Actions"}

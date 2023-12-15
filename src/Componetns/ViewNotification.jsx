@@ -18,7 +18,7 @@ const ViewNotification = ({ message, date }) => {
   return (
     <div
       data-aos="fade-right"
-      className="border border-[#e2e2e2] shadow-md px-4 py-2 rounded-md bg-[#eaf4fc] h-16"
+      className="border border-[#e2e2e2] shadow-md px-4 py-2 rounded-md bg-[#eaf4fc] h-16 font-roboto"
     >
       <h1 className="pt-1 font-semibold text-sm">{message}</h1>
       <p className="text-xs font-bold pt-1 text-slate-500">

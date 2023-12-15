@@ -28,7 +28,7 @@ const PendingRequests = () => {
 
   return (
     <>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto font-roboto">
         <table className="table table-sm">
           <thead>
             <tr>

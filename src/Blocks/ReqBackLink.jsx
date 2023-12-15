@@ -55,7 +55,7 @@ const ReqBackLink = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div className="font-roboto">
       {/* search and filter elements */}
       <div className="py-4 px-5 flex gap-10 items-center">
         <div className="join">

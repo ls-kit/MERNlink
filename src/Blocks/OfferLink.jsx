@@ -40,7 +40,7 @@ const OfferLink = () => {
   };
 
   return (
-    <div className="px-10 py-5">
+    <div className="px-10 py-5 font-roboto">
       <h1 className="text-center text-lg font-bold text-slate-700">
         Add Your Website
       </h1>

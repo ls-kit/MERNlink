@@ -92,7 +92,7 @@ const AllUsers = () => {
   return (
     <>
       <Toaster position="top-center" richColors />
-      <div className="overflow-x-auto py-3">
+      <div className="overflow-x-auto py-3 font-roboto">
         <table className="table lg:table-md md:table-sm table-xs">
           {/* head */}
           <thead>

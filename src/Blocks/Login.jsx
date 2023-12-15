@@ -115,7 +115,7 @@ const Login = () => {
   };
 
   return (
-    <div className="lg:h-screen md:h-screen bg-[#fffafa]">
+    <div className="lg:h-screen md:h-screen bg-[#fffafa] font-roboto">
       <Toaster position="top-center" richColors />
       {/* hero section and user authentication */}
       <div className="grid lg:grid-cols-2 grid-cols-1 items-center">

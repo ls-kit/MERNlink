@@ -28,7 +28,7 @@ const UserDetails = () => {
   };
 
   const onSubmitResetPass = (data) => {
-    console.log(data);
+    // console.log(data);
     // *reset pass
     const payload = { password: data.password };
     const id = _id;
@@ -103,7 +103,7 @@ const UserDetails = () => {
                     Message: {fullName} 💬
                   </h3>
                   <p className="py-2 text-xs font-bold text-slate-400">
-                    Press ESC key or click on ✕ button to close <br />{" "}
+                    Press ESC key or click on ✕ button to close <br />
                     <span className="animate-pulse">In progress...</span>
                   </p>
                   <form onSubmit={handleSubmit(onSubmitSendMail)}>
@@ -168,7 +168,8 @@ const UserDetails = () => {
                   </form>
                   <h3 className="font-bold text-lg pt-3">Password Reset 🔒</h3>
                   <p className="py-2 text-xs font-bold text-slate-400">
-                    Press ESC key or click on ✕ button to close
+                    Press ESC key or click on ✕ button to close <br />
+                    <span className="animate-pulse">In progress...</span>
                   </p>
                   <form
                     className="pt-2"

@@ -133,7 +133,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-screen pb-4">
+    <div className="h-screen pb-4 font-roboto">
       <Toaster position="top-center" richColors />
       <div className="grid lg:grid-cols-2 grid-cols-1 items-center lg:h-screen md:h-screen">
         {/* first grid column */}
