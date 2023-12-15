@@ -184,7 +184,7 @@ const DashBoard = () => {
             <li>
               <span className="text-xs mt-1">
                 Interacting as {isAdmin ? "Admin" : "User"} <br />{" "}
-                {user.displayName}
+                {user.displayName || user.fullName}
               </span>
             </li>
             <li
