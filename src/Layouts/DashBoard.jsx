@@ -53,14 +53,18 @@ const DashBoard = () => {
           {/* Page content here */}
           <Outlet />
           <div className="px-20 py-20 text-center">
-            <p>You have been redirected to dashboard after login</p>
+            <p className="text-sm font-bold text-slate-400">
+              You have been redirected to dashboard after login
+            </p>
           </div>
-          <label
-            htmlFor="my-drawer"
-            className="btn btn-primary drawer-button lg:hidden block"
-          >
-            Open drawer
-          </label>
+          <div className="flex justify-center items-center my-3">
+            <label
+              htmlFor="my-drawer"
+              className="btn btn-outline w-fit pt-4 drawer-button lg:hidden block"
+            >
+              Open Side Menu
+            </label>
+          </div>
         </div>
         <div className="drawer-side">
           <label

@@ -64,7 +64,7 @@ const AllWebsites = () => {
   return (
     <>
       <div className="overflow-x-auto py-3">
-        <table className="table table-xs">
+        <table className="table lg:table-md md:table-sm table-xs">
           {/* head */}
           <thead>
             <tr>
@@ -74,6 +74,7 @@ const AllWebsites = () => {
               <th>Monthly Visit</th>
               <th>Launch Date</th>
               <th>Times Requested</th>
+              <th>Action Buttons</th>
             </tr>
           </thead>
           <tbody>
@@ -95,156 +96,155 @@ const AllWebsites = () => {
             ))}
           </tbody>
         </table>
-        <div className="flex flex-col justify-center items-center py-10">
-          {/* You can open the modal using document.getElementById('ID').showModal() method */}
-          <button
-            className="btn btn-circle bg-emerald-200"
-            onClick={() =>
-              document.getElementById("my_modal_createUser").showModal()
-            }
-          >
-            <img src="/add.svg" alt="add user" />
-          </button>
-          <div className="text-center">
-            <h1 className="text-slate-400 font-bold text-md py-3">
-              Add New Site
-            </h1>
-          </div>
-          <dialog id="my_modal_createUser" className="modal">
-            <div className="modal-box">
-              <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <button className="btn btn-sm hover:bg-red-400 btn-circle btn-ghost absolute right-2 top-2">
-                  <img src="/cross.svg" alt="cross" />
-                </button>
-                <h1 className="font-bold text-lg text-slate-700">
-                  Add new site
-                </h1>
-              </form>
-              {/*here goes your form */}
-              <form className="pt-3" onSubmit={handleSubmit(onSubmit)}>
-                {/* add website input */}
-                <label className="form-control w-full">
+      </div>
+      {/* add new website */}
+      <div className="flex flex-col justify-center items-center py-10">
+        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+        <button
+          className="btn btn-circle bg-emerald-200"
+          onClick={() =>
+            document.getElementById("my_modal_createUser").showModal()
+          }
+        >
+          <img src="/add.svg" alt="add user" />
+        </button>
+        <div className="text-center">
+          <h1 className="text-slate-400 font-bold text-md py-3">
+            Add New Site
+          </h1>
+        </div>
+        <dialog id="my_modal_createUser" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm hover:bg-red-400 btn-circle btn-ghost absolute right-2 top-2">
+                <img src="/cross.svg" alt="cross" />
+              </button>
+              <h1 className="font-bold text-lg text-slate-700">Add new site</h1>
+            </form>
+            {/*here goes your form */}
+            <form className="pt-3" onSubmit={handleSubmit(onSubmit)}>
+              {/* add website input */}
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">Add Your Website</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered w-full input-md"
+                  {...register("addedSite", {
+                    required: true,
+                    pattern: /^www\..+\.(com|net|org|io|info|co|edu)$/,
+                  })}
+                />
+                {errors.addedSite && errors.addedSite?.type === "pattern" && (
+                  <span className="text-xs py-2 font-semibold text-red-400">
+                    Start with www. and end with .com or TLDs
+                  </span>
+                )}
+              </label>
+              {/* group input: category and monthly organic visit */}
+              <div className="flex gap-5 pt-2">
+                {/* category */}
+                <label className="form-control w-fit max-w-xs">
                   <div className="label">
-                    <span className="label-text">Add Your Website</span>
+                    <span className="label-text">Category</span>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Type here"
-                    className="input input-bordered w-full input-md"
-                    {...register("addedSite", {
-                      required: true,
-                      pattern: /^www\..+\.(com|net|org|io|info|co|edu)$/,
-                    })}
-                  />
-                  {errors.addedSite && errors.addedSite?.type === "pattern" && (
-                    <span className="text-xs py-2 font-semibold text-red-400">
-                      Start with www. and end with .com or TLDs
-                    </span>
-                  )}
+                  <select
+                    className="select select-bordered"
+                    {...register("category", { required: true })}
+                  >
+                    <option disabled selected>
+                      Pick one
+                    </option>
+                    {webCategory.map((item, i) => (
+                      <option key={i}>{item}</option>
+                    ))}
+                  </select>
                 </label>
-                {/* group input: category and monthly organic visit */}
-                <div className="flex gap-5 pt-2">
-                  {/* category */}
-                  <label className="form-control w-fit max-w-xs">
-                    <div className="label">
-                      <span className="label-text">Category</span>
-                    </div>
-                    <select
-                      className="select select-bordered"
-                      {...register("category", { required: true })}
-                    >
-                      <option disabled selected>
-                        Pick one
-                      </option>
-                      {webCategory.map((item, i) => (
-                        <option key={i}>{item}</option>
-                      ))}
-                    </select>
-                  </label>
-                  {/* monthly organic visits */}
-                  <label className="form-control w-full max-w-xs">
-                    <div className="label">
-                      <span className="label-text">Monthly Organic Visits</span>
-                    </div>
-                    <input
-                      type="number"
-                      placeholder="Type here"
-                      className="input input-bordered w-full max-w-xs"
-                      {...register("monthlyOrgVisit", {
-                        required: true,
-                      })}
-                    />
-                    {errors.monthlyOrgVisit &&
-                      errors.monthlyOrgVisist?.type === "valueAsNumber" && (
-                        <span className="text-xs py-2 font-semibold text-red-400">
-                          Numbers Only
-                        </span>
-                      )}
-                  </label>
-                </div>
-                {/* group input: launch date and type */}
-                <div className="flex gap-5 pt-2">
-                  {/* launch date */}
-                  <label className="form-control w-fit max-w-xs">
-                    <div className="label">
-                      <span className="label-text">Launch Date</span>
-                    </div>
-                    <input
-                      type="date"
-                      placeholder="Type here"
-                      className="input input-bordered w-full max-w-xs"
-                      {...register("launchDate", {
-                        required: true,
-                      })}
-                    />
-                  </label>
-                  {/* type do follow / not follow */}
-                  <label className="form-control w-full max-w-xs">
-                    <div className="label">
-                      <span className="label-text">Category</span>
-                    </div>
-                    <select
-                      className="select select-bordered"
-                      {...register("type", { required: true })}
-                    >
-                      <option disabled selected>
-                        Pick one
-                      </option>
-                      <option>Follow</option>
-                      <option>Not follow</option>
-                    </select>
-                  </label>
-                </div>
-                {/* key words */}
-                <label className="form-control w-full pt-2">
+                {/* monthly organic visits */}
+                <label className="form-control w-full max-w-xs">
                   <div className="label">
-                    <span className="label-text">Ranking Keywords</span>
+                    <span className="label-text">Monthly Organic Visits</span>
                   </div>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Type here"
-                    className="input input-bordered w-full"
-                    {...register("rankingKeyWords", {
+                    className="input input-bordered w-full max-w-xs"
+                    {...register("monthlyOrgVisit", {
                       required: true,
-                      pattern: /^\w+(,\w+)*$/,
                     })}
                   />
-                  {errors.rankingKeyWords &&
-                    errors.rankingKeyWords?.type === "pattern" && (
+                  {errors.monthlyOrgVisit &&
+                    errors.monthlyOrgVisist?.type === "valueAsNumber" && (
                       <span className="text-xs py-2 font-semibold text-red-400">
-                        Seperate words with commas (,)
+                        Numbers Only
                       </span>
                     )}
                 </label>
+              </div>
+              {/* group input: launch date and type */}
+              <div className="flex gap-5 pt-2">
+                {/* launch date */}
+                <label className="form-control w-fit max-w-xs">
+                  <div className="label">
+                    <span className="label-text">Launch Date</span>
+                  </div>
+                  <input
+                    type="date"
+                    placeholder="Type here"
+                    className="input input-bordered w-full max-w-xs"
+                    {...register("launchDate", {
+                      required: true,
+                    })}
+                  />
+                </label>
+                {/* type do follow / not follow */}
+                <label className="form-control w-full max-w-xs">
+                  <div className="label">
+                    <span className="label-text">Category</span>
+                  </div>
+                  <select
+                    className="select select-bordered"
+                    {...register("type", { required: true })}
+                  >
+                    <option disabled selected>
+                      Pick one
+                    </option>
+                    <option>Follow</option>
+                    <option>Not follow</option>
+                  </select>
+                </label>
+              </div>
+              {/* key words */}
+              <label className="form-control w-full pt-2">
+                <div className="label">
+                  <span className="label-text">Ranking Keywords</span>
+                </div>
                 <input
-                  className="btn btn-md btn-outline mt-3 w-full bg-yellow-300 font-bold"
-                  type="submit"
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered w-full"
+                  {...register("rankingKeyWords", {
+                    required: true,
+                    pattern: /^\w+(,\w+)*$/,
+                  })}
                 />
-              </form>
-            </div>
-          </dialog>
-        </div>
+                {errors.rankingKeyWords &&
+                  errors.rankingKeyWords?.type === "pattern" && (
+                    <span className="text-xs py-2 font-semibold text-red-400">
+                      Seperate words with commas (,)
+                    </span>
+                  )}
+              </label>
+              <input
+                className="btn btn-md btn-outline mt-3 w-full bg-yellow-300 font-bold"
+                type="submit"
+              />
+            </form>
+          </div>
+        </dialog>
       </div>
     </>
   );
