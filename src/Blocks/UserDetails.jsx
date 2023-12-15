@@ -3,6 +3,9 @@ import { Link, useLoaderData } from "react-router-dom";
 import { IoIosArrowDropleftCircle, IoIosSend } from "react-icons/io";
 import { MdLockReset } from "react-icons/md";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { parentUrl } from "../Api/baseUrl";
+import { toast } from "sonner";
 
 const UserDetails = () => {
   const [showPass, setShowPass] = useState(false);
@@ -24,7 +27,23 @@ const UserDetails = () => {
     setShowPass(!showPass);
   };
 
-  const onSubmit = (data) => {
+  const onSubmitResetPass = (data) => {
+    console.log(data);
+    // *reset pass
+    const payload = { password: data.password };
+    const id = _id;
+    axios
+      .patch(`${parentUrl}/users/reset/${id}`, payload)
+      .then((res) => {
+        console.log(res.status);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    reset();
+  };
+
+  const onSubmitSendMail = (data) => {
     console.log(data);
   };
 
@@ -87,7 +106,7 @@ const UserDetails = () => {
                     Press ESC key or click on ✕ button to close <br />{" "}
                     <span className="animate-pulse">In progress...</span>
                   </p>
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(onSubmitSendMail)}>
                     <label className="form-control w-full">
                       <div className="label">
                         <span className="label-text font-bold text-slate-600">
@@ -151,7 +170,10 @@ const UserDetails = () => {
                   <p className="py-2 text-xs font-bold text-slate-400">
                     Press ESC key or click on ✕ button to close
                   </p>
-                  <form className="pt-2" onSubmit={handleSubmit(onSubmit)}>
+                  <form
+                    className="pt-2"
+                    onSubmit={handleSubmit(onSubmitResetPass)}
+                  >
                     {/* password */}
                     <div className="mt-2 flex flex-col gap-y-2">
                       <div className="relative">
