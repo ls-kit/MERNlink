@@ -5,7 +5,8 @@ import { MdLockReset } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { parentUrl } from "../Api/baseUrl";
-import { toast } from "sonner";
+import { Toaster, toast } from "sonner";
+import { loacalServerURL } from "../Api/localURL";
 
 const UserDetails = () => {
   const [showPass, setShowPass] = useState(false);
@@ -30,29 +31,36 @@ const UserDetails = () => {
   const onSubmitResetPass = (data) => {
     // console.log(data);
     // *reset pass
-    const payload = { password: data.password };
+    const payload = { password: data.pass };
     const id = _id;
     axios
-      .patch(`${parentUrl}/users/reset/${id}`, payload)
+      .patch(`${loacalServerURL}/users/reset/${id}`, payload)
       .then((res) => {
-        console.log(res.status);
+        if (res.data.modifiedCount === 1) {
+          toast.success(`Password reset successfull`);
+          reset();
+        } else {
+          toast.warning(`${res.data.message}`);
+          reset();
+        }
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error(error.message);
+        reset();
       });
-    reset();
   };
 
-  const onSubmitSendMail = (data) => {
-    console.log(data);
+  const onSubmitSendMail = (mailData) => {
+    console.log(mailData);
   };
 
-  const password = watch("password");
-  const confirmPass = watch("confirmPassword");
-  const matchPassword = password === confirmPass;
+  const pass = watch("pass");
+  const confirmPass = watch("confirmPass");
+  const matchPassword = pass === confirmPass;
 
   return (
     <div>
+      <Toaster position="top-center" richColors />
       <div className="px-5 pt-5">
         <Link className="text-2xl flex items-end gap-1" to={"/allusers"}>
           <IoIosArrowDropleftCircle className="inline-block text-slate-700 hover:text-slate-900" />
@@ -182,7 +190,7 @@ const UserDetails = () => {
                           type={showPass ? "text" : "password"}
                           placeholder="Password"
                           className="input input-bordered w-full"
-                          {...register("password", {
+                          {...register("pass", {
                             required: true,
                             minLength: 6,
                             pattern:
@@ -198,30 +206,27 @@ const UserDetails = () => {
                       </div>
 
                       {/* validations for ui */}
-                      {errors.password &&
-                        errors.password?.type === "minLength" && (
-                          <p className="text-xs font-bold pt-1 text-red-400 mt-1">
-                            Password must be atleast 6 characters
-                          </p>
-                        )}
-                      {errors.password &&
-                        errors.password?.type === "required" && (
-                          <p className="text-xs font-bold pt-1 text-red-400 mt-1">
-                            Password is required
-                          </p>
-                        )}
-                      {errors.password &&
-                        errors.password?.type === "pattern" && (
-                          <p className="text-xs font-bold pt-1 text-red-400 mt-1">
-                            uppercase, number and special character required
-                          </p>
-                        )}
+                      {errors.pass && errors.pass?.type === "minLength" && (
+                        <p className="text-xs font-bold pt-1 text-red-400 mt-1">
+                          Password must be atleast 6 characters
+                        </p>
+                      )}
+                      {errors.pass && errors.password?.type === "required" && (
+                        <p className="text-xs font-bold pt-1 text-red-400 mt-1">
+                          Password is required
+                        </p>
+                      )}
+                      {errors.pass && errors.pass?.type === "pattern" && (
+                        <p className="text-xs font-bold pt-1 text-red-400 mt-1">
+                          uppercase, number and special character required
+                        </p>
+                      )}
                       <div className="relative">
                         <input
                           type={showPass ? "text" : "password"}
                           placeholder="Confirm Password"
                           className="input input-bordered w-full "
-                          {...register("confirmPassword", {
+                          {...register("confirmPass", {
                             required: true,
                           })}
                         />
