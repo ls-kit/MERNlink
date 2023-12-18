@@ -50,22 +50,32 @@ const UserDetails = () => {
       });
   };
 
-  const onSubmit = (data) => {
+  const handleMail = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const subject = form.subject.value;
+    const to = email;
+    const message = form.message.value;
+
     const mailPayload = {
-      to: email,
-      subject: data.subject,
-      text: data.text,
+      to,
+      subject,
+      message,
     };
 
-    console.log(mailPayload);
+    // console.log(mailPayload);
 
     axios
       .post(`${loacalServerURL}/personal-message`, mailPayload)
       .then((res) => {
-        console.log(res);
+        // console.log(res.status);
+        toast.success(`Mail sent to ${fullName}`);
+        reset();
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
+        toast.error(`${error.message}`);
+        reset();
       });
   };
 
@@ -133,7 +143,7 @@ const UserDetails = () => {
                     Press ESC key or click on ✕ button to close <br />
                     <span className="animate-pulse">In progress...</span>
                   </p>
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleMail}>
                     <label className="form-control w-full">
                       <div className="label">
                         <span className="label-text font-bold text-slate-600">
@@ -143,7 +153,9 @@ const UserDetails = () => {
                       <input
                         type="text"
                         placeholder="Type here"
+                        name="subject"
                         className="input input-bordered w-full"
+                        required
                         {...register("subject")}
                       />
                     </label>
@@ -156,7 +168,9 @@ const UserDetails = () => {
                       <textarea
                         className="textarea textarea-bordered h-24"
                         placeholder="Type here"
+                        name="message"
                         {...register("message")}
+                        required
                       ></textarea>
                     </label>
                     <button
