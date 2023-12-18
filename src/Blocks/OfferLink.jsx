@@ -70,7 +70,7 @@ const OfferLink = () => {
               )}
             </label>
             {/* category */}
-            <label className="form-control w-fit max-w-xs">
+            <label className="form-control lg:w-fit w-full">
               <div className="label">
                 <span className="label-text">Category</span>
               </div>
@@ -110,7 +110,7 @@ const OfferLink = () => {
           {/* second row */}
           <div className="mt-3 flex lg:flex-row flex-col gap-3">
             {/* launch date */}
-            <label className="form-control w-fit max-w-xs">
+            <label className="form-control lg:w-fit w-full">
               <div className="label">
                 <span className="label-text">Launch Date</span>
               </div>
@@ -162,17 +162,36 @@ const OfferLink = () => {
             </label>
           </div>
           <label className="form-control w-full">
-            {/* <div className="label flex flex-col items-start mt-4"> */}
-            {/* <span className="label-text pb-1">Verify Your Site</span> */}
-            <div className="grid grid-cols-2 gap-5 w-full pt-2">
-              <DownLoadBtn /> <CehckWebStatus />
+            {/* download html */}
+            <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-5 gap-2 w-full pt-2">
+              <label
+                className="form-control w-full tooltip"
+                data-tip="This file helps you to verify your site. For example, run it in your root directory: wwww.example.com/downloadedFile.html"
+              >
+                <div className="label">
+                  <span className="label-text">Verify Your Website</span>
+                </div>
+                <DownLoadBtn />
+              </label>
+              {/* check web status */}
+              <label
+                className="form-control w-full tooltip"
+                data-tip="Check Your Website verification Status"
+              >
+                <div className="label">
+                  <span className="label-text">Check Verification</span>
+                </div>
+                <CehckWebStatus />
+              </label>
             </div>
             {/* </div> */}
           </label>
-          <input
-            className="btn btn-md btn-outline w-full bg-indigo-400 mt-5"
-            type="submit"
-          />
+          <div className="flex justify-center items-center">
+            <input
+              className="btn btn-md btn-outline w-[60%] bg-indigo-300 mt-5"
+              type="submit"
+            />
+          </div>
         </form>
       </div>
     </div>
