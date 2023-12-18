@@ -161,38 +161,41 @@ const OfferLink = () => {
               </select>
             </label>
           </div>
-          <label className="form-control w-full">
+          <label className="form-control w-full mt-3">
             {/* download html */}
-            <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-5 gap-2 w-full pt-2">
+            <div className="grid lg:grid-cols-2 grid-cols-1 items-end lg:gap-5 gap-2 w-full pt-2">
               <label
                 className="form-control w-full tooltip"
-                data-tip="This file helps you to verify your site. For example, run it in your root directory: wwww.example.com/downloadedFile.html"
+                data-tip="This file helps you to verify your site. For example, run it in your root directory: wwww.example.com/downloadedFile.html. Later you can check status"
               >
                 <div className="label">
                   <span className="label-text">Verify Your Website</span>
                 </div>
                 <DownLoadBtn />
               </label>
-              {/* check web status */}
-              <label
-                className="form-control w-full tooltip"
-                data-tip="Check Your Website verification Status"
-              >
-                <div className="label">
-                  <span className="label-text">Check Verification</span>
-                </div>
-                <CehckWebStatus />
-              </label>
+              <div>
+                <input
+                  className="btn btn-md btn-outline w-full bg-indigo-300 mt-5"
+                  type="submit"
+                />
+              </div>
+              {/* </div> */}
             </div>
-            {/* </div> */}
           </label>
-          <div className="flex justify-center items-center">
+          {/*  <div className="flex justify-center items-center">
             <input
               className="btn btn-md btn-outline w-[60%] bg-indigo-300 mt-5"
               type="submit"
             />
-          </div>
+          </div> */}
         </form>
+        {/* check verification */}
+        <div className="mt-4">
+          <h1 className="text-center py-3 text-md font-bold text-slate-500">
+            Check if your site is verified or not
+          </h1>
+          <CehckWebStatus />
+        </div>
       </div>
     </div>
   );
