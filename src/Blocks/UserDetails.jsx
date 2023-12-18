@@ -91,21 +91,22 @@ const UserDetails = () => {
           <IoIosArrowDropleftCircle className="inline-block text-slate-700 hover:text-slate-900" />
           <span className="text-xs">Go back to All Users</span>
         </Link>
-        <h1 className="text-center font-bold text-2xl text-slate-400 underline">
-          Details of <span className="text-indigo-400">{fullName}</span>
-        </h1>
       </div>
       <div className="px-5 py-5">
-        <div className="border-2 border-border-slate-500 shadow-sm py-10 px-5 rounded-lg grid lg:grid-cols-3 grid-cols-1 items-end">
+        <div className="border-2 border-border-slate-500 shadow-sm py-8 px-8 rounded-lg grid lg:grid-cols-2 grid-cols-1 items-end bg-[#f0fff0]">
           <div>
-            <h1 className="text-lg font-bold">{fullName}</h1>
-            <small className="pt-0 text-sm">@sername: {userName}</small> <br />
-            <small className="text-sm">Email:{email}</small>
+            <h1 className="text-xl font-bold">{fullName}</h1>
+            <small className="pt-0 text-sm font-bold">{userName}</small> <br />
+            <small className="text-md font-bold">Email: {email}</small>
           </div>
           <div>
-            <small>Country: {country}</small> <br />
-            <small>Active Status: {activeStatus}</small> <br />
-            <small>Phone: {phone}</small>
+            <small className="text-md font-bold">Country: {country}</small>
+            <br />
+            <small className="text-md font-bold">
+              Active Status: {activeStatus}
+            </small>
+            <br />
+            <small className="text-md font-bold">Phone: {phone}</small>
           </div>
         </div>
       </div>
