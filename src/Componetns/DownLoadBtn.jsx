@@ -1,6 +1,6 @@
 import { saveAs } from "file-saver";
 import React from "react";
-import { FaCircleArrowDown } from "react-icons/fa6";
+import { FaDownload } from "react-icons/fa6";
 
 const DownLoadBtn = () => {
   // generate dynamic filename
@@ -20,15 +20,20 @@ const DownLoadBtn = () => {
 
   return (
     <div
-      className="tooltip tooltip-top"
-      data-tip="Download the file provided and upload it to the root directory of your website, for example at www.example.com/downloadedfile.html"
+      className="tooltip tooltip-top top-center w-full"
+      data-tip="Upload it to the root directory of your website, for example at www.example.com/downloadedfile.html"
     >
-      <button
-        className="btn btn-outline flex gap-1 items-center"
-        onClick={handleDownload}
-      >
-        Download the HTML File
-      </button>
+      <label className="form-control w-full">
+        <div className="label">
+          <span className="label-text">Download to verify</span>
+        </div>
+        <button
+          className="btn btn-outline flex gap-1 items-center bg-yellow-300"
+          onClick={handleDownload}
+        >
+          <FaDownload /> Download the HTML File
+        </button>
+      </label>
     </div>
   );
 };

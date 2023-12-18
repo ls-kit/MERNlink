@@ -141,7 +141,7 @@ const UserDetails = () => {
                   </h3>
                   <p className="py-2 text-xs font-bold text-slate-400">
                     Press ESC key or click on ✕ button to close <br />
-                    <span className="animate-pulse">In progress...</span>
+                    {/* <span className="animate-pulse">In progress...</span> */}
                   </p>
                   <form onSubmit={handleMail}>
                     <label className="form-control w-full">

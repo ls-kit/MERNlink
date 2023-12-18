@@ -6,6 +6,7 @@ import axios from "axios";
 import { parentUrl } from "../Api/baseUrl";
 import { toast } from "sonner";
 import { AuthContext } from "../Poveiders/AuthProvider";
+import CehckWebStatus from "../Componetns/CheckWebStatus";
 
 const OfferLink = () => {
   // get user
@@ -86,14 +87,14 @@ const OfferLink = () => {
               </select>
             </label>
             {/* monthly organic visits */}
-            <label className="form-control w-full max-w-xs">
+            <label className="form-control w-full">
               <div className="label">
                 <span className="label-text">Monthly Organic Visits</span>
               </div>
               <input
                 type="number"
                 placeholder="Type here"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 {...register("monthlyOrgVisit", {
                   required: true,
                 })}
@@ -144,7 +145,7 @@ const OfferLink = () => {
                 )}
             </label>
             {/* type do follow / not follow */}
-            <label className="form-control w-full max-w-xs">
+            <label className="form-control w-full">
               <div className="label">
                 <span className="label-text">Category</span>
               </div>
@@ -160,13 +161,18 @@ const OfferLink = () => {
               </select>
             </label>
           </div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label flex flex-col items-start mt-4">
-              <span className="label-text pb-1">Verify Your Site</span>
-              <DownLoadBtn />
+          <label className="form-control w-full">
+            {/* <div className="label flex flex-col items-start mt-4"> */}
+            {/* <span className="label-text pb-1">Verify Your Site</span> */}
+            <div className="grid grid-cols-2 gap-5 w-full pt-2">
+              <DownLoadBtn /> <CehckWebStatus />
             </div>
+            {/* </div> */}
           </label>
-          <input className="btn btn-md btn-outline mt-3" type="submit" />
+          <input
+            className="btn btn-md btn-outline w-full bg-indigo-400 mt-5"
+            type="submit"
+          />
         </form>
       </div>
     </div>
