@@ -162,9 +162,7 @@ const OfferLink = () => {
           </div>
           <label className="form-control w-full max-w-xs">
             <div className="label flex flex-col items-start mt-4">
-              <span className="label-text pb-1">
-                Download the file to verify your site
-              </span>
+              <span className="label-text pb-1">Verify Your Site</span>
               <DownLoadBtn />
             </div>
           </label>

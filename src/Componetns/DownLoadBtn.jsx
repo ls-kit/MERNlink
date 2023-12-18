@@ -19,12 +19,15 @@ const DownLoadBtn = () => {
   };
 
   return (
-    <div>
+    <div
+      className="tooltip tooltip-top"
+      data-tip="Download the file provided and upload it to the root directory of your website, for example at www.example.com/downloadedfile.html"
+    >
       <button
         className="btn btn-outline flex gap-1 items-center"
         onClick={handleDownload}
       >
-        Download HTML File
+        Download the HTML File
       </button>
     </div>
   );

@@ -50,8 +50,23 @@ const UserDetails = () => {
       });
   };
 
-  const onSubmitSendMail = (mailData) => {
-    console.log(mailData);
+  const onSubmit = (data) => {
+    const mailPayload = {
+      to: email,
+      subject: data.subject,
+      text: data.text,
+    };
+
+    console.log(mailPayload);
+
+    axios
+      .post(`${loacalServerURL}/personal-message`, mailPayload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   const pass = watch("pass");
@@ -118,7 +133,7 @@ const UserDetails = () => {
                     Press ESC key or click on ✕ button to close <br />
                     <span className="animate-pulse">In progress...</span>
                   </p>
-                  <form onSubmit={handleSubmit(onSubmitSendMail)}>
+                  <form onSubmit={handleSubmit(onSubmit)}>
                     <label className="form-control w-full">
                       <div className="label">
                         <span className="label-text font-bold text-slate-600">
