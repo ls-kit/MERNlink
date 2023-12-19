@@ -12,7 +12,8 @@
     </div>
 
     <script>
-      const url = location.href;
+      const url = "www." + window.location.host;
+      console.log(url);
       fetch(
         `https://lskit-mern-backend.vercel.app/offer-backlink/isValid/${url}`,
         {
@@ -20,7 +21,7 @@
         }
       )
         .then((res) => res.json())
-        .then((error) => alert(error.mesage));
+        .catch((error) => alert(error.message));
     </script>
   </body>
 </html>

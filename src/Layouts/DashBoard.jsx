@@ -151,6 +151,11 @@ const DashBoard = () => {
             ) : (
               <>
                 <li className="mt-1">
+                  <Link to={"/notifications"} className="flex items-start">
+                    <RiNotification4Fill /> Notifiactions
+                  </Link>
+                </li>
+                <li className="mt-1">
                   <Link
                     to={"/pending"}
                     className="flex items-start text-sm animate-pulse"

@@ -7,6 +7,8 @@ import { parentUrl } from "../Api/baseUrl";
 import { toast } from "sonner";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import CehckWebStatus from "../Componetns/CheckWebStatus";
+import { loacalServerURL } from "../Api/localURL";
+import { MdVerified } from "react-icons/md";
 
 const OfferLink = () => {
   // get user
@@ -31,12 +33,14 @@ const OfferLink = () => {
       email: user.email,
     };
     axios
-      .post(`${parentUrl}/offer-backlink`, payLoad)
+      .post(`${loacalServerURL}/offer-backlink`, payLoad)
       .then((res) => {
         // console.log(res);
         toast.info(`Data submitted, Download the html file to verify`);
       })
-      .then((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error.message);
+      });
     reset();
   };
 
@@ -173,21 +177,12 @@ const OfferLink = () => {
                 </div>
                 <DownLoadBtn />
               </label>
-              <div>
-                <input
-                  className="btn btn-md btn-outline w-full bg-indigo-300 mt-5"
-                  type="submit"
-                />
-              </div>
-              {/* </div> */}
+              <input
+                className="btn btn-md btn-outline bg-indigo-300 mt-5"
+                type="submit"
+              />
             </div>
           </label>
-          {/*  <div className="flex justify-center items-center">
-            <input
-              className="btn btn-md btn-outline w-[60%] bg-indigo-300 mt-5"
-              type="submit"
-            />
-          </div> */}
         </form>
         {/* check verification */}
         <div className="mt-4">

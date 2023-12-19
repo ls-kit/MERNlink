@@ -1,5 +1,4 @@
 import axios from "axios";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdVerified } from "react-icons/md";
 import { loacalServerURL } from "../Api/localURL";
@@ -7,9 +6,6 @@ import { Toaster, toast } from "sonner";
 import { parentUrl } from "../Api/baseUrl";
 
 const CehckWebStatus = () => {
-  // set message
-  const [message, setMessage] = useState("");
-
   const {
     register,
     handleSubmit,
@@ -64,7 +60,7 @@ const CehckWebStatus = () => {
               Verification Status 💡
             </h1>
             <p className="text-xs text-slate-400 font-bold text-start pt-2">
-              Provide registered email address and your submitted URL
+              Provide your submitted URL
             </p>
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               {/*  <label className="form-control w-full">
@@ -80,7 +76,7 @@ const CehckWebStatus = () => {
                   })}
                 />
               </label> */}
-              <p>{message}</p>
+
               <label className="form-control w-full pt-1">
                 <div className="label">
                   <span className="label-text">Give your submitted url</span>

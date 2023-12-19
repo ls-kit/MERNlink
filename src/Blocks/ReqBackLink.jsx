@@ -4,6 +4,7 @@ import { parentUrl } from "../Api/baseUrl";
 import ReqLinkTbRow from "../Componetns/ReqLinkTbRow";
 import Pagination from "../Componetns/Pagination";
 import { useQuery } from "react-query";
+import { loacalServerURL } from "../Api/localURL";
 
 const ReqBackLink = () => {
   // const [links, setLinks] = useState([]);
@@ -25,7 +26,7 @@ const ReqBackLink = () => {
   };
 
   const fetchLinks = async () => {
-    const res = await axios.get(`${parentUrl}/offer-backlink/${type}`);
+    const res = await axios.get(`${loacalServerURL}/offer-backlink`);
     return res.data;
   };
 
