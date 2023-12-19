@@ -202,7 +202,7 @@ const OfferLink = () => {
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button className="btn btn-xs btn-circle btn-ghost absolute right-2 top-2 bg-white hover:bg-red-400">
-                <img src="/public/cross.svg" alt="cross" />
+                <img src="/cross.svg" alt="cross" />
               </button>
             </form>
             <h3 className="font-bold text-lg">Click on the download button</h3>

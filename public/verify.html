@@ -20,7 +20,12 @@
           method: "PATCH",
         }
       )
-        .then((res) => res.json())
+        .then((res) => {
+          res.json();
+          if (res.status === 200) {
+            alert("Verified Successfully");
+          }
+        })
         .catch((error) => alert(error.message));
     </script>
   </body>

@@ -84,7 +84,7 @@ const CehckWebStatus = () => {
                 <input
                   type="text"
                   placeholder="Type here"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full text-slate-900"
                   {...register("siteName", {
                     required: true,
                     pattern: /^www\..+\.(com|net|org|io|info|co|edu)$/,
