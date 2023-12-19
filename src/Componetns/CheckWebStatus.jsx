@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdVerified } from "react-icons/md";
 import { loacalServerURL } from "../Api/localURL";
@@ -7,6 +7,9 @@ import { Toaster, toast } from "sonner";
 import { parentUrl } from "../Api/baseUrl";
 
 const CehckWebStatus = () => {
+  // set message
+  const [message, setMessage] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -19,16 +22,13 @@ const CehckWebStatus = () => {
     // console.log(data.siteName);
 
     axios
-      .post(
-        `${parentUrl}/offer-backlink/check-verification/${data.email}`,
-        data
-      )
+      .post(`${parentUrl}/offer-backlink/check-verification/`, data)
       .then((res) => {
         if (res.data.message === "verified") {
           toast.success(`Your site is verified`);
           reset();
         } else if (res.data.message === "notVerified") {
-          toast.info(`Your site is not verified`);
+          toast.error(`Your site is not verified`);
           reset();
         }
       })
@@ -67,7 +67,7 @@ const CehckWebStatus = () => {
               Provide registered email address and your submitted URL
             </p>
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
-              <label className="form-control w-full">
+              {/*  <label className="form-control w-full">
                 <div className="label">
                   <span className="label-text">Your registered email</span>
                 </div>
@@ -79,7 +79,8 @@ const CehckWebStatus = () => {
                     required: true,
                   })}
                 />
-              </label>
+              </label> */}
+              <p>{message}</p>
               <label className="form-control w-full pt-1">
                 <div className="label">
                   <span className="label-text">Give your submitted url</span>
