@@ -38,9 +38,9 @@ const CehckWebStatus = () => {
       <div className="w-full">
         {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
-        <div className="flex justify-center items-center">
+        <div className="mt-3">
           <button
-            className="btn btn-outline btn-md bg-emerald-400 w-[60%]"
+            className="btn btn-outline btn-sm bg-emerald-400 w-[20%]"
             onClick={() => document.getElementById("my_modal_3").showModal()}
           >
             <MdVerified className="text-xl" />
@@ -56,7 +56,7 @@ const CehckWebStatus = () => {
               </button>
             </form>
             {/* here will be modal text */}
-            <h1 className="text-start text-lg font-bold">
+            <h1 className="text-start text-lg font-bold text-slate-900">
               Verification Status 💡
             </h1>
             <p className="text-xs text-slate-400 font-bold text-start pt-2">

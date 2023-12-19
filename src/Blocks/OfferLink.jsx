@@ -9,6 +9,8 @@ import { AuthContext } from "../Poveiders/AuthProvider";
 import CehckWebStatus from "../Componetns/CheckWebStatus";
 import { loacalServerURL } from "../Api/localURL";
 import { MdVerified } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { FaLink } from "react-icons/fa6";
 
 const OfferLink = () => {
   // get user
@@ -165,10 +167,10 @@ const OfferLink = () => {
               </select>
             </label>
           </div>
-          <label className="form-control w-full mt-3">
+          <label className="form-control w-full mt-3 ">
             {/* download html */}
-            <div className="grid lg:grid-cols-2 grid-cols-1 items-end lg:gap-5 gap-2 w-full pt-2">
-              <label
+            <div className="py-4 flex justify-center">
+              {/* <label
                 className="form-control w-full tooltip"
                 data-tip="This file helps you to verify your site. For example, run it in your root directory: wwww.example.com/downloadedFile.html. Later you can check status"
               >
@@ -176,20 +178,30 @@ const OfferLink = () => {
                   <span className="label-text">Verify Your Website</span>
                 </div>
                 <DownLoadBtn />
-              </label>
+              </label> */}
               <input
-                className="btn btn-md btn-outline bg-indigo-300 mt-5"
+                className="btn btn-md btn-outline bg-indigo-300 w-[40%] text-center"
                 type="submit"
               />
             </div>
           </label>
         </form>
         {/* check verification */}
-        <div className="mt-4">
-          <h1 className="text-center py-3 text-md font-bold text-slate-500">
-            Check if your site is verified or not
-          </h1>
-          <CehckWebStatus />
+        <div className="mt-5 border-2 border-salte-300 rounded-lg px-[3px] py-1 bg-gradient-to-r from-red-400 via-indigo-300 to-emerald-300">
+          <div className="bg-[#101211] px-6 py-7 rounded-md text-white">
+            <h1 className="text-sm font-bold">Check verification status 💡</h1>
+            <p className="text-xs pt-2">
+              Before checking, make sure that your site is submitted first. You
+              have to download the verification file after submission. And
+              upload that file to your cpanel in order to queue for
+              verification. To know more visit:{" "}
+              <Link className="text-indigo-400 hover:text-cyan-200">
+                How to verify website <FaLink className="inline-block" />
+              </Link>
+            </p>
+            <CehckWebStatus />
+          </div>
+          {/* <CehckWebStatus /> */}
         </div>
       </div>
     </div>
