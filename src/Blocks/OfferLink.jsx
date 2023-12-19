@@ -39,6 +39,7 @@ const OfferLink = () => {
       .then((res) => {
         // console.log(res);
         toast.info(`Data submitted, Download the html file to verify`);
+        document.getElementById("my_modal_downloadBtnModal").showModal();
       })
       .catch((error) => {
         toast.error(error.message);
@@ -186,18 +187,62 @@ const OfferLink = () => {
             </div>
           </label>
         </form>
+        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+        {/*  <button
+          className="btn"
+          onClick={() =>
+            document.getElementById("my_modal_downloadBtnModal").showModal()
+          }
+        >
+          open modal
+        </button> */}
+        {/* open modal to download verifcation file */}
+        <dialog id="my_modal_downloadBtnModal" className="modal">
+          <div className="modal-box bg-[#101211] text-white">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-xs btn-circle btn-ghost absolute right-2 top-2 bg-white hover:bg-red-400">
+                <img src="/public/cross.svg" alt="cross" />
+              </button>
+            </form>
+            <h3 className="font-bold text-lg">Click on the download button</h3>
+            <p className="py-2 text-sm">
+              In order to verify your site, you can follow these steps
+            </p>
+            <ul className="text-xs pb-4 pt-2 text-slate-400">
+              <li className="pt-1">
+                Step-1: Download this file and upload it to your sites cpanel
+              </li>
+              <li className="pt-1">
+                Step-2:Go to site and at the very end wirte (/verify.html){" "}
+                <span className="text-red-400 inline-block">
+                  ex: www.mysite.com/verify.html
+                </span>
+              </li>
+              <li className="pt-1">
+                Step-3: Your site will be verified (automated)
+              </li>
+              <li className="pt-1">
+                Step-4: To check wheater it is verified or not click on the
+                check status button
+              </li>
+            </ul>
+            <DownLoadBtn />
+          </div>
+        </dialog>
         {/* check verification */}
-        <div className="mt-5 border-2 border-salte-300 rounded-lg px-[3px] py-1 bg-gradient-to-r from-red-400 via-indigo-300 to-emerald-300">
-          <div className="bg-[#101211] px-6 py-7 rounded-md text-white">
-            <h1 className="text-sm font-bold">Check verification status 💡</h1>
+        <div className="mt-5 border-2 border-salte-300 rounded-xl px-[3px] py-1 bg-gradient-to-r from-red-400 via-indigo-300 to-emerald-300">
+          <div className="bg-[#101211] px-4 py-5 rounded-lg text-white">
+            <h1 className="text-sm font-bold">
+              Check verification status (Note)💡
+            </h1>
             <p className="text-xs pt-2">
-              Before checking, make sure that your site is submitted first. You
-              have to download the verification file after submission. And
-              upload that file to your cpanel in order to queue for
-              verification. To know more visit:{" "}
+              Submit your site, download the verification file, and upload it to
+              your cPanel for verification. Visit :{" "}
               <Link className="text-indigo-400 hover:text-cyan-200">
                 How to verify website <FaLink className="inline-block" />
-              </Link>
+              </Link>{" "}
+              for more details
             </p>
             <CehckWebStatus />
           </div>

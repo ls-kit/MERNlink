@@ -38,7 +38,7 @@ const CehckWebStatus = () => {
       <div className="w-full">
         {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
-        <div className="mt-3">
+        <div className="pt-4">
           <button
             className="btn btn-outline btn-sm bg-emerald-400 w-[20%]"
             onClick={() => document.getElementById("my_modal_3").showModal()}
