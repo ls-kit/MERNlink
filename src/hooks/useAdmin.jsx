@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { toast } from "sonner";
 
 const useAdmin = () => {
@@ -10,7 +10,7 @@ const useAdmin = () => {
   const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
     queryKey: ["isAdmin", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`${parentUrl}/users/admin/${user?.email}`);
+      const res = await axios.get(`${parentURL}/users/admin/${user?.email}`);
       // .then((res) => console.log(res))
       // .catch((error) => {
       //   toast.error(`${error.message}`);

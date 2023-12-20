@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { MdVerified } from "react-icons/md";
-import { loacalServerURL } from "../Api/localURL";
+import { localServerURL } from "../Api/localURL";
 import { Toaster, toast } from "sonner";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 
 const CehckWebStatus = () => {
   const {
@@ -18,7 +18,7 @@ const CehckWebStatus = () => {
     // console.log(data.siteName);
 
     axios
-      .post(`${parentUrl}/offer-backlink/check-verification/`, data)
+      .post(`${parentURL}/offer-backlink/check-verification/`, data)
       .then((res) => {
         if (res.data.message === "verified") {
           toast.success(`Your site is verified`);
@@ -29,7 +29,7 @@ const CehckWebStatus = () => {
         }
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error(error.message);
       });
   };
 

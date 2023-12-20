@@ -16,7 +16,9 @@ import AllUsers from "../Blocks/AllUsers";
 import AllWebsites from "../Blocks/AllWebsites";
 import PendingRequests from "../Blocks/PendingRequests";
 import UserDetails from "../Blocks/UserDetails";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
+import MyWebSites from "../Blocks/MyWebSites";
+import VerificationPg from "../Blocks/VerificationPg";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/offer-link",
-            element: <OfferLink />,
+            element: <MyWebSites />,
           },
           {
             path: "/marketplace",
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
           {
             path: "/pending",
             element: <PendingRequests />,
+          },
+          {
+            path: "/submit-website",
+            element: <OfferLink />,
+          },
+          {
+            path: "/verification",
+            element: <VerificationPg />,
           },
           {
             path: "/manageusers",
@@ -99,7 +109,7 @@ const router = createBrowserRouter([
               </AdminRoute>
             ),
             loader: ({ params }) =>
-              fetch(`${parentUrl}/users/details/${params.id}`),
+              fetch(`${parentURL}/users/details/${params.id}`),
           },
         ],
       },

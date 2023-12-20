@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 
 const ResetPass = () => {
   const { resetPass } = useContext(AuthContext);
@@ -15,7 +15,7 @@ const ResetPass = () => {
 
     // todo: check if the email includes in data base, if includes then move to the next procedure or else give an warning toast
     axios
-      .get(`${parentUrl}/users`)
+      .get(`${parentURL}/users`)
       .then((res) => {
         const allUsers = res.data;
         allUsers.map((item) => {
@@ -35,7 +35,7 @@ const ResetPass = () => {
                 // todo: send notification
                 axios
                   .post(
-                    `${parentUrl}/users/notifications/${item._id}`,
+                    `${parentURL}/users/notifications/${item._id}`,
                     notificationPayload
                   )
                   .then((res) => {

@@ -4,7 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import { TbEditCircle } from "react-icons/tb";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import { PiRadioactiveFill } from "react-icons/pi";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { webCategory } from "../Api/siteCategory";
@@ -20,6 +20,9 @@ const AllSiteTableRow = ({
   requestedCount,
   siteID,
   verified,
+  remove,
+  edit,
+  deactivate,
 }) => {
   // hookform
   const {
@@ -41,7 +44,7 @@ const AllSiteTableRow = ({
     const siteID = data.siteID;
 
     axios
-      .patch(`${parentUrl}/offer-backlink/update/${siteID}`, payLoad)
+      .patch(`${parentURL}/offer-backlink/update/${siteID}`, payLoad)
       .then((res) => {
         toast.success(`${siteName} Updated`);
         reset();
@@ -54,7 +57,7 @@ const AllSiteTableRow = ({
 
   const handleDelete = (id) => {
     axios
-      .delete(`${parentUrl}/offer-backlink/delete/${id}`)
+      .delete(`${parentURL}/offer-backlink/delete/${id}`)
       .then((res) => {
         console.log(res.status);
         toast.warning(`Site Deleted`);
@@ -68,7 +71,7 @@ const AllSiteTableRow = ({
 
   const handleDeactivate = (id) => {
     axios
-      .patch(`${parentUrl}/offer-backlink/deactivate/${id}`)
+      .patch(`${parentURL}/offer-backlink/deactivate/${id}`)
       .then((res) => {
         toast.success(`${siteName} Deactivated`);
         refetch();
@@ -80,7 +83,7 @@ const AllSiteTableRow = ({
 
   const handleActivate = (id) => {
     axios
-      .patch(`${parentUrl}/offer-backlink/activate/${id}`)
+      .patch(`${parentURL}/offer-backlink/activate/${id}`)
       .then((res) => {
         toast.success(`Site Activated`);
         refetch();
@@ -119,14 +122,16 @@ const AllSiteTableRow = ({
           <div>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             <div className="lg:tooltip" data-tip="Edit">
-              <button
-                className="btn btn-outline btn-circle btn-sm bg-emerald-300"
-                onClick={() =>
-                  document.getElementById(`my_modal_${index}`).showModal()
-                }
-              >
-                <TbEditCircle />
-              </button>
+              {edit === true && (
+                <button
+                  className="btn btn-outline btn-circle btn-sm bg-emerald-300"
+                  onClick={() =>
+                    document.getElementById(`my_modal_${index}`).showModal()
+                  }
+                >
+                  <TbEditCircle />
+                </button>
+              )}
             </div>
             <dialog id={`my_modal_${index}`} className="modal">
               <div className="modal-box">
@@ -211,12 +216,14 @@ const AllSiteTableRow = ({
           {/* delete */}
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <div className="lg:tooltip" data-tip="Delete">
-            <button
-              className="btn btn-outline btn-sm btn-circle bg-red-300"
-              onClick={() => document.getElementById(`${siteID}`).showModal()}
-            >
-              <FaTrash />
-            </button>
+            {remove === true && (
+              <button
+                className="btn btn-outline btn-sm btn-circle bg-red-300"
+                onClick={() => document.getElementById(`${siteID}`).showModal()}
+              >
+                <FaTrash />
+              </button>
+            )}
           </div>
           <dialog id={`${siteID}`} className="modal">
             <div className="modal-box">
@@ -240,13 +247,15 @@ const AllSiteTableRow = ({
           </dialog>
           {/* deactivate */}
           <div className="lg:tooltip" data-tip="Deactivate">
-            <button
-              onClick={() => handleDeactivate(siteID)}
-              disabled={siteStatus === "deactivated" ? true : false}
-              className={"btn btn-outline btn-sm btn-circle bg-yellow-300"}
-            >
-              <PiRadioactiveFill />
-            </button>
+            {deactivate === true && (
+              <button
+                onClick={() => handleDeactivate(siteID)}
+                disabled={siteStatus === "deactivated" ? true : false}
+                className={"btn btn-outline btn-sm btn-circle bg-yellow-300"}
+              >
+                <PiRadioactiveFill />
+              </button>
+            )}
           </div>
         </td>
       </tr>

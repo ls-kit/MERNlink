@@ -84,7 +84,7 @@ const DashBoard = () => {
                 </li>
                 <li className="mt-1">
                   <Link className="flex items-start" to={"/offer-link"}>
-                    <FaWandMagicSparkles /> Offer Backlink
+                    <FaWandMagicSparkles /> My Websites
                   </Link>
                 </li>
                 <li className="mt-1">
@@ -102,7 +102,7 @@ const DashBoard = () => {
                 </li>
                 <li className="mt-1">
                   <Link className="flex items-start" to={"/offer-link"}>
-                    <FaWandMagicSparkles /> Offer Backlink
+                    <FaWandMagicSparkles /> My Websites
                   </Link>
                 </li>
                 <li className="mt-1">

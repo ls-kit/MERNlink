@@ -4,9 +4,9 @@ import { IoIosArrowDropleftCircle, IoIosSend } from "react-icons/io";
 import { MdLockReset } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { Toaster, toast } from "sonner";
-import { loacalServerURL } from "../Api/localURL";
+import { localServerURL } from "../Api/localURL";
 
 const UserDetails = () => {
   const [showPass, setShowPass] = useState(false);
@@ -34,7 +34,7 @@ const UserDetails = () => {
     const payload = { password: data.pass };
     const id = _id;
     axios
-      .patch(`${parentUrl}/users/reset/${id}`, payload)
+      .patch(`${parentURL}/users/reset/${id}`, payload)
       .then((res) => {
         if (res.data.modifiedCount === 1) {
           toast.success(`Password reset successfull`);
@@ -66,7 +66,7 @@ const UserDetails = () => {
     // console.log(mailPayload);
 
     axios
-      .post(`${loacalServerURL}/personal-message`, mailPayload)
+      .post(`${parentURL}/personal-message`, mailPayload)
       .then((res) => {
         // console.log(res.status);
         toast.success(`Mail sent to ${fullName}`);

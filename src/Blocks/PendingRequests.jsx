@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import axios from "axios";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import PendingTableRow from "../Componetns/PendingTableRow";
@@ -12,7 +12,7 @@ const PendingRequests = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios
-        .get(`${parentUrl}/requested-backlink/pending/${user?.email}`)
+        .get(`${parentURL}/requested-backlink/pending/${user?.email}`)
         .then((res) => {
           console.log(res);
           setPendingData(res.data);
@@ -24,7 +24,7 @@ const PendingRequests = () => {
     };
 
     fetchData();
-  }, [parentUrl]);
+  }, [parentURL]);
 
   return (
     <>

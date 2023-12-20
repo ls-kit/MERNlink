@@ -1,5 +1,5 @@
 import axios from "axios";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import TableRow from "../Componetns/TableRow";
 import { useQuery } from "react-query";
 
@@ -10,7 +10,7 @@ const MangeUsers = () => {
     error,
     isLoading,
   } = useQuery(["users"], async () => {
-    const res = await axios.get(`${parentUrl}/users`);
+    const res = await axios.get(`${parentURL}/users`);
     return res.data;
   });
 

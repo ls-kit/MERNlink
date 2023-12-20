@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import ReqLinkTbRow from "../Componetns/ReqLinkTbRow";
 import Pagination from "../Componetns/Pagination";
 import { useQuery } from "react-query";
-import { loacalServerURL } from "../Api/localURL";
+import { localServerURL } from "../Api/localURL";
 
 const ReqBackLink = () => {
   // const [links, setLinks] = useState([]);
@@ -26,7 +26,7 @@ const ReqBackLink = () => {
   };
 
   const fetchLinks = async () => {
-    const res = await axios.get(`${loacalServerURL}/offer-backlink`);
+    const res = await axios.get(`${parentURL}/offer-backlink`);
     return res.data;
   };
 

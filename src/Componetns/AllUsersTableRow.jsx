@@ -1,7 +1,7 @@
 import { FaTrash, FaUserEdit } from "react-icons/fa";
 import { PiRadioactiveFill } from "react-icons/pi";
 import { toast } from "sonner";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { useForm } from "react-hook-form";
 import countriesWithFlag from "../Api/country";
 import axios from "axios";
@@ -33,7 +33,7 @@ const AllUsersTableRow = ({
     const userID = data.userID;
 
     axios
-      .patch(`${parentUrl}/users/update/${userID}`, payLoad)
+      .patch(`${parentURL}/users/update/${userID}`, payLoad)
       .then((res) => {
         toast.info(res.status);
         reset();
@@ -47,7 +47,7 @@ const AllUsersTableRow = ({
   // activate user
   const activateUser = (userID) => {
     axios
-      .patch(`${parentUrl}/users/activate/${userID}`)
+      .patch(`${parentURL}/users/activate/${userID}`)
       .then((res) => {
         toast.success(`${Name} Activated`);
         refetch();
@@ -59,7 +59,7 @@ const AllUsersTableRow = ({
         // todo: send notification
         axios
           .post(
-            `${parentUrl}/users/notifications/${userID}`,
+            `${parentURL}/users/notifications/${userID}`,
             notificationPayload
           )
           .then((res) => {
@@ -80,7 +80,7 @@ const AllUsersTableRow = ({
   const handleDelete = (userID) => {
     // todo: delete from backend
     axios
-      .delete(`${parentUrl}/users/delete/${userID}`)
+      .delete(`${parentURL}/users/delete/${userID}`)
       .then((res) => {
         console.log(res.status);
         toast.warning(`Deleted ${Name}`);
@@ -98,7 +98,7 @@ const AllUsersTableRow = ({
   const handleDeactivate = (userId) => {
     // todo: add a deactivate account status in backend
     axios
-      .patch(`${parentUrl}/users/deactivate/${userId}`)
+      .patch(`${parentURL}/users/deactivate/${userId}`)
       .then((res) => {
         console.log(res.status);
         toast.warning(`Deactivated ${Name}`);
@@ -112,7 +112,7 @@ const AllUsersTableRow = ({
         // todo: send notification
         axios
           .post(
-            `${parentUrl}/users/notifications/${userId}`,
+            `${parentURL}/users/notifications/${userId}`,
             notificationPayload
           )
           .then((res) => {

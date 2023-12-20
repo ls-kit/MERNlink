@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import axios from "axios";
@@ -18,7 +18,7 @@ const TableRow = ({
   const { user } = useContext(AuthContext);
 
   const makeAdmin = () => {
-    fetch(`${parentUrl}/users/make-admin/${id}`, {
+    fetch(`${parentURL}/users/make-admin/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -32,7 +32,7 @@ const TableRow = ({
           };
           // todo: send notification
           axios
-            .post(`${parentUrl}/users/notifications/${id}`, notificationPayload)
+            .post(`${parentURL}/users/notifications/${id}`, notificationPayload)
             .then((res) => {
               console.log(res);
             })
@@ -47,7 +47,7 @@ const TableRow = ({
   };
 
   const removeAdmin = () => {
-    fetch(`${parentUrl}/users/remove-admin/${id}`, {
+    fetch(`${parentURL}/users/remove-admin/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -61,7 +61,7 @@ const TableRow = ({
           };
           // todo: send notification
           axios
-            .post(`${parentUrl}/users/notifications/${id}`, notificationPayload)
+            .post(`${parentURL}/users/notifications/${id}`, notificationPayload)
             .then((res) => {
               console.log(res);
             })

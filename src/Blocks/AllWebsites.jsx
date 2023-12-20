@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useQuery } from "react-query";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { toast } from "sonner";
 import AllSiteTableRow from "../Componetns/AllSiteTableRow";
 import { useForm } from "react-hook-form";
@@ -21,7 +21,7 @@ const AllWebsites = () => {
 
   // gell all sites
   const getAllSites = async () => {
-    const res = await axios.get(`${parentUrl}/offer-backlink`);
+    const res = await axios.get(`${parentURL}/offer-backlink`);
     return res.data;
   };
 
@@ -51,7 +51,7 @@ const AllWebsites = () => {
       user: user.email,
     };
     axios
-      .post(`${parentUrl}/offer-backlink`, payLoad)
+      .post(`${parentURL}/offer-backlink`, payLoad)
       .then((res) => {
         // console.log(res);
         toast.info(`Data submitted`);
@@ -92,6 +92,9 @@ const AllWebsites = () => {
                 refetch={refetch}
                 siteStatus={item.status}
                 verified={item.isValid}
+                remove={true}
+                edit={true}
+                deactivate={true}
               />
             ))}
           </tbody>

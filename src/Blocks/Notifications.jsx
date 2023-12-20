@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import axios from "axios";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { useQuery } from "react-query";
 import ViewNotification from "../Componetns/ViewNotification";
 import AOS from "aos";
@@ -15,7 +15,7 @@ const Notifications = () => {
   // fetchLoggedin user
   const fetchCurrentUserNotification = async () => {
     const result = await axios.get(
-      `${parentUrl}/users/notifications/${user.email}`
+      `${parentURL}/users/notifications/${user.email}`
     );
     return result.data;
     // .then((res) => {

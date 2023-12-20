@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import AllUsersTableRow from "../Componetns/AllUsersTableRow";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../Poveiders/AuthProvider";
@@ -24,7 +24,7 @@ const AllUsers = () => {
 
   // fetch fn
   const getUsers = async () => {
-    const res = await axios.get(`${parentUrl}/users`);
+    const res = await axios.get(`${parentURL}/users`);
     return res.data;
   };
 
@@ -53,7 +53,7 @@ const AllUsers = () => {
 
   // const handle delete
   const handleDelete = (id) => {
-    axios.delete(`${parentUrl}/users/delete/${id}`);
+    axios.delete(`${parentURL}/users/delete/${id}`);
   };
 
   const onSubmit = (data) => {
@@ -73,7 +73,7 @@ const AllUsers = () => {
     reset();
 
     axios
-      .post(`${parentUrl}/users`, userData)
+      .post(`${parentURL}/users`, userData)
       .then((res) => {
         toast.success(`Added New User`);
         refetch();

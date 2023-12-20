@@ -4,7 +4,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { Toaster, toast } from "sonner";
 import axios from "axios";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 
 const Login = () => {
   // authcontext and create user
@@ -32,7 +32,7 @@ const Login = () => {
     // *from gpt
     const fetchUser = () => {
       return axios
-        .get(`${parentUrl}/users/login/${data.email}`)
+        .get(`${parentURL}/users/login/${data.email}`)
         .then((response) => {
           // console.log(response.data);
           toast.success(response.status);
@@ -100,7 +100,7 @@ const Login = () => {
 
           // post to users route in backend
           axios
-            .post(`${parentUrl}/users`, userData)
+            .post(`${parentURL}/users`, userData)
             .then((res) => console.log(res.data.message))
             .catch((error) => console.log(error.message));
 

@@ -2,13 +2,13 @@ import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { toast } from "sonner";
 
 const NewsLetter = () => {
   // fetch data
   const fetchUsers = async () => {
-    const result = await axios.get(`${parentUrl}/users`);
+    const result = await axios.get(`${parentURL}/users`);
     return result.data;
   };
 
@@ -44,7 +44,7 @@ const NewsLetter = () => {
     };
     // send to nodemail in the backend
     axios
-      .post(`${parentUrl}/newsletter`, payLoad)
+      .post(`${parentURL}/newsletter`, payLoad)
       .then((res) => {
         toast.success(`Newsletter sent to all users`);
         reset();

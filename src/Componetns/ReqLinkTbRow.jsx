@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { useForm } from "react-hook-form";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
 
@@ -40,11 +40,11 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
       selectedUrl4Request: url,
     };
     axios
-      .post(`${parentUrl}/requested-backlink`, payLoad)
+      .post(`${parentURL}/requested-backlink`, payLoad)
       .then((res) => {
         // send request number to offer-backlink collection
         axios
-          .post(`${parentUrl}/offer-backlink/count/${id}`)
+          .post(`${parentURL}/offer-backlink/count/${id}`)
           .then((res) => {
             console.log(res);
           })

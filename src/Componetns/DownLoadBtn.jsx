@@ -36,9 +36,9 @@ const DownLoadBtn = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-start">
+    <div className="flex flex-col items-start">
       <button
-        className="btn btn-outline btn-md flex gap-1 items-center bg-yellow-300 w-full"
+        className="btn btn-outline btn-sm flex gap-1 items-center bg-yellow-300"
         onClick={handleDownload}
       >
         <FaDownload /> Download File

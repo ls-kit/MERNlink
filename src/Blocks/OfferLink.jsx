@@ -3,18 +3,22 @@ import { useForm } from "react-hook-form";
 import { webCategory } from "../Api/siteCategory";
 import DownLoadBtn from "../Componetns/DownLoadBtn";
 import axios from "axios";
-import { parentUrl } from "../Api/baseUrl";
+import { parentURL } from "../Api/baseUrl";
 import { toast } from "sonner";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import CehckWebStatus from "../Componetns/CheckWebStatus";
-import { loacalServerURL } from "../Api/localURL";
+import { localServerURL } from "../Api/localURL";
 import { MdVerified } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaLink } from "react-icons/fa6";
 
 const OfferLink = () => {
   // get user
   const { user } = useContext(AuthContext);
+
+  // navigate to verification page after submission
+  const navigate = useNavigate();
+  const to = "/verification";
 
   const {
     register,
@@ -35,11 +39,12 @@ const OfferLink = () => {
       email: user.email,
     };
     axios
-      .post(`${loacalServerURL}/offer-backlink`, payLoad)
+      .post(`${parentURL}/offer-backlink`, payLoad)
       .then((res) => {
         // console.log(res);
-        toast.info(`Data submitted, Download the html file to verify`);
-        document.getElementById("my_modal_downloadBtnModal").showModal();
+        toast.info(`Data submitted successfully`);
+        // document.getElementById("my_modal_downloadBtnModal").showModal();
+        navigate(to, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
