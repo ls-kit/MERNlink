@@ -18,7 +18,7 @@ const CehckWebStatus = () => {
     // console.log(data.siteName);
 
     axios
-      .post(`${parentURL}/offer-backlink/check-verification/`, data)
+      .post(`${parentURL}/offer-backlink/check-verification`, data)
       .then((res) => {
         if (res.data.message === "verified") {
           toast.success(`Your site is verified`);

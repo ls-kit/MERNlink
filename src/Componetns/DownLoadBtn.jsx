@@ -6,6 +6,8 @@ const DownLoadBtn = () => {
   // generate dynamic filename
   const generateFileName = () => {
     const uniqueStr = Math.random().toString(36).substring(2, 10);
+
+    localStorage.setItem("verificationString", `${uniqueStr}.html`);
     return `${uniqueStr}.html`;
   };
 
