@@ -79,11 +79,11 @@ const OfferLink = () => {
                   // pattern: /^www\..+\.(com|net|org|io|info|co|edu)$/,
                 })}
               />
-              {/*  {errors.addedSite && (
+              {errors.addedSite && (
                 <span className="text-xs py-2 font-semibold text-red-400">
                   Please add your site
                 </span>
-              )} */}
+              )}
             </label>
             {/* category */}
             <label className="form-control lg:w-fit w-full">
