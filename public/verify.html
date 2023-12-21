@@ -12,7 +12,7 @@
     </div>
 
     <script>
-      const url = "www." + window.location.host;
+      const url = window.location.host;
       console.log(url);
       fetch(
         `https://lskit-mern-backend.vercel.app/offer-backlink/isValid/${url}`,
