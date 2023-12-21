@@ -11,6 +11,7 @@ import { localServerURL } from "../Api/localURL";
 import { MdVerified } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { FaLink } from "react-icons/fa6";
+import { languages } from "../Api/language";
 
 const OfferLink = () => {
   // get user
@@ -139,23 +140,25 @@ const OfferLink = () => {
             {/* key words */}
             <label className="form-control w-full max-w-xs">
               <div className="label">
-                <span className="label-text">Ranking Keywords</span>
+                <span className="label-text">Your Language</span>
               </div>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered w-full max-w-xs"
-                {...register("rankingKeyWords", {
-                  required: true,
-                  pattern: /^\w+(,\w+)*$/,
-                })}
-              />
-              {errors.rankingKeyWords &&
+              <select
+                className="select select-bordered w-full"
+                {...register("language", { required: true })}
+              >
+                <option className="text-lg text-slate-500" disabled selected>
+                  Select your language
+                </option>
+                {languages.map((item, i) => (
+                  <option key={i}>{item}</option>
+                ))}
+              </select>
+              {/*  {errors.rankingKeyWords &&
                 errors.rankingKeyWords?.type === "pattern" && (
                   <span className="text-xs py-2 font-semibold text-red-400">
                     Seperate words with commas (,)
                   </span>
-                )}
+                )} */}
             </label>
             {/* type do follow / not follow */}
             <label className="form-control w-full">
