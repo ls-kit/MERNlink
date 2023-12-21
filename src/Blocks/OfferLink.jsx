@@ -29,13 +29,15 @@ const OfferLink = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    const parsedURL = new URL(data.addedSite);
+    const domain = parsedURL.hostname;
     // console.log(data);
     const payLoad = {
-      addedSite: data.addedSite,
+      addedSite: domain,
       category: data.category,
       launchDate: data.launchDate,
       monthlyOrgVisit: data.monthlyOrgVisit,
-      rankingKeyWords: data.rankingKeyWords,
+      lang: data.language,
       type: data.type,
       email: user.email,
     };
@@ -74,14 +76,14 @@ const OfferLink = () => {
                 className="input input-bordered w-full max-w-xs"
                 {...register("addedSite", {
                   required: true,
-                  pattern: /^www\..+\.(com|net|org|io|info|co|edu)$/,
+                  // pattern: /^www\..+\.(com|net|org|io|info|co|edu)$/,
                 })}
               />
-              {errors.addedSite && errors.addedSite?.type === "pattern" && (
+              {/*  {errors.addedSite && (
                 <span className="text-xs py-2 font-semibold text-red-400">
-                  Start with www. and end with .com or TLDs
+                  Please add your site
                 </span>
-              )}
+              )} */}
             </label>
             {/* category */}
             <label className="form-control lg:w-fit w-full">
