@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { parentURL } from "../Api/baseUrl";
 import { toast } from "sonner";
@@ -7,8 +7,12 @@ import AllSiteTableRow from "../Componetns/AllSiteTableRow";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { webCategory } from "../Api/siteCategory";
+import ReactPaginate from "react-paginate";
 
 const AllWebsites = () => {
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 3;
+
   // get user
   const { user } = useContext(AuthContext);
   // hook form
@@ -61,6 +65,18 @@ const AllWebsites = () => {
     reset();
   };
 
+  // react pagination
+
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = allSites.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(allSites.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % allSites.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
       <div className="overflow-x-auto py-3 font-roboto">
@@ -79,7 +95,7 @@ const AllWebsites = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {allSites.map((item, i) => (
+            {currentItems.map((item, i) => (
               <AllSiteTableRow
                 key={i}
                 index={i + 1}
@@ -249,6 +265,21 @@ const AllWebsites = () => {
           </div>
         </dialog>
       </div>
+      {/* pagination */}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< prev"
+        renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        previousLinkClassName="direction"
+        pageLinkClassName="page-num"
+        nextLinkClassName="direction"
+        activeLinkClassName="active"
+      />
     </>
   );
 };

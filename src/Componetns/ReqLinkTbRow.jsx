@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { parentURL } from "../Api/baseUrl";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
+import { FaBullseye, FaLink } from "react-icons/fa";
 
 const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
   // logged in user data
@@ -77,10 +78,10 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
           <th>{index}</th>
           <td>
             <button
-              className="btn btn-outline"
+              className="btn btn-sm btn-outline btn-circle bg-cyan-200"
               onClick={() => document.getElementById("my_modal_1").showModal()}
             >
-              Request Back-Link
+              <FaLink />
             </button>
             <dialog id="my_modal_1" className="modal">
               <div className="modal-box">

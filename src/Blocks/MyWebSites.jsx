@@ -1,13 +1,16 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { parentURL } from "../Api/baseUrl";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { FaLink } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import AllSiteTableRow from "../Componetns/AllSiteTableRow";
+import ReactPaginate from "react-paginate";
 
 const MyWebSites = () => {
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 3;
   // logged in user
   const { user } = useContext(AuthContext);
   const mySubmittedSites = async () => {
@@ -37,7 +40,17 @@ const MyWebSites = () => {
   if (error) {
     return <p className="px-10 py-10 text-center">{error.message}</p>;
   }
+  // react pagination
 
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = mysites.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(mysites.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % mysites.length;
+    setItemOffset(newOffset);
+  };
   return (
     <div>
       {/* navigation */}
@@ -72,7 +85,7 @@ const MyWebSites = () => {
           </thead>
           <tbody>
             {/* row-1 */}
-            {mysites.map((item, i) => (
+            {currentItems.map((item, i) => (
               <AllSiteTableRow
                 index={i + 1}
                 key={i}
@@ -91,6 +104,21 @@ const MyWebSites = () => {
           </tbody>
         </table>
       </div>
+      {/* pagination */}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< prev"
+        renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        previousLinkClassName="direction"
+        pageLinkClassName="page-num"
+        nextLinkClassName="direction"
+        activeLinkClassName="active"
+      />
     </div>
   );
 };

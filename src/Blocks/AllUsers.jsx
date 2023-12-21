@@ -7,8 +7,12 @@ import { Toaster, toast } from "sonner";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { useForm } from "react-hook-form";
 import countriesWithFlag from "../Api/country";
+import ReactPaginate from "react-paginate";
 
 const AllUsers = () => {
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 3;
+
   //create newuser with google createuser and also save to db
   const { createUser } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
@@ -89,6 +93,18 @@ const AllUsers = () => {
   const confirmPass = watch("confirmPassword");
   const matchPassword = password === confirmPass;
 
+  // react pagination
+
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = allusers.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(allusers.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % allusers.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
       <Toaster position="top-center" richColors />
@@ -107,7 +123,7 @@ const AllUsers = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {allusers.map((item, i) => (
+            {currentItems.map((item, i) => (
               <AllUsersTableRow
                 key={i}
                 index={i + 1}
@@ -282,6 +298,21 @@ const AllUsers = () => {
           </div>
         </dialog>
       </div>
+      {/* pagination */}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< prev"
+        renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        previousLinkClassName="direction"
+        pageLinkClassName="page-num"
+        nextLinkClassName="direction"
+        activeLinkClassName="active"
+      />
     </>
   );
 };

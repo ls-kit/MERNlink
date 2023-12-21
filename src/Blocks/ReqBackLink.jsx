@@ -2,15 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { parentURL } from "../Api/baseUrl";
 import ReqLinkTbRow from "../Componetns/ReqLinkTbRow";
-import Pagination from "../Componetns/Pagination";
 import { useQuery } from "react-query";
 import { localServerURL } from "../Api/localURL";
+import ReactPaginate from "react-paginate";
 
 const ReqBackLink = () => {
-  // const [links, setLinks] = useState([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [linksPerPage, setlinksPerPage] = useState(3);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 3;
 
   // filter
   const [type, setType] = useState();
@@ -47,13 +45,18 @@ const ReqBackLink = () => {
   if (error) {
     return <p className="px-10 py-10 text-center">{error.message}</p>;
   }
-  // get current posts
-  const indexOfLastPost = currentPage * linksPerPage;
-  const indexOfFirstPost = indexOfLastPost - linksPerPage;
-  const currentPost = links.slice(indexOfFirstPost, indexOfLastPost);
 
-  // change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // react pagination
+
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = links.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(links.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % links.length;
+    setItemOffset(newOffset);
+  };
 
   return (
     <div className="font-roboto">
@@ -68,12 +71,7 @@ const ReqBackLink = () => {
             Search
           </button>
         </div>
-        {/* pagination */}
-        <Pagination
-          linksPerPage={linksPerPage}
-          totalLinks={links.length}
-          paginate={paginate}
-        />
+
         {/* filter */}
         <details className="dropdown">
           <summary className="m-1 btn">Filter By</summary>
@@ -106,12 +104,12 @@ const ReqBackLink = () => {
           <thead>
             <tr>
               <th>index</th>
-              <th>Action</th>
+              <th>Request Backlink</th>
               <th>Site</th>
               <th>Launch Date</th>
             </tr>
           </thead>
-          {currentPost.map((item, i) => (
+          {currentItems.map((item, i) => (
             <ReqLinkTbRow
               key={i}
               url={item.addedSite}
@@ -122,6 +120,21 @@ const ReqBackLink = () => {
           ))}
         </table>
       </div>
+      {/* pagination */}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< prev"
+        renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        previousLinkClassName="direction"
+        pageLinkClassName="page-num"
+        nextLinkClassName="direction"
+        activeLinkClassName="active"
+      />
     </div>
   );
 };
