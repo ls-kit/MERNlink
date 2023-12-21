@@ -7,18 +7,16 @@
   </head>
   <body>
     <div class="px-20 py-20">
-      <h1 class="text-center">Run this file in your website url</h1>
-      <p>Example: www.mysite.com/verify.html</p>
+      <p>{}</p>
     </div>
 
     <script>
       const url = window.location.host;
       console.log(url);
-      fetch(
-        `https://lskit-mern-backend.vercel.app/offer-backlink/isValid/${url}`,
-        {
-          method: "PATCH",
-        }
+      alert(`${url} will appear on the list once approved`);
+      /*  fetch(
+        `https://lskit-mern-backend.vercel.app/offer-backlink/verify/${url}`,
+        { method: "PATCH" }
       )
         .then((res) => {
           res.json();
@@ -26,7 +24,7 @@
             alert("Verified Successfully");
           }
         })
-        .catch((error) => alert(error.message));
+        .catch((error) => alert(error.message)); */
     </script>
   </body>
 </html>

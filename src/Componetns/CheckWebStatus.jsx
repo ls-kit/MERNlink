@@ -14,7 +14,7 @@ const CehckWebStatus = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    // console.log(data.email);
+    console.log(data);
     // console.log(data.siteName);
 
     axios

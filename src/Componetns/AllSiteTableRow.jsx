@@ -93,6 +93,20 @@ const AllSiteTableRow = ({
       });
   };
 
+  const handleVerify = (id) => {
+    axios
+      .patch(`${parentURL}/offer-backlink/verify/${id}`)
+      .then((res) => {
+        toast.success(`Site Verified`);
+        refetch();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        console.log("Error:", error);
+        console.log("Message:", error.message);
+      });
+  };
+
   return (
     <>
       <tr>
@@ -206,6 +220,12 @@ const AllSiteTableRow = ({
                       className="btn btn-md btn-outline bg-cyan-300"
                     >
                       Activate Site
+                    </button>
+                    <button
+                      onClick={() => handleVerify(siteID)}
+                      className="btn btn-md btn-outline bg-yellow-300"
+                    >
+                      Verify Site
                     </button>
                   </div>
                 </form>
