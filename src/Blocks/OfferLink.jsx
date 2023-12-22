@@ -29,11 +29,22 @@ const OfferLink = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const parsedURL = new URL(data.addedSite);
-    const domain = parsedURL.hostname;
+    console.log(data.addedSite);
+
+    // accept data with or without protocol
+    const extractDomain = (url) => {
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "http://" + url;
+      }
+      const parsedUrl = new URL(url);
+      const domain = parsedUrl.hostname;
+
+      return domain;
+    };
+
     // console.log(data);
     const payLoad = {
-      addedSite: domain,
+      addedSite: extractDomain(data.addedSite),
       category: data.category,
       launchDate: data.launchDate,
       monthlyOrgVisit: data.monthlyOrgVisit,
