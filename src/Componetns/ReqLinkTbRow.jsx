@@ -18,7 +18,18 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
 
   //   submitted data from modal
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+
+    // accept data with or without protocol
+    const extractDomain = (url) => {
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "http://" + url;
+      }
+      const parsedUrl = new URL(url);
+      const domain = parsedUrl.hostname;
+
+      return domain;
+    };
 
     // date
     const currentDate = new Date();
@@ -31,7 +42,7 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
 
     // payload to send data in backend
     const payLoad = {
-      reqBackLink: data.requestedBackLink,
+      reqBackLink: extractDomain(data.requestedBackLink),
       msg: data.message,
       status: "isPending",
       reqUser: user.displayName,
@@ -47,7 +58,7 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
         axios
           .post(`${parentURL}/offer-backlink/count/${id}`)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
           })
           .then((error) => {
             console.log(error);
@@ -99,15 +110,13 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
                         className="input input-bordered w-full"
                         {...register("requestedBackLink", {
                           required: true,
-                          pattern: /^www\..+\.(com|net|org|io|info|co|edu)$/,
                         })}
                       />
-                      {errors.requestedBackLink &&
-                        errors.requestedBackLink?.type === "pattern" && (
-                          <span className="text-xs py-2 font-semibold text-red-400">
-                            Start with www. and end with .com or TLDs
-                          </span>
-                        )}
+                      {errors.requestedBackLink && (
+                        <span className="text-xs py-2 font-semibold text-red-400">
+                          This field is required
+                        </span>
+                      )}
                     </label>
                     <label className="form-control pt-1">
                       <div className="label">
@@ -115,7 +124,7 @@ const ReqLinkTbRow = ({ index, url, lanchDate, id }) => {
                       </div>
                       <textarea
                         className="textarea textarea-bordered h-24"
-                        placeholder="Bio"
+                        placeholder="Send this user a message"
                         {...register("message")}
                       ></textarea>
                     </label>
