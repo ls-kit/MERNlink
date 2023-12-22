@@ -5,10 +5,12 @@ import ReqLinkTbRow from "../Componetns/ReqLinkTbRow";
 import { useQuery } from "react-query";
 import { localServerURL } from "../Api/localURL";
 import ReactPaginate from "react-paginate";
+import { listOfItemsPerPg } from "../Api/itemsPerPage";
 
 const ReqBackLink = () => {
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [search, setSearch] = useState("");
 
   // filter
   const [type, setType] = useState();
@@ -58,23 +60,54 @@ const ReqBackLink = () => {
     setItemOffset(newOffset);
   };
 
+  // select items per page -> by me
+  const handleItemsPerPage = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const itemsPerPg = form.perPageData.value;
+    setItemsPerPage(itemsPerPg);
+  };
+
   return (
     <div className="font-roboto">
       {/* search and filter elements */}
-      <div className="py-4 px-5 flex gap-10 items-center">
-        <div className="join">
-          <input
-            className="input input-bordered input-md join-item"
-            placeholder="Search by site name"
-          />
-          <button className="btn btn-md btn-outline join-item rounded-r-full">
-            Search
+      <div className="py-2 px-3 flex gap-5 items-center">
+        <input
+          onChange={(e) => setSearch(e.target.value)}
+          className="input input-sm  input-bordered w-full max-w-xs"
+          placeholder="Search by site name"
+        />
+
+        {/* set items per page */}
+        <form className="flex gap-3" onSubmit={handleItemsPerPage}>
+          <div>
+            <label className="form-control lg:w-fit w-full">
+              <select
+                className="select select-bordered select-sm"
+                name="perPageData"
+              >
+                <option disabled selected>
+                  Items Per Page
+                </option>
+                {listOfItemsPerPg.map((item, i) => (
+                  <option value={item} key={i}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <button
+            className="text-xs font-semibold btn btn-sm btn-outline bg-yellow-200"
+            type="submit"
+          >
+            Set items
           </button>
-        </div>
+        </form>
 
         {/* filter */}
-        <details className="dropdown">
-          <summary className="m-1 btn">Filter By</summary>
+        {/* <details className="dropdown drop">
+          <summary className="btn">Filter By</summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
             <li>
               <button type="button" onClick={() => loadDataByFilter("Follow")}>
@@ -95,7 +128,7 @@ const ReqBackLink = () => {
               </button>
             </li>
           </ul>
-        </details>
+        </details> */}
       </div>
       {/* table data */}
       <div className="overflow-x-auto overflow-y-auto">
@@ -109,15 +142,21 @@ const ReqBackLink = () => {
               <th>Launch Date</th>
             </tr>
           </thead>
-          {currentItems.map((item, i) => (
-            <ReqLinkTbRow
-              key={i}
-              url={item.addedSite}
-              index={i + 1}
-              lanchDate={item.launchDate}
-              id={item._id}
-            />
-          ))}
+          {currentItems
+            .filter((item) =>
+              search.toLowerCase() === ""
+                ? item
+                : item.addedSite.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((item, i) => (
+              <ReqLinkTbRow
+                key={i}
+                url={item.addedSite}
+                index={i + 1}
+                lanchDate={item.launchDate}
+                id={item._id}
+              />
+            ))}
         </table>
       </div>
       {/* pagination */}

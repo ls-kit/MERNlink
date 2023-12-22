@@ -17,6 +17,7 @@ const AllUsers = () => {
   //create newuser with google createuser and also save to db
   const { createUser } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
+  const [search, setSearch] = useState("");
 
   // hookform
   const {
@@ -120,8 +121,9 @@ const AllUsers = () => {
       {/* navigation */}
       <div className="py-2 px-3 flex gap-5 items-center">
         <input
+          onChange={(e) => setSearch(e.target.value)}
           type="search"
-          placeholder="Search here"
+          placeholder="Search by name/email/phone"
           className="input input-sm  input-bordered w-full max-w-xs"
         />
         {/* set items per page */}
@@ -166,19 +168,29 @@ const AllUsers = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {currentItems.map((item, i) => (
-              <AllUsersTableRow
-                key={i}
-                index={i + 1}
-                Name={item.fullName}
-                email={item.email}
-                id={item._id}
-                country={item.country}
-                phone={item.phone}
-                userStatus={item.activeStatus}
-                refetch={refetch}
-              />
-            ))}
+            {currentItems
+              .filter((item) =>
+                search.toLowerCase() === ""
+                  ? item
+                  : item.fullName
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    item.email.toLowerCase().includes(search.toLowerCase()) ||
+                    item.phone.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((item, i) => (
+                <AllUsersTableRow
+                  key={i}
+                  index={i + 1}
+                  Name={item.fullName}
+                  email={item.email}
+                  id={item._id}
+                  country={item.country}
+                  phone={item.phone}
+                  userStatus={item.activeStatus}
+                  refetch={refetch}
+                />
+              ))}
           </tbody>
         </table>
       </div>

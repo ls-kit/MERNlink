@@ -13,6 +13,7 @@ import { listOfItemsPerPg } from "../Api/itemsPerPage";
 const AllWebsites = () => {
   const [itemOffset, setItemOffset] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [search, setSearch] = useState("");
 
   // get user
   const { user } = useContext(AuthContext);
@@ -91,6 +92,7 @@ const AllWebsites = () => {
       {/* navigation */}
       <div className="py-2 px-3 flex gap-5 items-center">
         <input
+          onChange={(e) => setSearch(e.target.value)}
           type="search"
           placeholder="Search here"
           className="input input-sm  input-bordered w-full max-w-xs"
@@ -138,24 +140,30 @@ const AllWebsites = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {currentItems.map((item, i) => (
-              <AllSiteTableRow
-                key={i}
-                index={i + 1}
-                siteName={item.addedSite}
-                category={item.category}
-                monthlyVisit={item.monthlyOrgVisit}
-                launchDate={item.launchDate}
-                requestedCount={item.count}
-                siteID={item._id}
-                refetch={refetch}
-                siteStatus={item.status}
-                verified={item.isValid}
-                remove={true}
-                edit={true}
-                deactivate={true}
-              />
-            ))}
+            {currentItems
+              .filter((item) =>
+                search.toLowerCase() === ""
+                  ? item
+                  : item.addedSite.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((item, i) => (
+                <AllSiteTableRow
+                  key={i}
+                  index={i + 1}
+                  siteName={item.addedSite}
+                  category={item.category}
+                  monthlyVisit={item.monthlyOrgVisit}
+                  launchDate={item.launchDate}
+                  requestedCount={item.count}
+                  siteID={item._id}
+                  refetch={refetch}
+                  siteStatus={item.status}
+                  verified={item.isValid}
+                  remove={true}
+                  edit={true}
+                  deactivate={true}
+                />
+              ))}
           </tbody>
         </table>
       </div>

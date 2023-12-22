@@ -9,6 +9,8 @@ import { listOfItemsPerPg } from "../Api/itemsPerPage";
 const MangeUsers = () => {
   const [itemOffset, setItemOffset] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [search, setSearch] = useState("");
+
   const {
     data: users = [],
     refetch,
@@ -52,8 +54,9 @@ const MangeUsers = () => {
       {/* navigation */}
       <div className="py-2 px-3 flex gap-5 items-center">
         <input
+          onChange={(e) => setSearch(e.target.value)}
           type="search"
-          placeholder="Search here"
+          placeholder="Search by name/email/phone"
           className="input input-sm  input-bordered w-full max-w-xs"
         />
         {/* set items per page */}
@@ -97,20 +100,30 @@ const MangeUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((item, i) => (
-              <TableRow
-                refetch={refetch}
-                id={item._id}
-                role={item.role}
-                key={i}
-                index={i + 1}
-                fullName={item.fullName}
-                country={item.country}
-                email={item.email}
-                userName={item.userName}
-                phone={item.phone}
-              />
-            ))}
+            {currentItems
+              .filter((item) =>
+                search.toLowerCase() === ""
+                  ? item
+                  : item.fullName
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    item.email.toLowerCase().includes(search.toLowerCase()) ||
+                    item.phone.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((item, i) => (
+                <TableRow
+                  refetch={refetch}
+                  id={item._id}
+                  role={item.role}
+                  key={i}
+                  index={i + 1}
+                  fullName={item.fullName}
+                  country={item.country}
+                  email={item.email}
+                  userName={item.userName}
+                  phone={item.phone}
+                />
+              ))}
           </tbody>
         </table>
       </div>
