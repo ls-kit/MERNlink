@@ -8,10 +8,11 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../Poveiders/AuthProvider";
 import { webCategory } from "../Api/siteCategory";
 import ReactPaginate from "react-paginate";
+import { listOfItemsPerPg } from "../Api/itemsPerPage";
 
 const AllWebsites = () => {
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
   // get user
   const { user } = useContext(AuthContext);
@@ -77,8 +78,50 @@ const AllWebsites = () => {
     setItemOffset(newOffset);
   };
 
+  // select items per page -> by me
+  const handleItemsPerPage = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const itemsPerPg = form.perPageData.value;
+    setItemsPerPage(itemsPerPg);
+  };
+
   return (
     <>
+      {/* navigation */}
+      <div className="py-2 px-3 flex gap-5 items-center">
+        <input
+          type="search"
+          placeholder="Search here"
+          className="input input-sm  input-bordered w-full max-w-xs"
+        />
+        {/* set items per page */}
+        <form className="flex gap-3" onSubmit={handleItemsPerPage}>
+          <div>
+            <label className="form-control lg:w-fit w-full">
+              <select
+                className="select select-bordered select-sm"
+                name="perPageData"
+              >
+                <option disabled selected>
+                  Items Per Page
+                </option>
+                {listOfItemsPerPg.map((item, i) => (
+                  <option value={item} key={i}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <button
+            className="text-xs font-semibold btn btn-sm btn-outline bg-yellow-200"
+            type="submit"
+          >
+            Set items
+          </button>
+        </form>
+      </div>
       <div className="overflow-x-auto py-3 font-roboto">
         <table className="table lg:table-md md:table-sm table-xs">
           {/* head */}

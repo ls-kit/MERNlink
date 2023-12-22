@@ -4,10 +4,11 @@ import TableRow from "../Componetns/TableRow";
 import { useQuery } from "react-query";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import { listOfItemsPerPg } from "../Api/itemsPerPage";
 
 const MangeUsers = () => {
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const {
     data: users = [],
     refetch,
@@ -38,8 +39,50 @@ const MangeUsers = () => {
     setItemOffset(newOffset);
   };
 
+  // select items per page -> by me
+  const handleItemsPerPage = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const itemsPerPg = form.perPageData.value;
+    setItemsPerPage(itemsPerPg);
+  };
+
   return (
     <div>
+      {/* navigation */}
+      <div className="py-2 px-3 flex gap-5 items-center">
+        <input
+          type="search"
+          placeholder="Search here"
+          className="input input-sm  input-bordered w-full max-w-xs"
+        />
+        {/* set items per page */}
+        <form className="flex gap-3" onSubmit={handleItemsPerPage}>
+          <div>
+            <label className="form-control lg:w-fit w-full">
+              <select
+                className="select select-bordered select-sm"
+                name="perPageData"
+              >
+                <option disabled selected>
+                  Items Per Page
+                </option>
+                {listOfItemsPerPg.map((item, i) => (
+                  <option value={item} key={i}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <button
+            className="text-xs font-semibold btn btn-sm btn-outline bg-yellow-200"
+            type="submit"
+          >
+            Set items
+          </button>
+        </form>
+      </div>
       <div className="overflow-x-auto font-roboto">
         <table className="table">
           <thead>

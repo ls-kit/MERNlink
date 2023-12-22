@@ -7,10 +7,11 @@ import { FaLink } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import AllSiteTableRow from "../Componetns/AllSiteTableRow";
 import ReactPaginate from "react-paginate";
+import { listOfItemsPerPg } from "../Api/itemsPerPage";
 
 const MyWebSites = () => {
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   // logged in user
   const { user } = useContext(AuthContext);
   const mySubmittedSites = async () => {
@@ -51,6 +52,15 @@ const MyWebSites = () => {
     const newOffset = (event.selected * itemsPerPage) % mysites.length;
     setItemOffset(newOffset);
   };
+
+  // select items per page -> by me
+  const handleItemsPerPage = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const itemsPerPg = form.perPageData.value;
+    setItemsPerPage(itemsPerPg);
+  };
+
   return (
     <div>
       {/* navigation */}
@@ -67,6 +77,32 @@ const MyWebSites = () => {
         >
           <FaLink className="text-lg font-bold" /> Add new website
         </Link>
+        {/* set items per page */}
+        <form className="flex gap-3" onSubmit={handleItemsPerPage}>
+          <div>
+            <label className="form-control lg:w-fit w-full">
+              <select
+                className="select select-bordered select-sm"
+                name="perPageData"
+              >
+                <option disabled selected>
+                  Items Per Page
+                </option>
+                {listOfItemsPerPg.map((item, i) => (
+                  <option value={item} key={i}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <button
+            className="text-xs font-semibold btn btn-sm btn-outline bg-yellow-200"
+            type="submit"
+          >
+            Set items
+          </button>
+        </form>
       </div>
       {/* show tables of website */}
       <div className="overflow-x-auto py-3 font-roboto">
